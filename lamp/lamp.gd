@@ -2,7 +2,7 @@ extends StaticBody3D
 
 @onready var interactive_area: Area3D = $InteractiveArea
 @onready var light_source: OmniLight3D = $Light
-@onready var light_area := $LightArea
+@onready var light_area_collider := $LightArea/CollisionShape3D
 
 var original_energy
 @export var is_on := true
@@ -32,6 +32,5 @@ func toggle() -> bool:
 	is_on = !is_on
 	var tween = get_tree().create_tween()
 	tween.tween_property(light_source, ^"light_energy", 0 if !is_on else original_energy, 1.5)
-	#light_area.monitoring = is_on
-	#light_area.monitorable = is_on
+	light_area_collider.set_deferred(&"disabled", !is_on)
 	return is_on
