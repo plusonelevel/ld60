@@ -2,9 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bccgwjuh6a6a6" path="res://player/player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ce4h5tabl1odc" path="res://lamp/lamp.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://clkjdylcngqe4" path="res://assets/bridge.blend" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://b8e6o88x8j8o4" path="res://bg_sky.png" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://uchcjrvfhuo8" path="res://enemies/spawner.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c5tq8rdhu7num" path="res://enemies/enemy.tscn" id="5_lquwl"]
+[ext_resource type="Shader" uid="uid://8q6v2pnnp6pi" path="res://shaders/water.gdshader" id="7_272bh"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
 panorama = ExtResource("3_h2yge")
@@ -13,8 +15,40 @@ panorama = ExtResource("3_h2yge")
 sky_material = SubResource("PanoramaSkyMaterial_fw1vm")
 
 [sub_resource type="Environment" id="Environment_h2yge"]
-background_mode = 2
+background_mode = 1
 sky = SubResource("Sky_vyj8c")
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.5
+fog_enabled = true
+fog_light_color = Color(0.032437935, 0.15050533, 0.20623124, 1)
+fog_light_energy = 0.1
+fog_density = 0.1
+fog_sky_affect = 0.95
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_57qmd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yf5fn"]
+noise = SubResource("FastNoiseLite_57qmd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+render_priority = 0
+shader = ExtResource("7_272bh")
+shader_parameter/water_color = Color(0.08334821, 0.14899787, 0.22050616, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_yf5fn")
+shader_parameter/wave_speed = 0.20000000624012
+shader_parameter/wave_noise = 0.10000000312006
+shader_parameter/wave_strength = Vector3(0, 3, 0)
+shader_parameter/roughness = 0.378000017955
+shader_parameter/specular = 0.0
+shader_parameter/metalic = 0.7670000364325
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
+material = SubResource("ShaderMaterial_5vw27")
+size = Vector2(200, 200)
+subdivide_width = 500
+subdivide_depth = 500
 
 [node name="Main" type="Node" unique_id=196047157]
 
@@ -29,7 +63,10 @@ CAMERA = NodePath("Camera3D")
 
 [node name="Bridge" type="Node3D" parent="World" unique_id=1205948698]
 
+[node name="bridge" parent="World/Bridge" unique_id=399275893 instance=ExtResource("2_7mycd")]
+
 [node name="BridgeModel" type="CSGCombiner3D" parent="World/Bridge" unique_id=1869756990]
+visible = false
 use_collision = true
 collision_mask = 521
 
@@ -47,10 +84,10 @@ size = Vector3(1, 2, 100)
 [node name="Lamps" type="Node3D" parent="World/Bridge" unique_id=2111140323]
 
 [node name="Lamp" parent="World/Bridge/Lamps" unique_id=1219314905 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5608296, 0.5070213, 0.29304934)
 
 [node name="Lamp2" parent="World/Bridge/Lamps" unique_id=799427924 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5756617, 0.1376878, 34.90726)
 
 [node name="Env" type="Node3D" parent="World" unique_id=876416759]
 
@@ -59,13 +96,17 @@ environment = SubResource("Environment_h2yge")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/Env" unique_id=1733552815]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-light_energy = 0.05
+light_energy = 0.5
 shadow_enabled = true
 
 [node name="Spawner" parent="World" unique_id=1985785800 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0343516, 25.077)
 enemy = ExtResource("5_lquwl")
 spawn_interval = 10.0
+
+[node name="Water" type="MeshInstance3D" parent="World" unique_id=1422554642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.113239, 0)
+mesh = SubResource("PlaneMesh_g4v7s")
 
 [node name="UI" type="Control" parent="." unique_id=1300053703]
 layout_mode = 3
