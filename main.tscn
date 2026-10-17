@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://uchcjrvfhuo8" path="res://enemies/spawner.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c5tq8rdhu7num" path="res://enemies/enemy.tscn" id="5_lquwl"]
 [ext_resource type="Shader" uid="uid://8q6v2pnnp6pi" path="res://shaders/water.gdshader" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://cihj5u5pwjasm" path="res://cloud.png" id="8_5vw27"]
+[ext_resource type="Shader" uid="uid://bpodw4v7ljp3j" path="res://shaders/cloud_drift.gdshader" id="8_kek77"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
 panorama = ExtResource("3_h2yge")
@@ -49,6 +51,32 @@ material = SubResource("ShaderMaterial_5vw27")
 size = Vector2(200, 200)
 subdivide_width = 500
 subdivide_depth = 500
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+albedo_color = Color(0.9548245, 0.9095076, 0.80407405, 1)
+emission_enabled = true
+emission = Color(0.8858858, 0.8452835, 0.79946166, 1)
+emission_energy_multiplier = 50.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_yf5fn")
+radius = 12.0
+height = 24.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
+render_priority = 0
+shader = ExtResource("8_kek77")
+shader_parameter/cloud_tex = ExtResource("8_5vw27")
+shader_parameter/drift_dir = Vector2(1, 0.2)
+shader_parameter/drift_speed = 0.01
+shader_parameter/wobble_amount = 0.07
+shader_parameter/wobble_speed = 0.4
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/opacity = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yf5fn"]
+material = SubResource("ShaderMaterial_4c57u")
+size = Vector2(75, 150)
 
 [node name="Main" type="Node" unique_id=196047157]
 
@@ -105,8 +133,20 @@ enemy = ExtResource("5_lquwl")
 spawn_interval = 10.0
 
 [node name="Water" type="MeshInstance3D" parent="World" unique_id=1422554642]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.113239, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.3975906, 0)
 mesh = SubResource("PlaneMesh_g4v7s")
+
+[node name="Moon" type="MeshInstance3D" parent="World" unique_id=1522560855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.119, 86.307755, -79.4249)
+mesh = SubResource("SphereMesh_g4v7s")
+
+[node name="Cloud" type="MeshInstance3D" parent="World" unique_id=1119159228]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 0, 0, 1, -29.59414, 0.41069221, 6.431384)
+mesh = SubResource("PlaneMesh_yf5fn")
+
+[node name="Cloud2" type="MeshInstance3D" parent="World" unique_id=1486564364]
+transform = Transform3D(4.3711395e-08, -1.0000001, -8.742278e-08, -1.0000001, -4.3711395e-08, 0, -3.8213718e-15, 8.7422784e-08, -1, 31.322031, 0.41069221, 6.431384)
+mesh = SubResource("PlaneMesh_yf5fn")
 
 [node name="UI" type="Control" parent="." unique_id=1300053703]
 layout_mode = 3
