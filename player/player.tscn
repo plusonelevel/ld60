@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bccgwjuh6a6a6"]
+
+[ext_resource type="Script" uid="uid://dibjsvd1mw103" path="res://player/player.gd" id="1_oul6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttdjf"]
+
+[node name="Player" type="CharacterBody3D" unique_id=502817955]
+script = ExtResource("1_oul6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1073120225]
+shape = SubResource("CapsuleShape3D_ttdjf")

@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://j3142lhcsx1d"]
+
+[ext_resource type="PackedScene" uid="uid://bccgwjuh6a6a6" path="res://player/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ce4h5tabl1odc" path="res://lamp/lamp.tscn" id="2_0xm2m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+
+[node name="Main" type="Node" unique_id=196047157]
+
+[node name="World" type="Node3D" parent="." unique_id=1041143271]
+
+[node name="Player" parent="World" unique_id=502817955 groups=["player"] instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9292638, 40)
+
+[node name="Camera3D" type="Camera3D" parent="World/Player" unique_id=1948103113]
+
+[node name="Bridge" type="Node3D" parent="World" unique_id=1205948698]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="World/Bridge" unique_id=1869756990]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Bridge/CSGCombiner3D" unique_id=1375659680]
+size = Vector3(10, 1, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Bridge/CSGCombiner3D" unique_id=425749679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 0)
+size = Vector3(1, 2, 100)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Bridge/CSGCombiner3D" unique_id=1085373703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, 0)
+size = Vector3(1, 2, 100)
+
+[node name="Lamps" type="Node3D" parent="World/Bridge" unique_id=2111140323]
+
+[node name="Lamp" parent="World/Bridge/Lamps" unique_id=1219314905 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
+
+[node name="Lamp2" parent="World/Bridge/Lamps" unique_id=1322314358 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 35)
+
+[node name="Env" type="Node3D" parent="World" unique_id=876416759]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World/Env" unique_id=271107855]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/Env" unique_id=1733552815]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.1
+shadow_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=864620067]
+
+[node name="GUI" type="Control" parent="UI" unique_id=1639490173]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
