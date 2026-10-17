@@ -1,10 +1,11 @@
-extends Area3D
+extends Node3D
 
 
 @export var enemy : PackedScene
 @export var spawn_interval: float = 5.0
 
 func _ready():
+	_on_spawn_timer_timeout()
 	var timer = Timer.new()
 	timer.wait_time = spawn_interval
 	timer.autostart = true

@@ -48,7 +48,7 @@ size = Vector3(1, 2, 100)
 [node name="Lamp" parent="World/Bridge/Lamps" unique_id=1219314905 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
 
-[node name="Lamp2" parent="World/Bridge/Lamps" unique_id=1322314358 instance=ExtResource("2_0xm2m")]
+[node name="Lamp2" parent="World/Bridge/Lamps" unique_id=799427924 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 35)
 
 [node name="Env" type="Node3D" parent="World" unique_id=876416759]
