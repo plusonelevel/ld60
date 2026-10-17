@@ -37,12 +37,13 @@ spin_degrees = 360.0
 spin_sides = 8
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=2094418869]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0077684, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03753212, 4.4389887, 0)
 layers = 2
 light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
-light_energy = 10.0
+light_energy = 15.0
+light_size = 1.0
 shadow_enabled = true
-omni_range = 20.0
+omni_range = 30.0
 
 [node name="InteractiveArea" type="Area3D" parent="." unique_id=734603101]
 collision_layer = 0

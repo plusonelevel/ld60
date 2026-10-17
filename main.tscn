@@ -63,6 +63,16 @@ material = SubResource("StandardMaterial3D_yf5fn")
 radius = 12.0
 height = 24.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
+albedo_color = Color(0.9548245, 0.9095076, 0.80407405, 1)
+emission = Color(0.8858858, 0.8452835, 0.79946166, 1)
+emission_energy_multiplier = 50.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4c57u"]
+material = SubResource("StandardMaterial3D_kek77")
+radius = 12.0
+height = 24.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 render_priority = 0
 shader = ExtResource("8_kek77")
@@ -139,6 +149,10 @@ mesh = SubResource("PlaneMesh_g4v7s")
 [node name="Moon" type="MeshInstance3D" parent="World" unique_id=1522560855]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.119, 86.307755, -79.4249)
 mesh = SubResource("SphereMesh_g4v7s")
+
+[node name="Moon2" type="MeshInstance3D" parent="World" unique_id=2071092057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.372456, 85.48255, -76.89182)
+mesh = SubResource("SphereMesh_4c57u")
 
 [node name="Cloud" type="MeshInstance3D" parent="World" unique_id=1119159228]
 transform = Transform3D(-4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 0, 0, 1, -29.59414, 0.41069221, 6.431384)
