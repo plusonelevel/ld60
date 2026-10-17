@@ -2,12 +2,12 @@ extends CharacterBody3D
 class_name Enemy
 
 
-var is_in_light_area = false
+var lamps_in_range: Array[Lamp] = []
 @onready var health_label = $DebugHP
 
 @export var health : float = 10.0
 @export var speed : float = 1.0
-@export var light_dps : float = 2.0
+@export var light_dps : float = 10.0
 
 var player: Player
 
@@ -23,10 +23,12 @@ func _physics_process(delta):
 	velocity = direction * speed
 	move_and_slide()
 	look_at(player.global_transform.origin, Vector3.UP)
-	
+
 	#TAKING DAMAGE FROM LIGHT
-	if is_in_light_area:
-		take_dmg(light_dps * delta)
+	var dmg := 0.0
+	for lamp in lamps_in_range:
+		dmg += light_dps * lamp.intensity / global_position.distance_to(lamp.position)
+	take_dmg(dmg * delta)
 		
 		
 func _process(delta):
@@ -40,4 +42,9 @@ func take_dmg(dmg):
 func die():
 	queue_free()
 	
-	
+func lamp_range_entered(lamp_pos: Lamp):
+	#if not lamps_in_range.find(lamp_pos):
+	lamps_in_range.append(lamp_pos)
+
+func lamp_range_exited(lamp_pos: Lamp):
+	lamps_in_range.erase(lamp_pos)
