@@ -36,6 +36,7 @@ spin_sides = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7773303, 0)
 layers = 2
 light_color = Color(1, 1, 0.75686276, 1)
+light_energy = 0.0
 shadow_enabled = true
 omni_range = 10.0
 
