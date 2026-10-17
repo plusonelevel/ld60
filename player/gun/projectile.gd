@@ -16,4 +16,4 @@ func _on_body_entered(body: Node) -> void:
 	print_debug("projectile hit %s" % body.name)
 	if body is Enemy:
 		body.die()
-	queue_free()
+		queue_free()

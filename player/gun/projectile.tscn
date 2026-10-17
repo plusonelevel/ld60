@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://b8hx5up5kthis" path="res://player/gun/projectile.gd" id="1_m2phq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ttdjf"]
-radius = 0.08
+radius = 0.1
 
 [node name="Projectile" type="RigidBody3D" unique_id=604010202]
 collision_layer = 512
 collision_mask = 259
 mass = 0.05
 gravity_scale = 0.7
+continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_m2phq")

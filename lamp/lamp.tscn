@@ -45,7 +45,8 @@ shadow_enabled = true
 omni_range = 20.0
 
 [node name="InteractiveArea" type="Area3D" parent="." unique_id=734603101]
-collision_layer = 2
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveArea" unique_id=50860135]
 shape = SubResource("CylinderShape3D_u5qm3")
