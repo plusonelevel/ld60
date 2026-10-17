@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d28e61nekvgap"]
+
+[ext_resource type="Script" uid="uid://c78r05v5bxr08" path="res://player/gun/gun.gd" id="1_f3u3k"]
+
+[node name="Gun" type="Node3D" unique_id=940231012]
+script = ExtResource("1_f3u3k")
+FIRE_POWER = 5000.0

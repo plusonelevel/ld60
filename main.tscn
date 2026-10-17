@@ -29,17 +29,18 @@ CAMERA = NodePath("Camera3D")
 
 [node name="Bridge" type="Node3D" parent="World" unique_id=1205948698]
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="World/Bridge" unique_id=1869756990]
+[node name="BridgeModel" type="CSGCombiner3D" parent="World/Bridge" unique_id=1869756990]
 use_collision = true
+collision_mask = 521
 
-[node name="CSGBox3D" type="CSGBox3D" parent="World/Bridge/CSGCombiner3D" unique_id=1375659680]
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Bridge/BridgeModel" unique_id=1375659680]
 size = Vector3(10, 1, 100)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="World/Bridge/CSGCombiner3D" unique_id=425749679]
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Bridge/BridgeModel" unique_id=425749679]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 0)
 size = Vector3(1, 2, 100)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="World/Bridge/CSGCombiner3D" unique_id=1085373703]
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Bridge/BridgeModel" unique_id=1085373703]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, 0)
 size = Vector3(1, 2, 100)
 
