@@ -33,8 +33,15 @@ func light():
 		tween.stop()
 	tween = create_tween()
 	tween.tween_property(light_source, ^"light_energy", 2, 0.5)
-	tween.parallel().tween_property(light_area_collider, ^"scale", Vector3.ONE, 0.5)
+	#tween.parallel().tween_property(light_area_collider, ^"scale", Vector3.ONE, 0.5)
 	
 	tween.tween_property(light_source, ^"light_energy", 0, fade_time)
-	tween.parallel().tween_property(light_area_collider, ^"scale", Vector3.ZERO, fade_time)
+	#tween.parallel().tween_property(light_area_collider, ^"scale", Vector3.ZERO, fade_time)
 	
+
+func _on_light_area_body_entered(body: Enemy) -> void:
+	body.is_in_light_area = true
+
+
+func _on_light_area_body_exited(body: Enemy) -> void:
+	body.is_in_light_area = false

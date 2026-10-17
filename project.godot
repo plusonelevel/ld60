@@ -29,6 +29,7 @@ window/stretch/aspect="expand"
 
 folder_colors={
 "res://autoloads/": "pink",
+"res://enemies/": "orange",
 "res://lamp/": "yellow",
 "res://player/": "teal"
 }

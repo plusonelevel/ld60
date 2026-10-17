@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c5tq8rdhu7num"]
+
+[ext_resource type="Script" uid="uid://vqf7q2x0ewo6" path="res://enemies/enemy.gd" id="1_fw1ev"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yf5fn"]
+radius = 0.15820313
+height = 0.76708984
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x4ssu"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=401762933]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_fw1ev")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1707719246]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=927072264]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.3024292, -0.72926044)
+mesh = SubResource("CapsuleMesh_yf5fn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=880006507]
+shape = SubResource("CapsuleShape3D_x4ssu")
+
+[node name="DebugHP" type="Label3D" parent="." unique_id=1020632479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5714617, 0)
+billboard = 2
