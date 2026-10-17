@@ -25,6 +25,14 @@ Signals="*uid://d3jvbekq1jgqe"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[file_customization]
+
+folder_colors={
+"res://autoloads/": "pink",
+"res://lamp/": "yellow",
+"res://player/": "teal"
+}
+
 [global_group]
 
 player=""
