@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://clkjdylcngqe4" path="res://assets/bridge.blend" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://b8e6o88x8j8o4" path="res://bg_sky.png" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://uchcjrvfhuo8" path="res://enemies/spawner.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://chmgmvf4j1uju" path="res://lamp/lamp_checkpoint.tscn" id="4_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://c5tq8rdhu7num" path="res://enemies/enemy.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c0wthmpjhxl1m" path="res://enemies/enemy2.tscn" id="7_4c57u"]
 [ext_resource type="Shader" uid="uid://8q6v2pnnp6pi" path="res://shaders/water.gdshader" id="7_272bh"]
@@ -94,7 +95,7 @@ size = Vector2(75, 150)
 [node name="World" type="Node3D" parent="." unique_id=1041143271]
 
 [node name="Player" parent="World" unique_id=502817955 node_paths=PackedStringArray("CAMERA") groups=["player"] instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9292638, 40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9292638, 42.75928)
 MOUSE_SENSITIVITY = 0.3
 CAMERA = NodePath("Camera3D")
 
@@ -122,11 +123,32 @@ size = Vector3(1, 2, 100)
 
 [node name="Lamps" type="Node3D" parent="World/Bridge" unique_id=2111140323]
 
-[node name="Lamp" parent="World/Bridge/Lamps" unique_id=1219314905 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5608296, 0.5070213, 0.29304934)
-
-[node name="Lamp2" parent="World/Bridge/Lamps" unique_id=799427924 instance=ExtResource("2_0xm2m")]
+[node name="Lamp1" parent="World/Bridge/Lamps" unique_id=799427924 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5756617, 0.1376878, 34.90726)
+
+[node name="Lamp2" parent="World/Bridge/Lamps" unique_id=1219314905 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8245234, 0.5070213, 16.123508)
+
+[node name="Lamp3" parent="World/Bridge/Lamps" unique_id=1037441904 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9205456, 0.5070213, -0.31437683)
+
+[node name="Lamp4" parent="World/Bridge/Lamps" unique_id=1968301309 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.992377, 0.5070213, -15.2975)
+
+[node name="Lamp5" parent="World/Bridge/Lamps" unique_id=2042994392 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0082884, 0.5070213, -29.13186)
+
+[node name="Lamp6" parent="World/Bridge/Lamps" unique_id=1639016602 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9128, 0.5070213, -44.122337)
+
+[node name="LampCheckpoint1" parent="World/Bridge/Lamps" unique_id=475233180 instance=ExtResource("4_ya4ey")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.394266, 0.39466405, 27.068428)
+
+[node name="LampCheckpoint2" parent="World/Bridge/Lamps" unique_id=175063297 instance=ExtResource("4_ya4ey")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.394266, 0.39466405, -0.35362625)
+
+[node name="LampCheckpoint3" parent="World/Bridge/Lamps" unique_id=691185125 instance=ExtResource("4_ya4ey")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.394266, 0.39466405, -44.765404)
 
 [node name="Env" type="Node3D" parent="World" unique_id=876416759]
 

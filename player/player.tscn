@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dibjsvd1mw103" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://d28e61nekvgap" path="res://player/gun/gun.tscn" id="2_rkbax"]
 [ext_resource type="Script" uid="uid://kdol44hddtl7" path="res://player/stuff.gd" id="3_yw30f"]
+[ext_resource type="PackedScene" uid="uid://c53qtfkkj8xsg" path="res://assets/pouch.blend" id="4_yw30f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttdjf"]
 
@@ -44,11 +45,15 @@ collision_mask = 0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stuff/Pouch" unique_id=297550556]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+visible = false
 radius = 0.1
 height = 0.2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stuff/Pouch" unique_id=1771728436]
 shape = SubResource("CylinderShape3D_ttdjf")
+
+[node name="pouch" parent="Stuff/Pouch" unique_id=1713744551 instance=ExtResource("4_yw30f")]
+transform = Transform3D(1.3617331, -0.30252868, -0.11899227, 0.3196707, 1.33928, 0.2532576, 0.059104465, -0.27350548, 1.3717511, 0.013111217, -0.04433436, 9.313226e-10)
 
 [node name="Barrel" type="Area3D" parent="Stuff" unique_id=79526899]
 transform = Transform3D(0.83481574, -0.41186988, -0.3653024, 0.4834943, 0.86583316, 0.12870969, 0.26327923, -0.28407058, 0.92194784, 0.3743687, -0.5856889, 0.41186017)
