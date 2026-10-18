@@ -510,6 +510,8 @@ shadow_mesh = SubResource("ArrayMesh_uevac")
 
 [node name="LampControls" type="Node3D" unique_id=2122993748]
 script = ExtResource("1_f48fc")
+fill_time = 1.0
+drain_time = 20.0
 
 [node name="lamp_controls" type="Node3D" parent="." unique_id=1903456574]
 

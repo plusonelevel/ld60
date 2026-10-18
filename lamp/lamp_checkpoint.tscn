@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://chmgmvf4j1uju"]
+
+[ext_resource type="Script" uid="uid://doqt6ihhnad4k" path="res://lamp/lamp.gd" id="1_1lom4"]
+[ext_resource type="PackedScene" uid="uid://btyhcpfakmmhv" path="res://assets/lamp_checkpoint.blend" id="2_1lom4"]
+[ext_resource type="Script" uid="uid://rg5e5auuw6qp" path="res://lamp/light.gd" id="3_fffv5"]
+[ext_resource type="PackedScene" uid="uid://b3tcgpjba40d2" path="res://lamp/lamp_controls.tscn" id="4_0p32j"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ttdjf"]
+height = 3.0
+radius = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u5qm3"]
+height = 3.0
+radius = 1.7
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u5qm3"]
+radius = 8.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_57qmd"]
+emission_shape_scale = Vector3(0.1, 0.05, 0.1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 0.19999999
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.79999995
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+transparency = 1
+albedo_color = Color(0.7553766, 0.23276019, 9.62615e-08, 0.5882353)
+emission_enabled = true
+emission = Color(0.52191913, 0.2021581, 4.813075e-08, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_yf5fn")
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
+[node name="Lamp" type="StaticBody3D" unique_id=1219314905]
+script = ExtResource("1_1lom4")
+
+[node name="lamp_checkpoint" parent="." unique_id=302217909 instance=ExtResource("2_1lom4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1154580514]
+shape = SubResource("CylinderShape3D_ttdjf")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1854379167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50456345, 0)
+visible = false
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=2017214957]
+radius = 0.25
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=1537112521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99064064, 0)
+polygon = PackedVector2Array(0, 0, 0, 1, 0.75, 0.75, 0.25, 0, 0, 0, 0, 0)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+
+[node name="Light" type="OmniLight3D" parent="." unique_id=2094418869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031212538, 4.730868, 0.0031939745)
+layers = 2
+light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
+light_energy = 15.0
+light_size = 1.0
+shadow_enabled = true
+script = ExtResource("3_fffv5")
+smooth = 1.0
+
+[node name="Light2" type="OmniLight3D" parent="." unique_id=1063020043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0808357, 4.043803, 0.96587586)
+layers = 2
+light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
+shadow_enabled = true
+script = ExtResource("3_fffv5")
+smooth = 1.0
+
+[node name="Light3" type="OmniLight3D" parent="." unique_id=310675994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.062541604, 4.1422124, -0.84418195)
+layers = 2
+light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
+shadow_enabled = true
+script = ExtResource("3_fffv5")
+smooth = 1.0
+
+[node name="InteractiveArea" type="Area3D" parent="." unique_id=734603101]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveArea" unique_id=50860135]
+shape = SubResource("CylinderShape3D_u5qm3")
+debug_fill = false
+
+[node name="LightArea" type="Area3D" parent="." unique_id=1509131164]
+collision_layer = 4
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightArea" unique_id=211380647]
+shape = SubResource("SphereShape3D_u5qm3")
+
+[node name="Flame" type="GPUParticles3D" parent="." unique_id=121889752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.416244, 0.014773488)
+cast_shadow = 0
+emitting = false
+amount = 50
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_57qmd")
+draw_pass_1 = SubResource("SphereMesh_g4v7s")
+
+[node name="Flame2" type="GPUParticles3D" parent="." unique_id=1812959775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.004562, 0.98137975)
+cast_shadow = 0
+emitting = false
+amount = 50
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_57qmd")
+draw_pass_1 = SubResource("SphereMesh_g4v7s")
+
+[node name="Flame3" type="GPUParticles3D" parent="." unique_id=869358901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0981364, -0.8505012)
+cast_shadow = 0
+emitting = false
+amount = 50
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_57qmd")
+draw_pass_1 = SubResource("SphereMesh_g4v7s")
+
+[node name="LampControls" parent="." unique_id=2122993748 instance=ExtResource("4_0p32j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24286175, 0)
+
+[connection signal="body_entered" from="InteractiveArea" to="." method="_on_interactive_area_body_entered"]
+[connection signal="body_exited" from="InteractiveArea" to="." method="_on_interactive_area_body_exited"]
+[connection signal="body_entered" from="LightArea" to="." method="_on_light_area_body_entered"]
