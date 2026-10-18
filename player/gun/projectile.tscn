@@ -3,17 +3,25 @@
 [ext_resource type="Script" uid="uid://b8hx5up5kthis" path="res://player/gun/projectile.gd" id="1_m2phq"]
 [ext_resource type="PackedScene" uid="uid://jdob7wix2hkl" path="res://assets/projectile.blend" id="2_3clxf"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1fvgt"]
+friction = 10.0
+rough = true
+bounce = 1.0
+absorbent = true
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_ttdjf"]
 radius = 0.1
 
 [node name="Projectile" type="RigidBody3D" unique_id=604010202]
 collision_layer = 512
 collision_mask = 259
-mass = 0.05
-gravity_scale = 0.7
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_1fvgt")
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 10
+linear_damp = 2.0
+angular_damp = 1.0
 script = ExtResource("1_m2phq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1437117781]
@@ -24,5 +32,6 @@ visible = false
 radius = 0.08
 
 [node name="projectile" parent="." unique_id=1732533026 instance=ExtResource("2_3clxf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

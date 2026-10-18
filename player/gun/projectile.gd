@@ -1,5 +1,6 @@
-extends RigidBody3D
+class_name Projectile extends RigidBody3D
 
+var is_primed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,10 +11,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
+func prime():
+	is_primed = true
 
 func _on_body_entered(body: Node) -> void:
 	print_debug("projectile hit %s" % body.name)
-	if body is Enemy:
+	if is_primed and body is Enemy:
 		body.die()
 		queue_free()
+	is_primed = false

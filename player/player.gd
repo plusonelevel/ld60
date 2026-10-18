@@ -30,22 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_rotation_input = -event.relative.x * MOUSE_SENSITIVITY
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
 	elif event.is_action_pressed(&"reload"):
-		var tween = create_tween().set_parallel()
-		if not is_reloading:
-			is_reloading = true
-			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-			tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), reload_transition)
-			tween.tween_property(self, ^"rotation:x", 0.0, reload_transition)
-			tween.tween_property(CAMERA, ^"rotation:x", -PI/4, reload_transition)
-			tween.tween_property(gun, ^"position", Vector3(0.3, -1.0, 0.2), reload_transition)
-			tween.tween_property(gun, ^"rotation", Vector3(PI/4, PI/6, 0), reload_transition)
-		else:
-			is_reloading = false
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			tween.tween_property(CAMERA, ^"position", Vector3.ZERO, reload_transition)
-			tween.tween_property(CAMERA, ^"rotation:x", 0, reload_transition)
-			tween.tween_property(gun, ^"transform", orig_gun_transform, reload_transition)
-			
+		toggle_reloading()	
 		
 func _update_camera(delta):
 	
@@ -96,3 +81,21 @@ func _physics_process(delta):
 	
 	stuff.rotation.x = 0.0
 	stuff.position.y = -0.2
+
+func toggle_reloading():
+	var tween = create_tween().set_parallel()
+	if not is_reloading:
+		is_reloading = true
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+		tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), reload_transition)
+		tween.tween_property(self, ^"rotation:x", 0.0, reload_transition)
+		tween.tween_property(CAMERA, ^"rotation:x", -PI/4, reload_transition)
+		tween.tween_property(gun, ^"position", Vector3(0.3, -1.0, 0.2), reload_transition)
+		tween.tween_property(gun, ^"rotation", Vector3(PI/4, PI/6, 0), reload_transition)
+	else:
+		is_reloading = false
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		tween.tween_property(CAMERA, ^"position", Vector3.ZERO, reload_transition)
+		tween.tween_property(CAMERA, ^"rotation:x", 0, reload_transition)
+		tween.tween_property(gun, ^"transform", orig_gun_transform, reload_transition)
+		

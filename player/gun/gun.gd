@@ -22,8 +22,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func fire() -> void:
 	smoke.emitting = true
 	smoke.restart()
-	var projectile: RigidBody3D = projectile_scn.instantiate()
+	var projectile: Projectile = projectile_scn.instantiate()
 	get_tree().get_root().add_child(projectile)
 	projectile.global_transform.origin = global_transform.origin
-	projectile.apply_impulse(-global_transform.basis.z * FIRE_POWER, Vector3(randf_range(0.0, 0.1), randf_range(0.0, 0.1), randf_range(0.0, 0.1)))
+	projectile.apply_impulse(-global_transform.basis.z * FIRE_POWER + Vector3(0, 1, 0), Vector3(randf_range(0.0, 0.1), randf_range(0.0, 0.1), randf_range(0.0, 0.1)))
+	projectile.prime()
 	
