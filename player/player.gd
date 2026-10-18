@@ -9,6 +9,7 @@ class_name Player extends CharacterBody3D
 
 @onready var stuff: Node3D = $Stuff
 @onready var gun: Gun = $Gun
+@onready var kerosene = $kerosene
 
 var _mouse_input : bool = false
 var _rotation_input : float
@@ -16,6 +17,13 @@ var _tilt_input : float
 var _mouse_rotation : Vector3
 var _player_rotation : Vector3
 
+var kerosene_shown := false
+var kerosene_rest:= Vector3(-0.153,-0.1,-0.163)
+var kerosene_tween: Tween
+var kerosene_amount = 0
+const KEROSENE_CAPACITY := 5
+
+var gun_rest: Vector3
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -25,8 +33,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _mouse_input:
 		_rotation_input = -event.relative.x * MOUSE_SENSITIVITY
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
-	elif event.is_action_pressed(&"reload") and (GameManager.player_state == Enums.PlayerState.DEFAULT or GameManager.player_state == Enums.PlayerState.RELOADING):
-		toggle_reloading()	
+	elif event.is_action_pressed(&"reload") and not kerosene_shown \
+			and (GameManager.player_state == Enums.PlayerState.DEFAULT or GameManager.player_state == Enums.PlayerState.RELOADING):
+		toggle_reloading()
+	elif event is InputEventMouseButton and event.pressed \
+		and event.button_index == MOUSE_BUTTON_RIGHT \
+		and GameManager.player_state == Enums.PlayerState.DEFAULT:
+		toggle_kerosene()
 		
 func _update_camera(delta):
 	
@@ -44,6 +57,11 @@ func _update_camera(delta):
 	
 func _ready():
 	Signals.gun_primed.connect(_on_gun_primed)
+	
+	gun_rest = gun.position
+	kerosene.position = kerosene_rest + Vector3(0, -0.3, 0)
+	kerosene.hide()
+	
 	
 	# Get mouse input
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -100,3 +118,26 @@ func toggle_reloading():
 func _on_gun_primed():
 	if GameManager.player_state == Enums.PlayerState.RELOADING:
 		toggle_reloading()
+
+func toggle_kerosene():
+	kerosene_shown = not kerosene_shown
+
+	var out_item: Node3D = gun if kerosene_shown else kerosene
+	var out_rest: Vector3 = gun_rest if kerosene_shown else kerosene_rest
+	var in_item: Node3D = kerosene if kerosene_shown else gun
+	var in_rest: Vector3 = kerosene_rest if kerosene_shown else gun_rest
+
+	if kerosene_tween:
+		kerosene_tween.kill()
+	kerosene_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	
+	kerosene_tween.tween_property(out_item, ^"position", out_rest + Vector3(0, -0.3, 0), 0.2)
+	kerosene_tween.tween_callback(out_item.hide)
+
+	kerosene_tween.tween_callback(in_item.show)
+	kerosene_tween.tween_property(in_item, ^"position", in_rest, 0.2)
+
+func fill_kerosene() -> void:
+	kerosene_amount = KEROSENE_CAPACITY
+	Signals.status_message.emit("Bottle filled.")

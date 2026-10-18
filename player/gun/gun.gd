@@ -43,6 +43,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		prime()
 
 func fire() -> void:
+	if not visible:
+		return
 	Signals.gun_fired.emit()
 	smoke.restart()
 	var projectile: Projectile = projectile_scn.instantiate()

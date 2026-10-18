@@ -73,7 +73,6 @@ light_size = 1.0
 shadow_enabled = true
 omni_range = 30.0
 script = ExtResource("3_3f7dg")
-smooth = 1.0
 
 [node name="InteractiveArea" type="Area3D" parent="." unique_id=734603101]
 collision_layer = 0
@@ -101,6 +100,7 @@ draw_pass_1 = SubResource("SphereMesh_g4v7s")
 
 [node name="LampControls" parent="." unique_id=2122993748 instance=ExtResource("4_f1vyn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24286175, 0)
+drain_time = 60.0
 
 [connection signal="body_entered" from="InteractiveArea" to="." method="_on_interactive_area_body_entered"]
 [connection signal="body_exited" from="InteractiveArea" to="." method="_on_interactive_area_body_exited"]

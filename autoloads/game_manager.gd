@@ -13,6 +13,9 @@ func _ready() -> void:
 	Signals.gun_fired.connect(_on_gun_state_changed.bind(Enums.GunState.DEFAULT))
 	Signals.gun_loaded.connect(_on_gun_state_changed.bind(Enums.GunState.LOADED))
 	Signals.gun_primed.connect(_on_gun_state_changed.bind(Enums.GunState.PRIMED))
+	
+	await get_tree().process_frame
+	Signals.game_start.emit()
 
 
 func _on_player_state_changed(new_state):

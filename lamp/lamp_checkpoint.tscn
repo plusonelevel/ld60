@@ -42,7 +42,7 @@ height = 0.1
 radial_segments = 4
 rings = 2
 
-[node name="Lamp" type="StaticBody3D" unique_id=1219314905]
+[node name="LampCheckpoint" type="StaticBody3D" unique_id=1219314905]
 script = ExtResource("1_1lom4")
 
 [node name="lamp_checkpoint" parent="." unique_id=302217909 instance=ExtResource("2_1lom4")]
@@ -65,30 +65,14 @@ spin_degrees = 360.0
 spin_sides = 8
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=2094418869]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031212538, 4.730868, 0.0031939745)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031212538, 4.6696486, 0.0031939745)
 layers = 2
 light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
 light_energy = 15.0
 light_size = 1.0
 shadow_enabled = true
+omni_range = 30.0
 script = ExtResource("3_fffv5")
-smooth = 1.0
-
-[node name="Light2" type="OmniLight3D" parent="." unique_id=1063020043]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0808357, 4.043803, 0.96587586)
-layers = 2
-light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
-shadow_enabled = true
-script = ExtResource("3_fffv5")
-smooth = 1.0
-
-[node name="Light3" type="OmniLight3D" parent="." unique_id=310675994]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.062541604, 4.1422124, -0.84418195)
-layers = 2
-light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
-shadow_enabled = true
-script = ExtResource("3_fffv5")
-smooth = 1.0
 
 [node name="InteractiveArea" type="Area3D" parent="." unique_id=734603101]
 collision_layer = 0
@@ -114,26 +98,12 @@ randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_57qmd")
 draw_pass_1 = SubResource("SphereMesh_g4v7s")
 
-[node name="Flame2" type="GPUParticles3D" parent="." unique_id=1812959775]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.004562, 0.98137975)
-cast_shadow = 0
-emitting = false
-amount = 50
-randomness = 0.5
-process_material = SubResource("ParticleProcessMaterial_57qmd")
-draw_pass_1 = SubResource("SphereMesh_g4v7s")
-
-[node name="Flame3" type="GPUParticles3D" parent="." unique_id=869358901]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0981364, -0.8505012)
-cast_shadow = 0
-emitting = false
-amount = 50
-randomness = 0.5
-process_material = SubResource("ParticleProcessMaterial_57qmd")
-draw_pass_1 = SubResource("SphereMesh_g4v7s")
-
 [node name="LampControls" parent="." unique_id=2122993748 instance=ExtResource("4_0p32j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24286175, 0)
+fill_time = 10.0
+drain_time = 60000.0
+cone_presses_needed = 10
+cone_fill_time = 3.0
 
 [connection signal="body_entered" from="InteractiveArea" to="." method="_on_interactive_area_body_entered"]
 [connection signal="body_exited" from="InteractiveArea" to="." method="_on_interactive_area_body_exited"]

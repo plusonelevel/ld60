@@ -14,35 +14,46 @@ var lamps_in_range: Array[Lamp] = []
 @export var attack_damage : float = 2.0
 @export var attack_cooldown : float = 1.0
 @export var blend_speed : float = 6.0
+@export var detection_range : float = 20.0
 
 
 enum State { RUN, HIT, DIE}
 
 var player: Player
 var attack_timer := 0.0
+var chasing := false
 
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group(&"player")
 
 func _physics_process(delta):
-	#CHASING PLAYER
 	var to_player := player.global_position - global_position
-	to_player.y = 0.0  # keep movement and rotation flat
+	to_player.y = 0.0
 	var dist := to_player.length()
+	
+	#CHASING PLAYER
+	if not chasing and dist <= detection_range:
+		chasing = true
+
+	if not chasing:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+
 
 	if dist > attack_range:
 		velocity = to_player.normalized() * speed
-		attack_timer = 0.0  # hits immediately on arrival; set to attack_cooldown for a wind-up
+		attack_timer = 0.0
 	else:
 		velocity = Vector3.ZERO
 		attack_timer -= delta
 		if attack_timer <= 0.0:
 			attack_timer = attack_cooldown
 			hit_player()
-	
+
 	move_and_slide()
-	look_at(player.global_transform.origin, Vector3.UP)
+	look_at(player.global_position, Vector3.UP)
 
 	#TAKING DAMAGE FROM LIGHT
 	var dmg := 0.0

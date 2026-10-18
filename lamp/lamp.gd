@@ -1,6 +1,6 @@
 class_name Lamp extends StaticBody3D
 
-
+@export var lamp_id : int
 
 @onready var interactive_area: Area3D = $InteractiveArea
 @onready var light_source: OmniLight3D = $Light
@@ -38,6 +38,8 @@ func _process(delta: float) -> void:
 
 
 func light_up():
+	Signals.lamp_lit.emit(lamp_id)
+	print(self)
 	var flame_fade = controls.drain_time
 	flame.emitting = true
 	flame.amount_ratio = 1.0
