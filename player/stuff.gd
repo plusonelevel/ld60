@@ -19,7 +19,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if dragged:
-		dragged.position = _get_mouse_target(2048).position
+		var target = _get_mouse_target(2048)
+		if target.is_empty():
+			dragged.release()
+			dragged = null
+		else:
+			dragged.position = target.position
 
 func _get_mouse_target(mask: int):
 	var space_state = get_world_3d().direct_space_state
