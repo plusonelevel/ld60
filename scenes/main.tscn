@@ -107,7 +107,6 @@ height = 1.2536621
 
 [node name="Player" parent="World" unique_id=502817955 node_paths=PackedStringArray("CAMERA") instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9292638, 42.75928)
-MOUSE_SENSITIVITY = 0.3
 CAMERA = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="World/Player" unique_id=1948103113]
@@ -438,6 +437,20 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("13_jkv2x")
 
+[node name="Kerosene" type="HBoxContainer" parent="UI" unique_id=1532930471]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 102.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="UI/Kerosene" unique_id=487476288]
+layout_mode = 2
+text = "Kerosene:"
+
+[node name="Charges" type="Label" parent="UI/Kerosene" unique_id=1241390789]
+layout_mode = 2
+
 [node name="Crosshair" type="Label" parent="UI" unique_id=1953527581]
 layout_mode = 1
 anchors_preset = 8
@@ -446,13 +459,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -5.0
-offset_top = -11.5
+offset_top = -12.0
 offset_right = 5.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StatusMessage" type="Label" parent="UI" unique_id=1421797719]
 visible = false
@@ -472,6 +487,27 @@ theme_override_font_sizes/font_size = 50
 text = "Test"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Gun" type="HBoxContainer" parent="UI" unique_id=1747532361]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -90.0
+offset_bottom = 40.0
+grow_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-20, 10)
+alignment = 2
+
+[node name="Label" type="Label" parent="UI/Gun" unique_id=1700878136]
+layout_mode = 2
+text = "Barrel:"
+
+[node name="GunStatus" type="Label" parent="UI/Gun" unique_id=372587021]
+layout_mode = 2
+text = "TMP"
 
 [node name="Enemy" parent="." unique_id=401762933 instance=ExtResource("18_dp3eg")]
 transform = Transform3D(-0.741243, 0, 1.3040547, 0, 1.5, 0, -1.3040547, 0, -0.741243, 3.009426, 1.1593232, 20.100006)

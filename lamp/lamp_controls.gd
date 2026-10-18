@@ -130,6 +130,7 @@ func _pour_cone() -> void:
 		return
 
 	player.kerosene_amount -= 1
+	Signals.kerosene_amount_changed.emit(player.kerosene_amount)
 	cone_presses += 1
 	var target := float(cone_presses) / cone_presses_needed
 	if kerosene_tween:

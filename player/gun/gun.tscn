@@ -42,7 +42,7 @@ size = Vector2(2.5, 2.5)
 [node name="Gun" type="Node3D" unique_id=940231012]
 script = ExtResource("1_f3u3k")
 FIRE_POWER = 25.0
-prime_duration = 0.2
+prime_duration = 0.1
 
 [node name="musket" parent="." unique_id=1678287569 instance=ExtResource("2_sss0t")]
 transform = Transform3D(0.99164915, -0.069276206, 0.10877856, 0.07848127, 0.9934751, -0.08275248, -0.102336, 0.09059851, 0.9906156, 0.43802172, -0.2988815, 2.4781718)
