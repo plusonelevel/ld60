@@ -24,7 +24,7 @@ var orig_gun_transform
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _unhandled_input(event: InputEvent) -> void:
-	_mouse_input = event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
+	_mouse_input = event is InputEventMouseMotion and GameManager.player_state == Enums.PlayerState.DEFAULT
 	if _mouse_input:
 		_rotation_input = -event.relative.x * MOUSE_SENSITIVITY
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
@@ -85,9 +85,10 @@ func _physics_process(delta):
 
 func toggle_reloading():
 	var tween = create_tween().set_parallel()
-	if GameManager.player_state == Enums.PlayerState.DEFAULT and GameManager.gun_state != Enums.GunState.PRIMED:
+	var needs_reloading = GameManager.player_state == Enums.PlayerState.DEFAULT and GameManager.gun_state != Enums.GunState.PRIMED
+	if needs_reloading:
 		Signals.player_state_changed.emit(Enums.PlayerState.RELOADING)
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), reload_transition)
 		tween.tween_property(self, ^"rotation:x", 0.0, reload_transition)
 		tween.tween_property(CAMERA, ^"rotation:x", -PI/4, reload_transition)
