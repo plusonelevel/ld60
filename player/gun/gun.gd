@@ -68,5 +68,4 @@ func _on_gun_fired():
 
 func _on_gun_loaded():
 	is_empty = false
-	var tween = create_tween().set_parallel()
 	start_reloading()
