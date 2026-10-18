@@ -65,7 +65,6 @@ func take_dmg(dmg):
 
 func die():
 	death_fx.reparent(get_tree().current_scene)  
-	death_fx.one_shot = true
 	death_fx.emitting = true
 	death_fx.finished.connect(death_fx.queue_free)
 

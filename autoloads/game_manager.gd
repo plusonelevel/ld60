@@ -3,7 +3,9 @@ extends Node
 var player_state := Enums.PlayerState.DEFAULT
 var gun_state := Enums.GunState.DEFAULT
 
-var reload_transition_length := 0.1
+var reload_transition_length := 0.5
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,10 +14,6 @@ func _ready() -> void:
 	Signals.gun_loaded.connect(_on_gun_state_changed.bind(Enums.GunState.LOADED))
 	Signals.gun_primed.connect(_on_gun_state_changed.bind(Enums.GunState.PRIMED))
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func _on_player_state_changed(new_state):
 	player_state = new_state

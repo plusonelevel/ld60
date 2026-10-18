@@ -10,9 +10,3 @@ enum GunState {
 	LOADED,
 	PRIMED
 }
-
-enum GunPosition {
-	DEFAULT,
-	EMPTY,
-	LOADED
-}

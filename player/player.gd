@@ -50,10 +50,11 @@ func _ready():
 
 
 func _physics_process(delta):
-	
+	if not GameManager.player_state == Enums.PlayerState.DEFAULT:
+		return
+
 	# Update camera movement based on mouse movement
-	if GameManager.player_state == Enums.PlayerState.DEFAULT:
-		_update_camera(delta)
+	_update_camera(delta)
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -76,9 +77,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-	
-	stuff.rotation.x = 0.0
-	stuff.position.y = -0.2
+
 
 func toggle_reloading():
 	var tween = create_tween().set_parallel()
