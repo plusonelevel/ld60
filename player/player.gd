@@ -7,12 +7,19 @@ class_name Player extends CharacterBody3D
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
 @export var CAMERA : Camera3D
 
+@onready var stuff: Node3D = $Stuff
+@onready var gun: Node3D = $Gun
+
 var _mouse_input : bool = false
 var _rotation_input : float
 var _tilt_input : float
 var _mouse_rotation : Vector3
 var _player_rotation : Vector3
-#var _camera_rotation : Vector3
+
+var is_reloading := false
+var reload_transition := 0.1
+var orig_gun_transform
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -22,7 +29,23 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _mouse_input:
 		_rotation_input = -event.relative.x * MOUSE_SENSITIVITY
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
-		
+	elif event.is_action_pressed(&"reload"):
+		var tween = create_tween().set_parallel()
+		if not is_reloading:
+			is_reloading = true
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+			tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), reload_transition)
+			tween.tween_property(self, ^"rotation:x", 0.0, reload_transition)
+			tween.tween_property(CAMERA, ^"rotation:x", -PI/4, reload_transition)
+			tween.tween_property(gun, ^"position", Vector3(0.3, -1.0, 0.2), reload_transition)
+			tween.tween_property(gun, ^"rotation", Vector3(PI/4, PI/6, 0), reload_transition)
+		else:
+			is_reloading = false
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			tween.tween_property(CAMERA, ^"position", Vector3.ZERO, reload_transition)
+			tween.tween_property(CAMERA, ^"rotation:x", 0, reload_transition)
+			tween.tween_property(gun, ^"transform", orig_gun_transform, reload_transition)
+			
 		
 func _update_camera(delta):
 	
@@ -32,26 +55,22 @@ func _update_camera(delta):
 	_mouse_rotation.y += _rotation_input * delta
 	
 	_player_rotation = Vector3(_mouse_rotation.x,_mouse_rotation.y,0.0)
-	#_player_rotation = Vector3(0.0,_mouse_rotation.y,0.0)
-	#_camera_rotation = Vector3(_mouse_rotation.x,0.0,0.0)
-
-	#CAMERA.transform.basis = Basis.from_euler(_camera_rotation)
+	
 	global_transform.basis = Basis.from_euler(_player_rotation)
 	
-	#CAMERA.rotation.z = 0.0
-
 	_rotation_input = 0.0
 	_tilt_input = 0.0
 	
 func _ready():
-
+	orig_gun_transform = gun.transform
 	# Get mouse input
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
 	
 	# Update camera movement based on mouse movement
-	_update_camera(delta)
+	if not is_reloading:
+		_update_camera(delta)
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -74,3 +93,6 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+	stuff.rotation.x = 0.0
+	stuff.position.y = -0.2

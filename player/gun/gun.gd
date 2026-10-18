@@ -1,6 +1,6 @@
 class_name Gun extends Node3D
 
-@export var FIRE_POWER := 500.0
+@export var FIRE_POWER := 2.0
 
 @onready var smoke : GPUParticles3D = $Smoke
 
@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"fire"):
+	if event.is_action_pressed(&"fire") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		fire()
 
 func fire() -> void:

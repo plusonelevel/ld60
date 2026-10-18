@@ -43,7 +43,6 @@ func die():
 	queue_free()
 	
 func lamp_range_entered(lamp_pos: Lamp):
-	#if not lamps_in_range.find(lamp_pos):
 	lamps_in_range.append(lamp_pos)
 
 func lamp_range_exited(lamp_pos: Lamp):
