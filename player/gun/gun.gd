@@ -2,6 +2,8 @@ class_name Gun extends Node3D
 
 @export var FIRE_POWER := 500.0
 
+@onready var smoke : GPUParticles3D = $Smoke
+
 var projectile_scn = preload("res://player/gun/projectile.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +20,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		fire()
 
 func fire() -> void:
+	smoke.emitting = true
+	smoke.restart()
 	var projectile: RigidBody3D = projectile_scn.instantiate()
 	get_tree().get_root().add_child(projectile)
 	projectile.global_transform.origin = global_transform.origin

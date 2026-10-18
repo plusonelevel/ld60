@@ -5,6 +5,7 @@ class_name Lamp extends StaticBody3D
 @onready var interactive_area: Area3D = $InteractiveArea
 @onready var light_source: OmniLight3D = $Light
 @onready var light_collider: CollisionShape3D = $LightArea/CollisionShape3D
+@onready var flame: GPUParticles3D = $Flame
 
 var orig_energy
 var intensity
@@ -33,6 +34,9 @@ func _on_interactive_area_body_exited(body: Node3D) -> void:
 
 
 func light_up():
+	var flame_fade = fade_time - 5.0
+	flame.emitting = true
+	flame.amount_ratio = 1.0
 	if tween:
 		tween.kill()
 	tween = create_tween()
@@ -40,6 +44,8 @@ func light_up():
 	#tween.parallel().tween_property(light_collider, ^"scale", orig_size, 0.5)
 	
 	tween.tween_property(self, ^"intensity", 0.0, fade_time)
+	tween.tween_property(flame,"amount_ratio",0,flame_fade)
+	tween.tween_property(flame,"emitting",false,flame_fade)
 	#tween.parallel().tween_property(light_collider, ^"scale", MIN_SCALE, fade_time)
 	
 

@@ -14,6 +14,32 @@ radius = 1.7
 [sub_resource type="SphereShape3D" id="SphereShape3D_u5qm3"]
 radius = 8.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_57qmd"]
+emission_shape_scale = Vector3(0.1, 0.05, 0.1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 0.19999999
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.79999995
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+transparency = 1
+albedo_color = Color(0.7553766, 0.23276019, 9.62615e-08, 0.5882353)
+emission_enabled = true
+emission = Color(0.52191913, 0.2021581, 4.813075e-08, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_yf5fn")
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
 [node name="Lamp" type="StaticBody3D" unique_id=1219314905]
 script = ExtResource("1_gswdp")
 
@@ -59,6 +85,15 @@ collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LightArea" unique_id=211380647]
 shape = SubResource("SphereShape3D_u5qm3")
+
+[node name="Flame" type="GPUParticles3D" parent="." unique_id=121889752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0760393, 0.014773488)
+cast_shadow = 0
+emitting = false
+amount = 50
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_57qmd")
+draw_pass_1 = SubResource("SphereMesh_g4v7s")
 
 [connection signal="body_entered" from="InteractiveArea" to="." method="_on_interactive_area_body_entered"]
 [connection signal="body_exited" from="InteractiveArea" to="." method="_on_interactive_area_body_exited"]
