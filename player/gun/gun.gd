@@ -16,10 +16,11 @@ func _process(delta: float) -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"fire") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event.is_action_pressed(&"fire") and GameManager.player_state == Enums.PlayerState.DEFAULT and GameManager.gun_state == Enums.GunState.PRIMED:
 		fire()
 
 func fire() -> void:
+	Signals.gun_fired.emit()
 	smoke.emitting = true
 	smoke.restart()
 	var projectile: Projectile = projectile_scn.instantiate()

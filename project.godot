@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*uid://drplt1hj2rfan"
 Signals="*uid://d3jvbekq1jgqe"
+Enums="*uid://dnjdcurex0g0k"
 
 [display]
 

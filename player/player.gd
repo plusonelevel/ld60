@@ -16,7 +16,6 @@ var _tilt_input : float
 var _mouse_rotation : Vector3
 var _player_rotation : Vector3
 
-var is_reloading := false
 var reload_transition := 0.1
 var orig_gun_transform
 
@@ -54,7 +53,7 @@ func _ready():
 func _physics_process(delta):
 	
 	# Update camera movement based on mouse movement
-	if not is_reloading:
+	if GameManager.player_state == Enums.PlayerState.DEFAULT:
 		_update_camera(delta)
 	
 	# Add the gravity.
@@ -83,17 +82,18 @@ func _physics_process(delta):
 	stuff.position.y = -0.2
 
 func toggle_reloading():
+	Signals.gun_primed.emit()
 	var tween = create_tween().set_parallel()
-	if not is_reloading:
-		is_reloading = true
+	if GameManager.player_state == Enums.PlayerState.DEFAULT:
+		Signals.player_state_changed.emit(Enums.PlayerState.RELOADING)
 		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 		tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), reload_transition)
 		tween.tween_property(self, ^"rotation:x", 0.0, reload_transition)
 		tween.tween_property(CAMERA, ^"rotation:x", -PI/4, reload_transition)
-		tween.tween_property(gun, ^"position", Vector3(0.3, -1.0, 0.2), reload_transition)
+		tween.tween_property(gun, ^"position", Vector3(0.4, -1.1, 0.2), reload_transition)
 		tween.tween_property(gun, ^"rotation", Vector3(PI/4, PI/6, 0), reload_transition)
 	else:
-		is_reloading = false
+		Signals.player_state_changed.emit(Enums.PlayerState.DEFAULT)
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		tween.tween_property(CAMERA, ^"position", Vector3.ZERO, reload_transition)
 		tween.tween_property(CAMERA, ^"rotation:x", 0, reload_transition)
