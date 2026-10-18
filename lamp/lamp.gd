@@ -6,6 +6,7 @@ class_name Lamp extends StaticBody3D
 @onready var light_source: OmniLight3D = $Light
 @onready var light_collider: CollisionShape3D = $LightArea/CollisionShape3D
 @onready var flame: GPUParticles3D = $Flame
+@onready var controls := $LampControls
 
 var orig_energy
 var intensity
@@ -16,21 +17,22 @@ var tween: Tween
 func _ready() -> void:
 	orig_energy = light_source.light_energy
 	intensity = 0.0
+	controls.pressure_full.connect(_on_pressure_full)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	light_source.light_energy = intensity * orig_energy
 
 
-func _on_interactive_area_body_entered(body: Node3D) -> void:
-	if body is Player:
-		light_up()
-		Signals.interactable_changed.emit(true)
-
-
-func _on_interactive_area_body_exited(body: Node3D) -> void:
-	if body is Player:
-		Signals.interactable_changed.emit(false)
+#func _on_interactive_area_body_entered(body: Node3D) -> void:
+	#if body is Player:
+		#light_up()
+		#Signals.interactable_changed.emit(true)
+#
+#
+#func _on_interactive_area_body_exited(body: Node3D) -> void:
+	#if body is Player:
+		#Signals.interactable_changed.emit(false)
 
 
 func light_up():
@@ -59,3 +61,6 @@ func _on_light_area_body_exited(body) -> void:
 	if body is Enemy:
 		print_debug("Enemy %s left range of lamp %s" % [body.name, name])
 		body.lamp_range_exited(self)
+
+func _on_pressure_full():
+	light_up()
