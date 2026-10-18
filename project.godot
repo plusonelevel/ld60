@@ -84,7 +84,7 @@ reload={
 3d_physics/layer_4="Player"
 3d_physics/layer_9="Enemy"
 3d_physics/layer_10="Projectile"
-3d_physics/layer_11="Mouse_interactable"
+3d_physics/layer_11="Clickable"
 
 [physics]
 

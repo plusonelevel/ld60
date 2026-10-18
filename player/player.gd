@@ -46,9 +46,11 @@ func _update_camera(delta):
 	_tilt_input = 0.0
 	
 func _ready():
+	Signals.gun_primed.connect(_on_gun_primed)
 	orig_gun_transform = gun.transform
 	# Get mouse input
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 
 func _physics_process(delta):
 	
@@ -82,9 +84,8 @@ func _physics_process(delta):
 	stuff.position.y = -0.2
 
 func toggle_reloading():
-	Signals.gun_primed.emit()
 	var tween = create_tween().set_parallel()
-	if GameManager.player_state == Enums.PlayerState.DEFAULT:
+	if GameManager.player_state == Enums.PlayerState.DEFAULT and GameManager.gun_state != Enums.GunState.PRIMED:
 		Signals.player_state_changed.emit(Enums.PlayerState.RELOADING)
 		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 		tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), reload_transition)
@@ -99,3 +100,6 @@ func toggle_reloading():
 		tween.tween_property(CAMERA, ^"rotation:x", 0, reload_transition)
 		tween.tween_property(gun, ^"transform", orig_gun_transform, reload_transition)
 		
+func _on_gun_primed():
+	if GameManager.player_state == Enums.PlayerState.RELOADING:
+		toggle_reloading()

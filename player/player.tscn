@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dibjsvd1mw103" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://d28e61nekvgap" path="res://player/gun/gun.tscn" id="2_rkbax"]
-[ext_resource type="Script" uid="uid://bdrp7il1wm41v" path="res://player/barrel.gd" id="3_g1dw6"]
+[ext_resource type="Script" uid="uid://kdol44hddtl7" path="res://player/stuff.gd" id="3_yw30f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttdjf"]
 
@@ -27,6 +27,7 @@ shape = SubResource("CapsuleShape3D_ttdjf")
 
 [node name="Stuff" type="Node3D" parent="." unique_id=130019530]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.6)
+script = ExtResource("3_yw30f")
 
 [node name="Pouch" type="StaticBody3D" parent="Stuff" unique_id=611403351]
 transform = Transform3D(0.4337283, 0.3041131, -0.28177115, -0.1844434, 0.5067541, 0.2630227, 0.3712955, -0.10351595, 0.45980874, -0.2, -0.532, 0.5)
@@ -42,13 +43,12 @@ height = 0.2
 shape = SubResource("CylinderShape3D_ttdjf")
 
 [node name="Barrel" type="Area3D" parent="Stuff" unique_id=79526899]
-transform = Transform3D(0.83481574, -0.41186988, -0.3653024, 0.4834943, 0.86583316, 0.12870969, 0.26327923, -0.28407058, 0.92194784, 0.29666004, -0.52606815, 0.4441886)
+transform = Transform3D(0.83481574, -0.41186988, -0.3653024, 0.4834943, 0.86583316, 0.12870969, 0.26327923, -0.28407058, 0.92194784, 0.3743687, -0.5856889, 0.41186017)
 collision_layer = 0
 collision_mask = 512
-script = ExtResource("3_g1dw6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stuff/Barrel" unique_id=1667328185]
 transform = Transform3D(0.9819895, -0.18860011, 0.011274144, 0.1875618, 0.9802917, 0.06203565, -0.022751883, -0.058804065, 0.9980105, -0.049393296, 0.0014119744, 0.028551012)
 shape = SubResource("CylinderShape3D_u5qm3")
 
-[connection signal="body_entered" from="Stuff/Barrel" to="Stuff/Barrel" method="_on_body_entered"]
+[connection signal="body_entered" from="Stuff/Barrel" to="Stuff" method="_on_barrel_body_entered"]

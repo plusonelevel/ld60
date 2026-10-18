@@ -11,6 +11,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func grab():
+	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+	freeze = true
+
+func release():
+	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+	freeze = false
+
 func prime():
 	is_primed = true
 
