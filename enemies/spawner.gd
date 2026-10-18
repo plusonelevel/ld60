@@ -5,13 +5,15 @@ extends Node3D
 @export var spawn_interval: float = 5.0
 @export var checkpoint : int
 
+var timer
+
 func _ready():
 	Signals.game_start.connect(_activate_spawner)
 	Signals.lamp_lit.connect(_checkpoint_reached)
 
 func _activate_spawner():
 	_on_spawn_timer_timeout()
-	var timer = Timer.new()
+	timer = Timer.new()
 	timer.wait_time = spawn_interval
 	timer.autostart = true
 	timer.connect("timeout", _on_spawn_timer_timeout)
@@ -24,4 +26,4 @@ func _on_spawn_timer_timeout():
 
 func _checkpoint_reached(checkpoint_number):
 	if checkpoint_number == checkpoint:
-		queue_free()
+		timer.stop()
