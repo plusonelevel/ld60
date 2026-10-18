@@ -15,16 +15,12 @@ var lamps_in_range: Array[Lamp] = []
 @export var attack_cooldown : float = 1.0
 @export var blend_speed : float = 6.0
 
-@onready var anim_tree: AnimationTree = $ghost/AnimationTree
-const BLEND_PATH := "parameters/Blend3/blend_amount"
-
 
 enum State { RUN, HIT, DIE}
 
 var player: Player
-var state := State.RUN
 var attack_timer := 0.0
-var blend = 1.0
+
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group(&"player")
@@ -36,11 +32,9 @@ func _physics_process(delta):
 	var dist := to_player.length()
 
 	if dist > attack_range:
-		state = State.RUN
 		velocity = to_player.normalized() * speed
 		attack_timer = 0.0  # hits immediately on arrival; set to attack_cooldown for a wind-up
 	else:
-		state = State.HIT
 		velocity = Vector3.ZERO
 		attack_timer -= delta
 		if attack_timer <= 0.0:
@@ -56,15 +50,9 @@ func _physics_process(delta):
 		dmg += light_dps * lamp.intensity / global_position.distance_to(lamp.position)
 	take_dmg(dmg * delta)
 	
-	_update_animation(delta)
 		
 func _process(delta):
 	health_label.text = "%.1f" % health
-
-func _update_animation(delta):
-	var target := 1.0 if state == State.RUN else 0.0
-	blend = move_toward(blend, target, blend_speed * delta)
-	anim_tree.set(BLEND_PATH, blend)
 
 func hit_player():
 	if player.has_method("take_dmg"):
@@ -76,10 +64,6 @@ func take_dmg(dmg):
 		die()
 
 func die():
-	if state == State.DIE:
-		return
-	state = State.DIE
-
 	death_fx.reparent(get_tree().current_scene)  
 	death_fx.one_shot = true
 	death_fx.emitting = true
