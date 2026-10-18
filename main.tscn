@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b8e6o88x8j8o4" path="res://bg_sky.png" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://uchcjrvfhuo8" path="res://enemies/spawner.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c5tq8rdhu7num" path="res://enemies/enemy.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c0wthmpjhxl1m" path="res://enemies/enemy2.tscn" id="7_4c57u"]
 [ext_resource type="Shader" uid="uid://8q6v2pnnp6pi" path="res://shaders/water.gdshader" id="7_272bh"]
 [ext_resource type="Texture2D" uid="uid://cihj5u5pwjasm" path="res://cloud.png" id="8_5vw27"]
 [ext_resource type="Shader" uid="uid://bpodw4v7ljp3j" path="res://shaders/cloud_drift.gdshader" id="8_kek77"]
@@ -138,8 +139,13 @@ light_energy = 0.5
 shadow_enabled = true
 
 [node name="Spawner" parent="World" unique_id=1985785800 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0343516, 25.077)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8490314, 1.0343516, 25.077)
 enemy = ExtResource("5_lquwl")
+spawn_interval = 10.0
+
+[node name="Spawner2" parent="World" unique_id=441289407 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9134283, 3.628722, 25.077)
+enemy = ExtResource("7_4c57u")
 spawn_interval = 10.0
 
 [node name="Water" type="MeshInstance3D" parent="World" unique_id=1422554642]

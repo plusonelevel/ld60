@@ -1,0 +1,29 @@
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://bxkauxlig0cuv"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fw1ev"]
+animation = &"Hit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7frlh"]
+animation = &"Fly"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_orwns"]
+animation = &"Dying"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_a6vjd"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_fw1ev"]
+
+[resource]
+graph_offset = Vector2(-418.713, -28.902145)
+nodes/output/position = Vector2(580, 140)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_a6vjd")
+nodes/Blend3/position = Vector2(380, 120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_orwns")
+nodes/Animation/position = Vector2(-80, 0)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_fw1ev")
+"nodes/Animation 2/position" = Vector2(-160, 180)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_7frlh")
+"nodes/Animation 3/position" = Vector2(0, 380)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_fw1ev")
+nodes/TimeScale/position = Vector2(200, 320)
+node_connections = [&"output", 0, &"Blend3", &"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"TimeScale", &"TimeScale", 0, &"Animation 3"]

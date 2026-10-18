@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c0jrw1665qb0f"]
 
 [ext_resource type="Script" uid="uid://b8hx5up5kthis" path="res://player/gun/projectile.gd" id="1_m2phq"]
+[ext_resource type="PackedScene" uid="uid://jdob7wix2hkl" path="res://assets/projectile.blend" id="2_3clxf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ttdjf"]
 radius = 0.1
@@ -19,6 +20,9 @@ script = ExtResource("1_m2phq")
 shape = SubResource("SphereShape3D_ttdjf")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1542376414]
+visible = false
 radius = 0.08
+
+[node name="projectile" parent="." unique_id=1732533026 instance=ExtResource("2_3clxf")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
