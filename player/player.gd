@@ -8,16 +8,13 @@ class_name Player extends CharacterBody3D
 @export var CAMERA : Camera3D
 
 @onready var stuff: Node3D = $Stuff
-@onready var gun: Node3D = $Gun
+@onready var gun: Gun = $Gun
 
 var _mouse_input : bool = false
 var _rotation_input : float
 var _tilt_input : float
 var _mouse_rotation : Vector3
 var _player_rotation : Vector3
-
-var reload_transition := 0.1
-var orig_gun_transform
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -28,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _mouse_input:
 		_rotation_input = -event.relative.x * MOUSE_SENSITIVITY
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
-	elif event.is_action_pressed(&"reload"):
+	elif event.is_action_pressed(&"reload") and (GameManager.player_state == Enums.PlayerState.DEFAULT or GameManager.player_state == Enums.PlayerState.RELOADING):
 		toggle_reloading()	
 		
 func _update_camera(delta):
@@ -47,7 +44,7 @@ func _update_camera(delta):
 	
 func _ready():
 	Signals.gun_primed.connect(_on_gun_primed)
-	orig_gun_transform = gun.transform
+	
 	# Get mouse input
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -89,17 +86,17 @@ func toggle_reloading():
 	if needs_reloading:
 		Signals.player_state_changed.emit(Enums.PlayerState.RELOADING)
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), reload_transition)
-		tween.tween_property(self, ^"rotation:x", 0.0, reload_transition)
-		tween.tween_property(CAMERA, ^"rotation:x", -PI/4, reload_transition)
-		tween.tween_property(gun, ^"position", Vector3(0.4, -1.1, 0.2), reload_transition)
-		tween.tween_property(gun, ^"rotation", Vector3(PI/4, PI/6, 0), reload_transition)
+		tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), GameManager.reload_transition_length)
+		tween.tween_property(self, ^"rotation:x", 0.0, GameManager.reload_transition_length)
+		tween.tween_property(CAMERA, ^"rotation:x", -PI/4, GameManager.reload_transition_length)
+		gun.start_reloading()
 	else:
 		Signals.player_state_changed.emit(Enums.PlayerState.DEFAULT)
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		tween.tween_property(CAMERA, ^"position", Vector3.ZERO, reload_transition)
-		tween.tween_property(CAMERA, ^"rotation:x", 0, reload_transition)
-		tween.tween_property(gun, ^"transform", orig_gun_transform, reload_transition)
+		tween.tween_property(CAMERA, ^"position", Vector3.ZERO, GameManager.reload_transition_length)
+		tween.tween_property(CAMERA, ^"rotation:x", 0, GameManager.reload_transition_length)
+		gun.stop_reloading()
+		
 		
 func _on_gun_primed():
 	if GameManager.player_state == Enums.PlayerState.RELOADING:

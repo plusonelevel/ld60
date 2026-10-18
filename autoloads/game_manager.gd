@@ -3,6 +3,8 @@ extends Node
 var player_state := Enums.PlayerState.DEFAULT
 var gun_state := Enums.GunState.DEFAULT
 
+var reload_transition_length := 0.1
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.player_state_changed.connect(_on_player_state_changed)

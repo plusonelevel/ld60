@@ -14,10 +14,18 @@ radius = 0.1
 height = 0.05
 radius = 0.05
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cjont"]
+height = 0.1
+
 [node name="Player" type="CharacterBody3D" unique_id=502817955]
 collision_layer = 8
 collision_mask = 263
 script = ExtResource("1_oul6g")
+SPEED = null
+JUMP_VELOCITY = null
+MOUSE_SENSITIVITY = null
+TILT_LOWER_LIMIT = null
+TILT_UPPER_LIMIT = null
 
 [node name="Gun" parent="." unique_id=940231012 instance=ExtResource("2_rkbax")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.721)
@@ -44,11 +52,19 @@ shape = SubResource("CylinderShape3D_ttdjf")
 
 [node name="Barrel" type="Area3D" parent="Stuff" unique_id=79526899]
 transform = Transform3D(0.83481574, -0.41186988, -0.3653024, 0.4834943, 0.86583316, 0.12870969, 0.26327923, -0.28407058, 0.92194784, 0.3743687, -0.5856889, 0.41186017)
-collision_layer = 0
+collision_layer = 1024
 collision_mask = 512
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stuff/Barrel" unique_id=1667328185]
 transform = Transform3D(0.9819895, -0.18860011, 0.011274144, 0.1875618, 0.9802917, 0.06203565, -0.022751883, -0.058804065, 0.9980105, -0.049393296, 0.0014119744, 0.028551012)
 shape = SubResource("CylinderShape3D_u5qm3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stuff" unique_id=194536656]
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stuff/StaticBody3D" unique_id=1574613770]
+transform = Transform3D(0.97025716, 0.23937652, 0.03606021, -3.888445e-09, 0.1489615, -0.98884296, -0.24207735, 0.95943195, 0.14453092, 0.21844709, -0.62971634, 0.3636982)
+shape = SubResource("CylinderShape3D_cjont")
 
 [connection signal="body_entered" from="Stuff/Barrel" to="Stuff" method="_on_barrel_body_entered"]
