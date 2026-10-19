@@ -212,8 +212,20 @@ transform = Transform3D(0.48575637, 8.742277e-08, -0.9800679, -1.0754748e-07, 1,
 [node name="crate14" parent="World/Bridge/Level" unique_id=252064072 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(-0.55616254, -1.7484555e-07, 0.59914434, 1.7175678e-07, -1, -7.0580036e-08, 0.85234404, 8.742278e-08, 0.39094743, 2.5451355, 1.1835423, -43.618656)
 
+[node name="crate17" parent="World/Bridge/Level" unique_id=502223931 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(0.80586207, 7.274187e-08, 0.7677393, 1.7221902e-07, -0.99999994, -1.2345721e-07, 0.62607986, 1.814451e-07, -0.9881996, 1.7747884, 1.1835423, -12.409154)
+
+[node name="crate19" parent="World/Bridge/Level" unique_id=1478302002 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(0.026255285, -0.69150233, 0.023097783, -0.4075215, -0.045285616, -0.008564681, 0.008869752, -0.03374159, -0.46187305, 2.6309395, 0.8708236, -10.026823)
+
+[node name="crate18" parent="World/Bridge/Level" unique_id=1984834981 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(0.6958552, 4.130848e-08, 0.4763321, 1.4870967e-07, -0.56787753, -7.659713e-08, 0.54061466, 1.0303862e-07, -0.6131133, 3.5292292, 0.98094225, -13.305729)
+
 [node name="crate15" parent="World/Bridge/Level" unique_id=1766458370 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(-0.8536674, -1.7505371e-07, -0.38951796, 1.977655e-07, -1, 1.5851581e-08, -0.55412894, -8.721411e-08, 0.60007465, 1.2894309, 1.1835423, -44.51503)
+
+[node name="crate16" parent="World/Bridge/Level" unique_id=1530817118 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(-0.8536674, -1.7505371e-07, -0.38951796, 1.977655e-07, -1, 1.5851581e-08, -0.55412894, -8.721411e-08, 0.60007465, 1.2894309, 1.1835423, -10.618944)
 
 [node name="gate" parent="World/Bridge/Level" unique_id=1820116654 instance=ExtResource("13_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.027605, 1.244012, 45.265568)
@@ -451,6 +463,26 @@ transform = Transform3D(0.21453765, 0.121362, -0.9691465, -0.9766057, 0.01175931
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9658513, 0.8117249, 42.164898)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Kerosene/Area3D" unique_id=1395427351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031902313, 0.16192627, 0.29884338)
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="Kerosene2" type="Node3D" parent="World" unique_id=1910814297]
+transform = Transform3D(-0.9806942, 0, 0.19554797, 0, 1, 0, -0.19554797, 0, -0.9806942, -0.9382477, 0, 30.830181)
+script = ExtResource("15_muem4")
+
+[node name="barrel" parent="World/Kerosene2" unique_id=424433009 instance=ExtResource("13_jbj1t")]
+transform = Transform3D(-0.21473113, 0, 0.9766732, 0, 1, 0, -0.9766732, 0, -0.21473113, 3.7749586, 0.5, 42.28594)
+
+[node name="barrel3" parent="World/Kerosene2" unique_id=1906471914 instance=ExtResource("13_jbj1t")]
+transform = Transform3D(-0.8869784, 0, -0.46181113, 0, 1, 0, 0.46181113, 0, -0.8869784, 4.1345477, 0.5, 42.83598)
+
+[node name="barrel2" parent="World/Kerosene2" unique_id=1856557374 instance=ExtResource("13_jbj1t")]
+transform = Transform3D(0.21453765, 0.121362, -0.9691465, -0.9766057, 0.011759319, -0.21471627, -0.014661923, 0.99253875, 0.12104574, 4.2630954, 0.825878, 42.059086)
+
+[node name="Area3D" type="Area3D" parent="World/Kerosene2" unique_id=1707542044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9658513, 0.8117249, 42.164898)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Kerosene2/Area3D" unique_id=1090097637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031902313, 0.16192627, 0.29884338)
 shape = SubResource("CapsuleShape3D_g4v7s")
 
