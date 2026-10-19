@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://btyhcpfakmmhv" path="res://assets/lamp_checkpoint.blend" id="2_1lom4"]
 [ext_resource type="Script" uid="uid://rg5e5auuw6qp" path="res://lamp/light.gd" id="3_fffv5"]
 [ext_resource type="PackedScene" uid="uid://b3tcgpjba40d2" path="res://lamp/lamp_controls.tscn" id="4_0p32j"]
+[ext_resource type="AudioStream" uid="uid://pesq2xr88k4a" path="res://sound/lampsound.mp3" id="5_fk4ww"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ttdjf"]
 height = 3.0
@@ -104,6 +105,12 @@ fill_time = 10.0
 drain_time = 60000.0
 cone_presses_needed = 10
 cone_fill_time = 3.0
+
+[node name="LampSound" type="AudioStreamPlayer3D" parent="." unique_id=1137766387]
+stream = ExtResource("5_fk4ww")
+volume_db = 16.0
+max_distance = 30.0
+parameters/looping = true
 
 [connection signal="body_entered" from="InteractiveArea" to="." method="_on_interactive_area_body_entered"]
 [connection signal="body_exited" from="InteractiveArea" to="." method="_on_interactive_area_body_exited"]

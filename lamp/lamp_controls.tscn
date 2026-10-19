@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://b3tcgpjba40d2"]
 
 [ext_resource type="Script" uid="uid://cttql0ale2gag" path="res://lamp/lamp_controls.gd" id="1_f48fc"]
+[ext_resource type="AudioStream" uid="uid://dkg8lajqkf80v" path="res://sound/temp_click.mp3" id="2_0u6l5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrxt6"]
 resource_name = "Barrel"
@@ -557,5 +558,17 @@ mesh = SubResource("ArrayMesh_dhprw")
 metadata/extras = {
 "yp_decal": {}
 }
+
+[node name="Cone" type="AudioStreamPlayer3D" parent="." unique_id=263648086]
+stream = ExtResource("2_0u6l5")
+
+[node name="Valve" type="AudioStreamPlayer3D" parent="." unique_id=539056840]
+stream = ExtResource("2_0u6l5")
+
+[node name="Splash" type="AudioStreamPlayer3D" parent="." unique_id=219360471]
+stream = ExtResource("2_0u6l5")
+
+[node name="Door" type="AudioStreamPlayer3D" parent="." unique_id=2130176792]
+stream = ExtResource("2_0u6l5")
 
 [connection signal="mouse_entered" from="lamp_controls/Door" to="." method="_on_door_mouse_entered"]

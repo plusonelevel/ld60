@@ -28,12 +28,12 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
 panorama = ExtResource("3_h2yge")
 
-[sub_resource type="Sky" id="Sky_vyj8c"]
+[sub_resource type="Sky" id="Sky_y6deb"]
 sky_material = SubResource("PanoramaSkyMaterial_fw1vm")
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
-sky = SubResource("Sky_vyj8c")
+sky = SubResource("Sky_y6deb")
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 0.5
@@ -108,7 +108,7 @@ radius = 0.78759766
 height = 1.5751953
 
 [sub_resource type="Theme" id="Theme_r4f5i"]
-Label/colors/font_color = Color(0.4627451, 0.1764706, 0.11764706, 1)
+Label/colors/font_color = Color(0.6318149, 0.37663376, 0.24875814, 1)
 Label/font_sizes/font_size = 64
 Label/fonts/font = ExtResource("17_pm3ni")
 
@@ -518,15 +518,19 @@ vertical_alignment = 1
 
 [node name="KeroseneBar" type="TextureProgressBar" parent="UI" unique_id=577435662]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = 535.0
-offset_top = 91.0
-offset_right = 635.0
-offset_bottom = 591.0
+anchor_bottom = 1.0
+offset_left = 306.0
+offset_top = -96.0
+offset_right = 406.0
+offset_bottom = 404.0
 grow_horizontal = 2
+grow_vertical = 0
 rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
 max_value = 5.0
 step = 0.1
 fill_mode = 3
@@ -536,24 +540,29 @@ texture_progress = ExtResource("19_yc10j")
 
 [node name="Label" type="Label" parent="UI/KeroseneBar" unique_id=654365106]
 layout_mode = 0
-offset_left = -86.999985
+offset_left = 83.000015
 offset_top = 377.0
-offset_right = 128.00002
+offset_right = 298.0
 offset_bottom = 473.0
 rotation = -1.5707964
 text = "Kerosene"
+horizontal_alignment = 1
 
 [node name="CourageBar" type="TextureProgressBar" parent="UI" unique_id=1911099215]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -31.0
-offset_top = 86.0
-offset_right = 69.0
-offset_bottom = 586.0
+anchor_bottom = 1.0
+offset_left = -61.0
+offset_top = -96.0
+offset_right = 39.0
+offset_bottom = 404.0
 grow_horizontal = 2
+grow_vertical = 0
 rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
 max_value = 20.0
 step = 0.1
 fill_mode = 3
@@ -563,12 +572,13 @@ texture_progress = ExtResource("22_y6deb")
 
 [node name="Label2" type="Label" parent="UI/CourageBar" unique_id=882074313]
 layout_mode = 0
-offset_left = -89.999985
+offset_left = 85.000015
 offset_top = 362.0
-offset_right = 125.000015
+offset_right = 300.0
 offset_bottom = 458.0
 rotation = -1.5707964
 text = "Courage"
+horizontal_alignment = 1
 
 [node name="Gun" type="HBoxContainer" parent="UI" unique_id=1747532361]
 custom_minimum_size = Vector2(200, 0)

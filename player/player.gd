@@ -11,6 +11,7 @@ class_name Player extends CharacterBody3D
 @onready var gun: Gun = $Gun
 @onready var kerosene = $kerosene
 @onready var steps_sfx = $Steps
+@onready var bottle_fill = $BottleFill
 
 var _mouse_input : bool = false
 var _rotation_input : float
@@ -151,6 +152,7 @@ func fill_kerosene() -> void:
 	kerosene_amount = KEROSENE_CAPACITY
 	Signals.kerosene_amount_changed.emit(kerosene_amount)
 	Signals.status_message.emit("Bottle filled.")
+	bottle_fill.play()
 	
 func take_dmg(dmg):
 	health -= dmg

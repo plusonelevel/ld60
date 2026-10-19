@@ -41,6 +41,40 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_67j6s")
 size = Vector2(2.5, 2.5)
 
+[sub_resource type="Curve" id="Curve_67j6s"]
+_data = [Vector2(0, 0.37762243), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wm1u5"]
+curve = SubResource("Curve_67j6s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jh2s2"]
+emission_shape_scale = Vector3(0.2, 0.2, 0.525)
+angle_min = 1.0728835e-05
+angle_max = 180.00002
+direction = Vector3(0, 0, -1)
+spread = 30.0
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+scale_min = 0.099999994
+scale_max = 0.19999999
+alpha_curve = SubResource("CurveTexture_wm1u5")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.29999998
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgyib"]
+albedo_color = Color(0.8111675, 0.57661575, 0.11009175, 1)
+emission_enabled = true
+emission = Color(0.7829661, 0.29716516, 8.663535e-07, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_boad6"]
+material = SubResource("StandardMaterial3D_rgyib")
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
 [node name="Gun" type="Node3D" unique_id=940231012]
 script = ExtResource("1_f3u3k")
 FIRE_POWER = 25.0
@@ -58,6 +92,15 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_l37ko")
 draw_pass_1 = SubResource("QuadMesh_l0emw")
+
+[node name="Sparks" type="GPUParticles3D" parent="." unique_id=693522231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123064995, -0.07315563, -0.4234324)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jh2s2")
+draw_pass_1 = SubResource("SphereMesh_boad6")
 
 [node name="Tycinka" type="Node3D" parent="." unique_id=1621087282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)

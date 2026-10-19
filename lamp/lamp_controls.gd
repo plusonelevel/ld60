@@ -17,6 +17,10 @@ signal pressure_empty
 @onready var valve_pivot: Node3D = $lamp_controls/Valve/ValvePivot
 @onready var cone: Area3D = $lamp_controls/Cone
 @onready var kerosene: MeshInstance3D = $lamp_controls/Kerosene
+@onready var cone_sfx = $Cone
+@onready var valve_sfx = $Valve
+@onready var splash_sfx = $Splash
+@onready var door_sfx = $Door
 
 var interact_key: Key = KEY_E
 var ray_length := 3.0
@@ -114,6 +118,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_toggle_splash()
 	elif _is_part(valve, hit):
 		valve_spinning = not valve_spinning
+		valve_sfx.play()
 		dry_spin_elapsed = 0.0
 
 
@@ -128,7 +133,8 @@ func _pour_cone() -> void:
 	if player.kerosene_amount <= 0:
 		Signals.status_message.emit("The bottle is empty. Fill it at the barrel.")
 		return
-
+	
+	cone_sfx.play()
 	player.kerosene_amount -= 1
 	Signals.kerosene_amount_changed.emit(player.kerosene_amount)
 	cone_presses += 1
@@ -157,6 +163,7 @@ func _is_part(node: Node, hit: Node) -> bool:
 
 func _set_door(open: bool) -> void:
 	door_open = open
+	door_sfx.play()
 	_enable(door, not open)
 	_enable(door2, open)
 
@@ -174,6 +181,7 @@ func _toggle_splash() -> void:
 		splash_tween.kill()
 	splash_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	splash_tween.tween_property(splash, "position", target, splash_time)
+	splash_sfx.play()
 
 
 func _update_kerosene() -> void:

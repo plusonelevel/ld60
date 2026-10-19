@@ -3,6 +3,7 @@ class_name Gun extends Node3D
 @export var FIRE_POWER := 2.0
 
 @onready var smoke : GPUParticles3D = $Smoke
+@onready var sparks : GPUParticles3D = $Sparks
 @onready var tycinka : Node3D = $Tycinka
 @onready var musket_fire_sfx = $MusketFire
 @onready var pouch_sfx = $Pouch
@@ -13,6 +14,9 @@ var projectile_scn = preload("res://player/gun/projectile.tscn")
 
 var priming_counter := 0
 var can_prime := true
+var gun_position
+
+
 @export var prime_target := 4
 @export var prime_duration := 0.15
 
@@ -34,6 +38,7 @@ func _ready() -> void:
 	
 	Signals.gun_state_changed.connect(_on_gun_state_changed)
 	
+	gun_position = position
 	tycinka_orig_pos = tycinka.position
 
 
@@ -49,12 +54,16 @@ func fire() -> void:
 	is_empty = true
 	musket_fire_sfx.play()
 	Signals.gun_state_changed.emit(Enums.GunState.DEFAULT)
+	sparks.restart()
 	smoke.restart()
 	var projectile: Projectile = projectile_scn.instantiate()
 	get_tree().get_root().add_child(projectile)
 	projectile.global_transform.origin = global_transform.origin
 	projectile.apply_impulse(-global_transform.basis.z * FIRE_POWER + Vector3(0, 1, 0), Vector3(randf_range(0.0, 0.1), randf_range(0.0, 0.1), randf_range(0.0, 0.1)))
 	projectile.prime()
+	position = gun_position - Vector3(0,0,-0.4)
+	var tween = create_tween()
+	tween.tween_property(self, ^"position", gun_position, 0.4)
 
 func start_reloading():
 	var tween = create_tween()
