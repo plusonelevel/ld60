@@ -30,3 +30,6 @@ func _on_gun_state_changed(new_state: Enums.GunState):
 func _game_over():
 	await get_tree().create_timer(3.0).timeout
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	
+func _game_won():
+	get_tree().change_scene_to_file("res://scenes/win.tscn")
