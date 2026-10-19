@@ -1,0 +1,22 @@
+[gd_resource type="Theme" format=3 uid="uid://bvesck7rk66lk"]
+
+[ext_resource type="FontFile" uid="uid://btxgeb35qrgpl" path="res://assets/GrenzeGotisch-VariableFont_wght.ttf" id="1_2krdf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcnqv"]
+bg_color = Color(0.53968817, 0.28113258, 0.06257029, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0u6y"]
+bg_color = Color(0.054675274, 0.09064231, 0.109202035, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gngh"]
+
+[resource]
+Button/colors/font_color = Color(0.6313726, 0.3764706, 0.24705882, 1)
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("1_2krdf")
+Button/styles/hover = SubResource("StyleBoxFlat_fcnqv")
+Button/styles/normal = SubResource("StyleBoxFlat_d0u6y")
+Button/styles/pressed = SubResource("StyleBoxFlat_3gngh")
+Label/colors/font_color = Color(0.6313726, 0.3764706, 0.24705882, 1)
+Label/font_sizes/font_size = 190
+Label/fonts/font = ExtResource("1_2krdf")
