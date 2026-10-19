@@ -1,8 +1,9 @@
 [gd_scene format=4 uid="uid://ckv0eto4h3my1"]
 
 [ext_resource type="Script" uid="uid://vqf7q2x0ewo6" path="res://enemies/enemy.gd" id="1_uqgo1"]
-[ext_resource type="AudioStream" uid="uid://brwqg21g40dqn" path="res://sound/whisper.mp3" id="2_lvnpg"]
-[ext_resource type="AudioStream" uid="uid://c4yg7jymo2vsx" path="res://sound/chimes.mp3" id="3_kqsru"]
+[ext_resource type="AudioStream" uid="uid://cth64xwwcqgvc" path="res://sound/monster.mp3" id="2_kqsru"]
+[ext_resource type="AudioStream" uid="uid://dnfcaha0jdfdt" path="res://sound/hit.mp3" id="3_0ugqn"]
+[ext_resource type="AudioStream" uid="uid://rw8yas56s2s8" path="res://sound/monster_death.mp3" id="4_0ugqn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
 
@@ -1275,16 +1276,6 @@ tree_root = SubResource("AnimationNodeBlendTree_lvnpg")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 0.0
 
-[node name="Whisper" type="AudioStreamPlayer3D" parent="." unique_id=1250860326]
-stream = ExtResource("2_lvnpg")
-autoplay = true
-max_distance = 10.0
-parameters/looping = true
-
-[node name="Hit" type="AudioStreamPlayer3D" parent="." unique_id=487467970]
-stream = ExtResource("3_kqsru")
-max_distance = 30.0
-
 [node name="Blood" type="GPUParticles3D" parent="." unique_id=1847271253]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123064995, -0.07315563, -0.4234324)
 emitting = false
@@ -1293,3 +1284,17 @@ one_shot = true
 explosiveness = 0.9
 process_material = SubResource("ParticleProcessMaterial_qcjwy")
 draw_pass_1 = SubResource("SphereMesh_le1bj")
+
+[node name="Whisper" type="AudioStreamPlayer3D" parent="." unique_id=1336543116]
+stream = ExtResource("2_kqsru")
+autoplay = true
+max_distance = 10.0
+parameters/looping = true
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="." unique_id=1258698239]
+stream = ExtResource("3_0ugqn")
+max_distance = 30.0
+
+[node name="Death" type="AudioStreamPlayer3D" parent="." unique_id=887359079]
+stream = ExtResource("4_0ugqn")
+max_distance = 30.0
