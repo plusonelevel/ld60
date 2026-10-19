@@ -408,7 +408,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uevac")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_57qmd"]
-radius = 0.1016495
+radius = 0.058292683
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44kgp"]
 resource_name = "Brass"
@@ -553,7 +553,7 @@ metadata/extras = {
 [node name="Cone" type="Area3D" parent="lamp_controls" unique_id=1596539043]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lamp_controls/Cone" unique_id=153344121]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53786254, 1.0232002, 0.093445055)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51279765, 1.0232002, 0.093445055)
 shape = SubResource("SphereShape3D_57qmd")
 
 [node name="Cone" type="MeshInstance3D" parent="lamp_controls/Cone" unique_id=345103407]

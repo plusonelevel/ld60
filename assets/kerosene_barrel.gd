@@ -2,6 +2,16 @@ extends Node3D
 
 @export var ray_length := 3.0
 
+var current_prompt := ""
+
+func _physics_process(_delta: float) -> void:
+	var hit := _aim_target()
+	var prompt := ""
+	if hit and (hit == self or is_ancestor_of(hit)):
+		prompt = "[LMB] Fill kerosene bottle"
+	if prompt != current_prompt:
+		current_prompt = prompt
+		Signals.aim_prompt_changed.emit(prompt)
 
 func _unhandled_input(event: InputEvent) -> void:
 	var left_click: bool = event is InputEventMouseButton and event.pressed \
