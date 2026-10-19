@@ -82,7 +82,8 @@ func play_hit():
 	hit_sfx.play()
 
 func die():
-	death_fx.reparent(get_tree().current_scene)
+	Signals.enemy_died.emit(self)
+	death_fx.reparent(get_tree().current_scene)  
 	death_fx.emitting = true
 
 	blood_fx.reparent(get_tree().current_scene)

@@ -195,6 +195,7 @@ func _set_door(open: bool, play_sound := true) -> void:
 			door_open_sfx.play()
 		else:
 			door_close_sfx.play()
+	Signals.lamp_door_opened.emit(door_open)
 
 
 func _enable(node: Node3D, on: bool) -> void:
