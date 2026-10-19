@@ -9,6 +9,9 @@ extends Control
 @onready var kerosene_charges = $Kerosene/Charges
 @onready var gun_status = $Gun/GunStatus
 @onready var player_damage_flash = $PlayerDamage
+@onready var gun_icon_empty = $GunEmpty
+@onready var gun_icon_primed = $GunPrimed
+@onready var gun_icon_ready = $GunReady
 
 @export var is_tutorial : bool
 
@@ -24,6 +27,7 @@ func _ready() -> void:
 	Signals.kerosene_amount_changed.connect(_on_kerosene_amount_changed)
 	Signals.gun_state_changed.connect(_on_gun_state_changed)
 	Signals.player_took_damage.connect(_on_player_damage)
+	
 	if is_tutorial == false:
 		Signals.status_message.connect(_status_message_change)
 	
@@ -67,11 +71,17 @@ func _on_kerosene_amount_changed(amount):
 
 func _on_gun_state_changed(state: Enums.GunState):
 	if state == Enums.GunState.LOADED:
-		gun_status.text = "Loaded"
+		gun_icon_empty.hide()
+		gun_icon_primed.show()
+		gun_icon_ready.hide()
 	elif state == Enums.GunState.PRIMED:
-		gun_status.text = "READY"
+		gun_icon_empty.hide()
+		gun_icon_primed.hide()
+		gun_icon_ready.show()
 	else:
-		gun_status.text = "Empty"
+		gun_icon_empty.show()
+		gun_icon_primed.hide()
+		gun_icon_ready.hide()
 		
 		
 func _on_player_damage():
@@ -81,3 +91,5 @@ func _on_player_damage():
 	player_damage_flash.modulate.a = 0.6
 	damage_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	damage_tween.tween_property(player_damage_flash, ^"modulate:a", 0.0, 0.4)
+	
+	

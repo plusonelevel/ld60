@@ -17,3 +17,5 @@ signal tutorial_advanced(idx: int)
 signal aim_prompt_changed(text: String)
 
 signal player_took_damage
+
+signal game_over

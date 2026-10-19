@@ -25,16 +25,20 @@
 [ext_resource type="Texture2D" uid="uid://8kjkf5ho8xlj" path="res://assets/bar_over.png" id="20_jscy8"]
 [ext_resource type="Texture2D" uid="uid://tqs15sm1cn8" path="res://assets/courage.png" id="22_y6deb"]
 [ext_resource type="Script" uid="uid://dc7uvqcjt4orb" path="res://scenes/guide.gd" id="24_og1vs"]
+[ext_resource type="Texture2D" uid="uid://cbcydnhouik87" path="res://assets/musket_empty.png" id="24_vxglm"]
+[ext_resource type="Texture2D" uid="uid://cuqkojyoi0mru" path="res://assets/musket_primed.png" id="25_2f3dj"]
+[ext_resource type="Texture2D" uid="uid://cpchlfe10s4lx" path="res://assets/musket_ready.png" id="26_yq6so"]
+[ext_resource type="AudioStream" uid="uid://bntaehw34d1p" path="res://sound/ambient.mp3" id="28_2f3dj"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
 panorama = ExtResource("3_h2yge")
 
-[sub_resource type="Sky" id="Sky_y6deb"]
+[sub_resource type="Sky" id="Sky_vxglm"]
 sky_material = SubResource("PanoramaSkyMaterial_fw1vm")
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
-sky = SubResource("Sky_y6deb")
+sky = SubResource("Sky_vxglm")
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 0.5
@@ -45,12 +49,12 @@ fog_light_energy = 0.1
 fog_density = 0.1
 fog_sky_affect = 0.95
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_57qmd"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2f3dj"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yf5fn"]
-noise = SubResource("FastNoiseLite_57qmd")
+noise = SubResource("FastNoiseLite_2f3dj")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yq6so"]
 render_priority = 0
 shader = ExtResource("7_272bh")
 shader_parameter/water_color = Color(0.08334821, 0.14899787, 0.22050616, 1)
@@ -63,33 +67,33 @@ shader_parameter/specular = 0.0
 shader_parameter/metalic = 0.7670000364325
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
-material = SubResource("ShaderMaterial_5vw27")
+material = SubResource("ShaderMaterial_yq6so")
 size = Vector2(200, 200)
 subdivide_width = 500
 subdivide_depth = 500
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fv21b"]
 albedo_color = Color(0.9548245, 0.9095076, 0.80407405, 1)
 emission_enabled = true
 emission = Color(0.8858858, 0.8452835, 0.79946166, 1)
 emission_energy_multiplier = 50.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
-material = SubResource("StandardMaterial3D_yf5fn")
+material = SubResource("StandardMaterial3D_fv21b")
 radius = 12.0
 height = 24.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tel4y"]
 albedo_color = Color(0.9548245, 0.9095076, 0.80407405, 1)
 emission = Color(0.8858858, 0.8452835, 0.79946166, 1)
 emission_energy_multiplier = 50.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_4c57u"]
-material = SubResource("StandardMaterial3D_kek77")
+material = SubResource("StandardMaterial3D_tel4y")
 radius = 12.0
 height = 24.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qkpxi"]
 render_priority = 0
 shader = ExtResource("8_kek77")
 shader_parameter/cloud_tex = ExtResource("8_5vw27")
@@ -101,7 +105,7 @@ shader_parameter/tint = Color(1, 1, 1, 1)
 shader_parameter/opacity = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yf5fn"]
-material = SubResource("ShaderMaterial_4c57u")
+material = SubResource("ShaderMaterial_qkpxi")
 size = Vector2(75, 150)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
@@ -551,9 +555,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 312.0
+offset_left = 392.0
 offset_top = -114.0
-offset_right = 412.0
+offset_right = 492.0
 offset_bottom = 386.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -583,9 +587,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -50.0
+offset_left = -130.0
 offset_top = -114.0
-offset_right = 50.0
+offset_right = -30.0
 offset_bottom = 386.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -609,6 +613,7 @@ text = "Courage"
 horizontal_alignment = 1
 
 [node name="Gun" type="HBoxContainer" parent="UI" unique_id=1747532361]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -662,6 +667,56 @@ text = "x"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="GunEmpty" type="TextureRect" parent="UI" unique_id=1935414783]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -157.0
+offset_right = 68.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("24_vxglm")
+expand_mode = 1
+
+[node name="GunPrimed" type="TextureRect" parent="UI" unique_id=739152074]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -157.0
+offset_right = 68.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("25_2f3dj")
+expand_mode = 1
+
+[node name="GunReady" type="TextureRect" parent="UI" unique_id=945279043]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -157.0
+offset_right = 68.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("26_yq6so")
+expand_mode = 1
+
 [node name="Enemy" parent="." unique_id=401762933 instance=ExtResource("18_dp3eg")]
 transform = Transform3D(-0.741243, 0, 1.3040547, 0, 1.5, 0, -1.3040547, 0, -0.741243, 3.009426, 1.1593232, 20.100006)
 health = 40.0
@@ -676,3 +731,9 @@ speed = 0.0
 transform = Transform3D(-0.98832405, 0, 1.7387396, 0, 2, 0, -1.7387396, 0, -0.98832405, 3.009426, 2.1928134, -47.094776)
 health = 80.0
 speed = 0.0
+
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=804023814]
+stream = ExtResource("28_2f3dj")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true

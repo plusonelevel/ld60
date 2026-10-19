@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://c0388maiw7vit" path="res://scenes/menu.gd" id="14_i42df"]
 [ext_resource type="Theme" uid="uid://bvesck7rk66lk" path="res://menu_theme.tres" id="15_7jp70"]
 [ext_resource type="AudioStream" uid="uid://dke7eyd2lr0jf" path="res://sound/take_pellet.wav" id="15_mxgkd"]
+[ext_resource type="AudioStream" uid="uid://bntaehw34d1p" path="res://sound/ambient.mp3" id="16_mxgkd"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ttdjf"]
 height = 3.0
@@ -147,7 +148,7 @@ shader_parameter/opacity = 1.0
 material = SubResource("ShaderMaterial_4c57u")
 size = Vector2(75, 150)
 
-[node name="Node" type="Node" unique_id=1564836208]
+[node name="Menu" type="Node" unique_id=1564836208]
 
 [node name="World" type="Node3D" parent="." unique_id=815068835]
 
@@ -449,6 +450,13 @@ text = "Tutorial"
 
 [node name="Click" type="AudioStreamPlayer" parent="." unique_id=1179618210]
 stream = ExtResource("15_mxgkd")
+volume_db = -8.0
+
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=463479060]
+stream = ExtResource("16_mxgkd")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="body_entered" from="World/Bridge/Lamps/Lamp3/InteractiveArea" to="World/Bridge/Lamps/Lamp3" method="_on_interactive_area_body_entered"]
 [connection signal="body_exited" from="World/Bridge/Lamps/Lamp3/InteractiveArea" to="World/Bridge/Lamps/Lamp3" method="_on_interactive_area_body_exited"]

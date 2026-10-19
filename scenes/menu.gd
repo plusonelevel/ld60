@@ -5,6 +5,7 @@ extends Control
 var _leaving := false
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	for button in find_children("*", "BaseButton"):
 		button.mouse_entered.connect(_play_hover)
 

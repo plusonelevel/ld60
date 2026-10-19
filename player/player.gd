@@ -169,3 +169,7 @@ func take_dmg(dmg):
 
 func _die():
 	Signals.status_message.emit("You perished.")
+	velocity = Vector3.ZERO
+	steps_sfx.stop()
+	process_mode = Node.PROCESS_MODE_DISABLED
+	Signals.game_over.emit()

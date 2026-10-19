@@ -20,10 +20,14 @@
 [ext_resource type="Theme" uid="uid://dccrdaomawscv" path="res://ui_theme.tres" id="17_feaue"]
 [ext_resource type="Script" uid="uid://cn323ipqiq128" path="res://scenes/ui.gd" id="18_i8gw2"]
 [ext_resource type="Texture2D" uid="uid://omnl601kh871" path="res://assets/bar_under.png" id="20_6wmvi"]
+[ext_resource type="Texture2D" uid="uid://cbcydnhouik87" path="res://assets/musket_empty.png" id="20_qbchm"]
 [ext_resource type="Texture2D" uid="uid://8kjkf5ho8xlj" path="res://assets/bar_over.png" id="21_7muwt"]
+[ext_resource type="Texture2D" uid="uid://cuqkojyoi0mru" path="res://assets/musket_primed.png" id="21_gxgfo"]
 [ext_resource type="Texture2D" uid="uid://v2v4xb4q6dtc" path="res://assets/kerosene.png" id="22_liift"]
+[ext_resource type="Texture2D" uid="uid://cpchlfe10s4lx" path="res://assets/musket_ready.png" id="22_sbw1o"]
 [ext_resource type="Texture2D" uid="uid://tqs15sm1cn8" path="res://assets/courage.png" id="23_2urjh"]
 [ext_resource type="Script" uid="uid://dc7uvqcjt4orb" path="res://scenes/guide.gd" id="23_feaue"]
+[ext_resource type="AudioStream" uid="uid://bntaehw34d1p" path="res://sound/ambient.mp3" id="28_gxgfo"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
 panorama = ExtResource("8_qbchm")
@@ -336,71 +340,8 @@ text = "Test"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="KeroseneBar" type="TextureProgressBar" parent="UI" unique_id=577435662]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 306.0
-offset_top = -96.0
-offset_right = 406.0
-offset_bottom = 404.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 1.5707964
-scale = Vector2(0.5, 0.5)
-max_value = 5.0
-step = 0.1
-fill_mode = 3
-texture_under = ExtResource("20_6wmvi")
-texture_over = ExtResource("21_7muwt")
-texture_progress = ExtResource("22_liift")
-
-[node name="Label" type="Label" parent="UI/KeroseneBar" unique_id=654365106]
-layout_mode = 0
-offset_left = 83.000015
-offset_top = 377.0
-offset_right = 298.0
-offset_bottom = 473.0
-rotation = -1.5707964
-text = "Kerosene"
-horizontal_alignment = 1
-
-[node name="CourageBar" type="TextureProgressBar" parent="UI" unique_id=1911099215]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -61.0
-offset_top = -96.0
-offset_right = 39.0
-offset_bottom = 404.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 1.5707964
-scale = Vector2(0.5, 0.5)
-max_value = 20.0
-step = 0.1
-fill_mode = 3
-texture_under = ExtResource("20_6wmvi")
-texture_over = ExtResource("21_7muwt")
-texture_progress = ExtResource("23_2urjh")
-
-[node name="Label2" type="Label" parent="UI/CourageBar" unique_id=882074313]
-layout_mode = 0
-offset_left = 85.000015
-offset_top = 362.0
-offset_right = 300.0
-offset_bottom = 458.0
-rotation = -1.5707964
-text = "Courage"
-horizontal_alignment = 1
-
 [node name="Gun" type="HBoxContainer" parent="UI" unique_id=1747532361]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -453,6 +394,120 @@ grow_vertical = 2
 text = "x"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GunEmpty" type="TextureRect" parent="UI" unique_id=2032273831]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -157.0
+offset_right = 68.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("20_qbchm")
+expand_mode = 1
+
+[node name="GunPrimed" type="TextureRect" parent="UI" unique_id=1300707479]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -157.0
+offset_right = 68.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("21_gxgfo")
+expand_mode = 1
+
+[node name="GunReady" type="TextureRect" parent="UI" unique_id=559320143]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -157.0
+offset_right = 68.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_sbw1o")
+expand_mode = 1
+
+[node name="KeroseneBar" type="TextureProgressBar" parent="UI" unique_id=1835485611]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 392.0
+offset_top = -114.0
+offset_right = 492.0
+offset_bottom = 386.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+max_value = 5.0
+step = 0.1
+fill_mode = 3
+texture_under = ExtResource("20_6wmvi")
+texture_over = ExtResource("21_7muwt")
+texture_progress = ExtResource("22_liift")
+
+[node name="Label" type="Label" parent="UI/KeroseneBar" unique_id=311940828]
+layout_mode = 0
+offset_left = 85.000015
+offset_top = 362.0
+offset_right = 300.0
+offset_bottom = 458.0
+rotation = -1.5707964
+text = "Kerosene"
+horizontal_alignment = 1
+
+[node name="CourageBar" type="TextureProgressBar" parent="UI" unique_id=1547052834]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -114.0
+offset_right = -30.0
+offset_bottom = 386.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+max_value = 20.0
+step = 0.1
+fill_mode = 3
+texture_under = ExtResource("20_6wmvi")
+texture_over = ExtResource("21_7muwt")
+texture_progress = ExtResource("23_2urjh")
+
+[node name="Label2" type="Label" parent="UI/CourageBar" unique_id=288939537]
+layout_mode = 0
+offset_left = 85.000015
+offset_top = 362.0
+offset_right = 300.0
+offset_bottom = 458.0
+rotation = -1.5707964
+text = "Courage"
+horizontal_alignment = 1
 
 [node name="TutorialSteps" type="Control" parent="." unique_id=695395410]
 layout_mode = 3
@@ -740,9 +795,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -486.0
-offset_top = -190.0
+offset_top = -197.0
 offset_right = 486.0
-offset_bottom = 403.0
+offset_bottom = 396.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -764,3 +819,9 @@ horizontal_alignment = 1
 [node name="Countdown" type="Label" parent="TutorialSteps/Step10" unique_id=2082427922]
 layout_mode = 2
 horizontal_alignment = 1
+
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=1587443593]
+stream = ExtResource("28_gxgfo")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
