@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://j3142lhcsx1d"]
 
 [ext_resource type="PackedScene" uid="uid://bccgwjuh6a6a6" path="res://player/player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bplabfqo2vdgi" path="res://scenes/main.gd" id="1_og1vs"]
 [ext_resource type="PackedScene" uid="uid://ce4h5tabl1odc" path="res://lamp/lamp.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://clkjdylcngqe4" path="res://assets/bridge.blend" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://b8e6o88x8j8o4" path="res://bg_sky.png" id="3_h2yge"]
@@ -113,6 +114,7 @@ Label/font_sizes/font_size = 64
 Label/fonts/font = ExtResource("17_pm3ni")
 
 [node name="Main" type="Node" unique_id=196047157]
+script = ExtResource("1_og1vs")
 
 [node name="World" type="Node3D" parent="." unique_id=1041143271]
 
@@ -363,16 +365,16 @@ activate_tag = 2
 [node name="Spawner4" parent="World" unique_id=961854830 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.386814, 1.9019604, -13.992439)
 enemy = ExtResource("7_4c57u")
-spawn_interval = 22.0
+spawn_interval = 25.0
 checkpoint = 4
 activate_tag = 2
 
 [node name="Spawner9" parent="World" unique_id=272594549 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.176085, 2.4067328, -10.452172)
 enemy = ExtResource("7_4c57u")
-spawn_interval = 17.0
+spawn_interval = 19.0
 checkpoint = 6
-activate_tag = 4
+activate_tag = 5
 
 [node name="Spawner10" parent="World" unique_id=1012853588 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3714293, 1.4426563, -38.20742)
