@@ -2,15 +2,13 @@ extends Control
 
 
 @onready var status = $StatusMessage
-<<<<<<< HEAD
 @onready var player = $"../World/Player"
 @onready var courage_bar = $CourageBar
 @onready var kerosene_bar = $KeroseneBar
-=======
 @onready var crosshair = $Crosshair
 @onready var kerosene_charges = $Kerosene/Charges
 @onready var gun_status = $Gun/GunStatus
->>>>>>> 8451985c60f3d99e8c18d590509a65cf6303acc5
+
 
 var tween: Tween
 var courage_tween: Tween
@@ -25,6 +23,7 @@ func _ready() -> void:
 	Signals.gun_state_changed.connect(_on_gun_state_changed)
 	
 	_on_gun_state_changed(Enums.GunState.DEFAULT)
+
 	
 func _process(delta: float) -> void:
 	if player.health != last_health:
@@ -36,6 +35,7 @@ func _process(delta: float) -> void:
 		last_kerosene = player.kerosene_amount
 		kerosene_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		kerosene_tween.tween_property(kerosene_bar, "value", player.kerosene_amount, 1.0)
+
 	
 func _status_message_change(msg):
 	status.text = msg
