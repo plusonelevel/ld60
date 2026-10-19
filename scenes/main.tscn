@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://emgixhy66ewn" path="res://assets/gate.blend" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://qtbaqhqvtqol" path="res://assets/block.blend" id="14_a8y0u"]
 [ext_resource type="Script" uid="uid://b64y6me24ghby" path="res://assets/kerosene_barrel.gd" id="15_muem4"]
-[ext_resource type="Texture2D" uid="uid://bln7u4juondw8" path="res://assets/crosshair.png" id="18_0ld40"]
 [ext_resource type="PackedScene" uid="uid://ckv0eto4h3my1" path="res://enemies/enemy3.tscn" id="18_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://omnl601kh871" path="res://assets/bar_under.png" id="19_pm3ni"]
 [ext_resource type="Texture2D" uid="uid://v2v4xb4q6dtc" path="res://assets/kerosene.png" id="19_yc10j"]
@@ -443,7 +442,10 @@ mouse_filter = 1
 script = ExtResource("13_jkv2x")
 
 [node name="Crosshair" type="TextureRect" parent="UI" unique_id=113545709]
+layout_mode = 0
+
 [node name="Kerosene" type="HBoxContainer" parent="UI" unique_id=1532930471]
+visible = false
 layout_mode = 0
 offset_left = 20.0
 offset_top = 10.0
@@ -456,24 +458,6 @@ text = "Kerosene:"
 
 [node name="Charges" type="Label" parent="UI/Kerosene" unique_id=1241390789]
 layout_mode = 2
-
-[node name="Crosshair" type="Label" parent="UI" unique_id=1953527581]
-
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-
-offset_left = -11.0
-offset_top = -11.0
-offset_right = 11.0
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("18_0ld40")
-expand_mode = 1
 
 [node name="StatusMessage" type="Label" parent="UI" unique_id=1421797719]
 visible = false
@@ -519,7 +503,6 @@ fill_mode = 3
 texture_under = ExtResource("19_pm3ni")
 texture_over = ExtResource("20_jscy8")
 texture_progress = ExtResource("22_y6deb")
-
 
 [node name="Gun" type="HBoxContainer" parent="UI" unique_id=1747532361]
 custom_minimum_size = Vector2(200, 0)
