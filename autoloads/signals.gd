@@ -1,12 +1,9 @@
 extends Node
 
-signal game_start
-
 signal interactable_changed(is_interactable: bool)
 signal player_state_changed(state: Enums.PlayerState)
-signal gun_loaded
-signal gun_primed
-signal gun_fired
+signal kerosene_amount_changed(new_amount: int)
+signal gun_state_changed(state: Enums.GunState)
 
 signal status_message(String)
 

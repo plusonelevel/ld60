@@ -1,11 +1,11 @@
 class_name Player extends CharacterBody3D
 
 @export var SPEED : float = 5.0
-@export var JUMP_VELOCITY : float = 4.5
 @export var MOUSE_SENSITIVITY : float = 0.5
 @export var TILT_LOWER_LIMIT := deg_to_rad(-90.0)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
 @export var CAMERA : Camera3D
+@export var health : float = 20
 
 @onready var stuff: Node3D = $Stuff
 @onready var gun: Gun = $Gun
@@ -28,6 +28,18 @@ var gun_rest: Vector3
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _ready():
+	Signals.gun_state_changed.connect(_on_gun_state_changed)
+	
+	gun_rest = gun.position
+	kerosene.position = kerosene_rest + Vector3(0, -0.3, 0)
+	kerosene.hide()
+	Signals.kerosene_amount_changed.emit(kerosene_amount)
+	
+	# Get mouse input
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	_mouse_input = event is InputEventMouseMotion and GameManager.player_state == Enums.PlayerState.DEFAULT
 	if _mouse_input:
@@ -41,7 +53,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		and GameManager.player_state == Enums.PlayerState.DEFAULT:
 		toggle_kerosene()
 		
-func _update_camera(delta):
+func _rotate(delta):
 	
 	# Rotates camera using euler rotation
 	_mouse_rotation.x += _tilt_input * delta
@@ -55,32 +67,17 @@ func _update_camera(delta):
 	_rotation_input = 0.0
 	_tilt_input = 0.0
 	
-func _ready():
-	Signals.gun_primed.connect(_on_gun_primed)
-	
-	gun_rest = gun.position
-	kerosene.position = kerosene_rest + Vector3(0, -0.3, 0)
-	kerosene.hide()
-	
-	
-	# Get mouse input
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 
 func _physics_process(delta):
 	if not GameManager.player_state == Enums.PlayerState.DEFAULT:
 		return
 
 	# Update camera movement based on mouse movement
-	_update_camera(delta)
+	_rotate(delta)
 	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
-	# Handle Jump.
-	#if Input.is_action_just_pressed("jump") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -114,10 +111,10 @@ func toggle_reloading():
 		tween.tween_property(CAMERA, ^"rotation:x", 0, GameManager.reload_transition_length)
 		gun.stop_reloading()
 		
-		
-func _on_gun_primed():
-	if GameManager.player_state == Enums.PlayerState.RELOADING:
+func _on_gun_state_changed(state: Enums.GunState):
+	if state == Enums.GunState.PRIMED and GameManager.player_state == Enums.PlayerState.RELOADING:
 		toggle_reloading()
+	
 
 func toggle_kerosene():
 	kerosene_shown = not kerosene_shown
@@ -140,4 +137,13 @@ func toggle_kerosene():
 
 func fill_kerosene() -> void:
 	kerosene_amount = KEROSENE_CAPACITY
+	Signals.kerosene_amount_changed.emit(kerosene_amount)
 	Signals.status_message.emit("Bottle filled.")
+	
+func take_dmg(dmg):
+	health -= dmg
+	if health <= 0:
+		_die()
+
+func _die():
+	Signals.status_message.emit("Perished.")

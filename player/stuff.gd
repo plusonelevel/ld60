@@ -10,8 +10,7 @@ var dragged: Variant
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Signals.gun_loaded.connect(_on_gun_loaded)
-	Signals.gun_primed.connect(_on_gun_primed)
+	Signals.gun_state_changed.connect(_on_gun_state_changed)
 	
 	pouch_orig_pos = pouch.position
 
@@ -21,8 +20,7 @@ func _process(_delta: float) -> void:
 	if dragged:
 		var target = _get_mouse_target(2048)
 		if target.is_empty():
-			dragged.release()
-			dragged = null
+			handle_release()
 		else:
 			dragged.position = target.position
 
@@ -55,7 +53,7 @@ func handle_click() -> void:
 func handle_release():
 	if dragged and dragged is Projectile:
 		dragged.release()
-		dragged = null
+	dragged = null
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and GameManager.player_state == Enums.PlayerState.RELOADING:
@@ -67,13 +65,12 @@ func _input(event: InputEvent) -> void:
 func _on_barrel_body_entered(body: Node3D) -> void:
 	if body is Projectile:
 		body.queue_free()
-		Signals.gun_loaded.emit()
-		#Signals.gun_primed.emit()
+		Signals.gun_state_changed.emit(Enums.GunState.LOADED)
 
-func _on_gun_loaded():
-	var tween = create_tween()
-	tween.tween_property(pouch, ^"position", pouch_orig_pos + Vector3(0, 0, 1), GameManager.reload_transition_length)
-	
-func _on_gun_primed():
-	var tween = create_tween()
-	tween.tween_property(pouch, ^"position", pouch_orig_pos, GameManager.reload_transition_length)
+func _on_gun_state_changed(state: Enums.GunState):
+	if state == Enums.GunState.LOADED:
+		var tween = create_tween()
+		tween.tween_property(pouch, ^"position", pouch_orig_pos + Vector3(0, 0, 1), GameManager.reload_transition_length)
+	elif state == Enums.GunState.PRIMED:
+		var tween = create_tween()
+		tween.tween_property(pouch, ^"position", pouch_orig_pos, GameManager.reload_transition_length)

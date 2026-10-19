@@ -25,6 +25,7 @@ func prime():
 func _on_body_entered(body: Node) -> void:
 	print_debug("projectile hit %s" % body.name)
 	if is_primed and body is Enemy:
-		body.die()
+		if body.has_method("take_dmg"):
+			body.take_dmg(20)
 		queue_free()
 	is_primed = false

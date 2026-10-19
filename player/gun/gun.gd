@@ -11,8 +11,8 @@ var projectile_scn = preload("res://player/gun/projectile.tscn")
 
 var priming_counter := 0
 var can_prime := true
-@export var prime_target := 3
-@export var prime_duration := 0.3
+@export var prime_target := 4
+@export var prime_duration := 0.15
 
 enum GunPosition {
 	DEFAULT,
@@ -30,8 +30,7 @@ func _ready() -> void:
 		GunPosition.LOADED: [Vector3(0.4, -1, 0.13), Vector3(deg_to_rad(29), deg_to_rad(56), deg_to_rad(31))]
 	}
 	
-	Signals.gun_fired.connect(_on_gun_fired)
-	Signals.gun_loaded.connect(_on_gun_loaded)
+	Signals.gun_state_changed.connect(_on_gun_state_changed)
 	
 	tycinka_orig_pos = tycinka.position
 
@@ -45,7 +44,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func fire() -> void:
 	if not visible:
 		return
-	Signals.gun_fired.emit()
+	is_empty = true
+	Signals.gun_state_changed.emit(Enums.GunState.DEFAULT)
 	smoke.restart()
 	var projectile: Projectile = projectile_scn.instantiate()
 	get_tree().get_root().add_child(projectile)
@@ -81,13 +81,12 @@ func prime():
 		priming_counter += 1
 		if priming_counter >= prime_target:
 			priming_counter = 0
-			Signals.gun_primed.emit()
+			Signals.gun_state_changed.emit(Enums.GunState.PRIMED)
 	)
+
+func _on_gun_state_changed(state: Enums.GunState):
+	if state == Enums.GunState.LOADED:
+		is_empty = false
+		start_reloading()
+
 	
-
-func _on_gun_fired():
-	is_empty = true
-
-func _on_gun_loaded():
-	is_empty = false
-	start_reloading()

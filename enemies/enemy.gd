@@ -11,7 +11,7 @@ var lamps_in_range: Array[Lamp] = []
 @export var light_dps : float = 10.0
 
 @export var attack_range : float = 1.5
-@export var attack_damage : float = 2.0
+@export var attack_damage : float = 10.0
 @export var attack_cooldown : float = 1.0
 @export var blend_speed : float = 6.0
 @export var detection_range : float = 20.0
@@ -77,7 +77,7 @@ func take_dmg(dmg):
 func die():
 	death_fx.reparent(get_tree().current_scene)  
 	death_fx.emitting = true
-	death_fx.finished.connect(death_fx.queue_free)
+	#death_fx.finished.connect(death_fx.queue_free)
 
 	queue_free()
 	

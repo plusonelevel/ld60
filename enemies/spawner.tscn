@@ -4,3 +4,6 @@
 
 [node name="Spawner" type="Node3D" unique_id=441289407]
 script = ExtResource("1_876pp")
+
+[node name="Timer" type="Timer" parent="." unique_id=685980537]
+autostart = true
