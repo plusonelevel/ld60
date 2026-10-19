@@ -20,7 +20,8 @@ signal pressure_empty
 @onready var cone_sfx = $Cone
 @onready var valve_sfx = $Valve
 @onready var splash_sfx = $Splash
-@onready var door_sfx = $Door
+@onready var door_open_sfx = $DoorOpen
+@onready var door_close_sfx = $DoorClose
 
 var interact_key: Key = KEY_E
 var ray_length := 3.0
@@ -57,7 +58,7 @@ var kerosene_tween: Tween
 
 func _ready() -> void:
 	splash_rest = splash.position
-	_set_door(false)
+	_set_door(false, false)
 	_update_kerosene()
 
 
@@ -161,11 +162,15 @@ func _is_part(node: Node, hit: Node) -> bool:
 	return hit != null and (hit == node or node.is_ancestor_of(hit))
 
 
-func _set_door(open: bool) -> void:
+func _set_door(open: bool, play_sound := true) -> void:
 	door_open = open
-	door_sfx.play()
 	_enable(door, not open)
 	_enable(door2, open)
+	if play_sound:
+		if open:
+			door_open_sfx.play()
+		else:
+			door_close_sfx.play()
 
 
 func _enable(node: Node3D, on: bool) -> void:
