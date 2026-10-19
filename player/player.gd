@@ -110,6 +110,7 @@ func toggle_reloading():
 	var tween = create_tween().set_parallel()
 	var needs_reloading = GameManager.player_state == Enums.PlayerState.DEFAULT and GameManager.gun_state != Enums.GunState.PRIMED
 	if needs_reloading:
+		_mouse_rotation.x = 0.0
 		Signals.player_state_changed.emit(Enums.PlayerState.RELOADING)
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		tween.tween_property(CAMERA, ^"position", Vector3(0, -0.5, 0), GameManager.reload_transition_length)
@@ -118,11 +119,11 @@ func toggle_reloading():
 		gun.start_reloading()
 		gun.pouch_sfx.play()
 	else:
-		Signals.player_state_changed.emit(Enums.PlayerState.DEFAULT)
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		tween.tween_property(CAMERA, ^"position", Vector3.ZERO, GameManager.reload_transition_length)
 		tween.tween_property(CAMERA, ^"rotation:x", 0, GameManager.reload_transition_length)
-		gun.stop_reloading()
+		tween.tween_callback(gun.stop_reloading)
+		tween.chain().tween_callback(func(): Signals.player_state_changed.emit(Enums.PlayerState.DEFAULT))
 		
 func _on_gun_state_changed(state: Enums.GunState):
 	if state == Enums.GunState.PRIMED and GameManager.player_state == Enums.PlayerState.RELOADING:
