@@ -1,7 +1,11 @@
 [gd_scene format=4 uid="uid://b3tcgpjba40d2"]
 
 [ext_resource type="Script" uid="uid://cttql0ale2gag" path="res://lamp/lamp_controls.gd" id="1_f48fc"]
-[ext_resource type="AudioStream" uid="uid://dkg8lajqkf80v" path="res://sound/temp_click.mp3" id="2_0u6l5"]
+[ext_resource type="AudioStream" uid="uid://3nojfha6qhah" path="res://sound/kerosene_fill.wav" id="2_wsi84"]
+[ext_resource type="AudioStream" uid="uid://bk52n0ipjk118" path="res://sound/hatch_open.wav" id="3_kh0r4"]
+[ext_resource type="AudioStream" uid="uid://dgwyfg4d5t36o" path="res://sound/valve.wav" id="3_wj2m8"]
+[ext_resource type="AudioStream" uid="uid://dixrdi63l70wb" path="res://sound/latch.wav" id="4_wj2m8"]
+[ext_resource type="AudioStream" uid="uid://dap3pqt67m3xd" path="res://sound/hatch_close.wav" id="4_wsi84"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrxt6"]
 resource_name = "Barrel"
@@ -560,15 +564,18 @@ metadata/extras = {
 }
 
 [node name="Cone" type="AudioStreamPlayer3D" parent="." unique_id=263648086]
-stream = ExtResource("2_0u6l5")
+stream = ExtResource("2_wsi84")
 
 [node name="Valve" type="AudioStreamPlayer3D" parent="." unique_id=539056840]
-stream = ExtResource("2_0u6l5")
+stream = ExtResource("3_wj2m8")
 
 [node name="Splash" type="AudioStreamPlayer3D" parent="." unique_id=219360471]
-stream = ExtResource("2_0u6l5")
+stream = ExtResource("4_wj2m8")
 
-[node name="Door" type="AudioStreamPlayer3D" parent="." unique_id=2130176792]
-stream = ExtResource("2_0u6l5")
+[node name="DoorOpen" type="AudioStreamPlayer3D" parent="." unique_id=2130176792]
+stream = ExtResource("3_kh0r4")
+
+[node name="DoorClose" type="AudioStreamPlayer3D" parent="." unique_id=21462065]
+stream = ExtResource("4_wsi84")
 
 [connection signal="mouse_entered" from="lamp_controls/Door" to="." method="_on_door_mouse_entered"]
