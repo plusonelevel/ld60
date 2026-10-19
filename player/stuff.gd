@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var pouch := $Pouch
+@onready var take_pellet = $"../TakePellet"
 var pouch_orig_pos: Vector3
 
 var projectile_scn = preload("res://player/gun/projectile.tscn")
@@ -47,6 +48,8 @@ func handle_click() -> void:
 			projectile.scale = Vector3.ONE * 0.5
 			projectile.position = collider.position
 			projectile.grab()
+			take_pellet.pitch_scale = 1.0
+			take_pellet.play()
 			get_tree().get_root().add_child(projectile)
 			dragged = projectile
 		
@@ -65,6 +68,8 @@ func _input(event: InputEvent) -> void:
 func _on_barrel_body_entered(body: Node3D) -> void:
 	if body is Projectile:
 		body.queue_free()
+		take_pellet.pitch_scale = 0.7
+		take_pellet.play()
 		Signals.gun_state_changed.emit(Enums.GunState.LOADED)
 
 func _on_gun_state_changed(state: Enums.GunState):

@@ -99,6 +99,7 @@ func prime():
 		return
 	
 	can_prime = false
+	priming_sfx.pitch_scale = randf_range(0.95, 1.05)
 	priming_sfx.play()
 	var tween = create_tween()
 	tween.tween_property(tycinka, ^"position", tycinka_orig_pos + Vector3(0.02, -0.015, 0.2), prime_duration)
