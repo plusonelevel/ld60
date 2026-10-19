@@ -1,0 +1,739 @@
+[gd_scene format=3 uid="uid://bmm2afmo1accf"]
+
+[ext_resource type="Script" uid="uid://cs3qqngcki4m2" path="res://scenes/tutorial.gd" id="1_ph3nu"]
+[ext_resource type="PackedScene" uid="uid://ce4h5tabl1odc" path="res://lamp/lamp.tscn" id="2_4kmhl"]
+[ext_resource type="PackedScene" uid="uid://bccgwjuh6a6a6" path="res://player/player.tscn" id="2_7a100"]
+[ext_resource type="PackedScene" uid="uid://clkjdylcngqe4" path="res://assets/bridge.blend" id="3_cq4me"]
+[ext_resource type="PackedScene" uid="uid://chmgmvf4j1uju" path="res://lamp/lamp_checkpoint.tscn" id="5_feaue"]
+[ext_resource type="PackedScene" uid="uid://emgixhy66ewn" path="res://assets/gate.blend" id="6_210s6"]
+[ext_resource type="PackedScene" uid="uid://qtbaqhqvtqol" path="res://assets/block.blend" id="7_5qvs7"]
+[ext_resource type="Texture2D" uid="uid://b8e6o88x8j8o4" path="res://bg_sky.png" id="8_qbchm"]
+[ext_resource type="PackedScene" uid="uid://uchcjrvfhuo8" path="res://enemies/spawner.tscn" id="9_gxgfo"]
+[ext_resource type="PackedScene" uid="uid://c5tq8rdhu7num" path="res://enemies/enemy.tscn" id="10_sbw1o"]
+[ext_resource type="PackedScene" uid="uid://c0wthmpjhxl1m" path="res://enemies/enemy2.tscn" id="11_06rsu"]
+[ext_resource type="Shader" uid="uid://8q6v2pnnp6pi" path="res://shaders/water.gdshader" id="12_4gq6d"]
+[ext_resource type="Shader" uid="uid://bpodw4v7ljp3j" path="res://shaders/cloud_drift.gdshader" id="13_mjrbb"]
+[ext_resource type="Texture2D" uid="uid://cihj5u5pwjasm" path="res://cloud.png" id="14_7kfc1"]
+[ext_resource type="Script" uid="uid://b64y6me24ghby" path="res://assets/kerosene_barrel.gd" id="15_jne3d"]
+[ext_resource type="PackedScene" uid="uid://b6t000vl33nx1" path="res://assets/barrel.blend" id="16_nr1vm"]
+[ext_resource type="FontFile" uid="uid://btxgeb35qrgpl" path="res://assets/GrenzeGotisch-VariableFont_wght.ttf" id="17_6a2is"]
+[ext_resource type="Theme" uid="uid://dccrdaomawscv" path="res://ui_theme.tres" id="17_feaue"]
+[ext_resource type="Script" uid="uid://cn323ipqiq128" path="res://scenes/ui.gd" id="18_i8gw2"]
+[ext_resource type="Texture2D" uid="uid://bln7u4juondw8" path="res://assets/crosshair.png" id="19_4exn6"]
+[ext_resource type="Texture2D" uid="uid://omnl601kh871" path="res://assets/bar_under.png" id="20_6wmvi"]
+[ext_resource type="Texture2D" uid="uid://8kjkf5ho8xlj" path="res://assets/bar_over.png" id="21_7muwt"]
+[ext_resource type="Texture2D" uid="uid://v2v4xb4q6dtc" path="res://assets/kerosene.png" id="22_liift"]
+[ext_resource type="Texture2D" uid="uid://tqs15sm1cn8" path="res://assets/courage.png" id="23_2urjh"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
+panorama = ExtResource("8_qbchm")
+
+[sub_resource type="Sky" id="Sky_y6deb"]
+sky_material = SubResource("PanoramaSkyMaterial_fw1vm")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 1
+sky = SubResource("Sky_y6deb")
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.5
+fog_enabled = true
+fog_light_color = Color(0.032437935, 0.15050533, 0.20623124, 1)
+fog_light_energy = 0.1
+fog_density = 0.1
+fog_sky_affect = 0.95
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_57qmd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yf5fn"]
+noise = SubResource("FastNoiseLite_57qmd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+render_priority = 0
+shader = ExtResource("12_4gq6d")
+shader_parameter/water_color = Color(0.08334821, 0.14899787, 0.22050616, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_yf5fn")
+shader_parameter/wave_speed = 0.20000000624012
+shader_parameter/wave_noise = 0.10000000312006
+shader_parameter/wave_strength = Vector3(0, 3, 0)
+shader_parameter/roughness = 0.378000017955
+shader_parameter/specular = 0.0
+shader_parameter/metalic = 0.7670000364325
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
+material = SubResource("ShaderMaterial_5vw27")
+size = Vector2(200, 200)
+subdivide_width = 500
+subdivide_depth = 500
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+albedo_color = Color(0.9548245, 0.9095076, 0.80407405, 1)
+emission_enabled = true
+emission = Color(0.8858858, 0.8452835, 0.79946166, 1)
+emission_energy_multiplier = 50.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_yf5fn")
+radius = 12.0
+height = 24.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
+albedo_color = Color(0.9548245, 0.9095076, 0.80407405, 1)
+emission = Color(0.8858858, 0.8452835, 0.79946166, 1)
+emission_energy_multiplier = 50.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4c57u"]
+material = SubResource("StandardMaterial3D_kek77")
+radius = 12.0
+height = 24.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
+render_priority = 0
+shader = ExtResource("13_mjrbb")
+shader_parameter/cloud_tex = ExtResource("14_7kfc1")
+shader_parameter/drift_dir = Vector2(1, 0.2)
+shader_parameter/drift_speed = 0.01
+shader_parameter/wobble_amount = 0.07
+shader_parameter/wobble_speed = 0.4
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/opacity = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yf5fn"]
+material = SubResource("ShaderMaterial_4c57u")
+size = Vector2(75, 150)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+radius = 0.78759766
+height = 1.5751953
+
+[node name="Tutorial" type="Node" unique_id=196047157]
+script = ExtResource("1_ph3nu")
+
+[node name="World" type="Node3D" parent="." unique_id=1041143271]
+
+[node name="Player" parent="World" unique_id=502817955 node_paths=PackedStringArray("CAMERA") instance=ExtResource("2_7a100")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6276839, 41.880367)
+CAMERA = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="World/Player" unique_id=1948103113]
+
+[node name="Bridge" type="Node3D" parent="World" unique_id=1205948698]
+
+[node name="bridge" parent="World/Bridge" unique_id=399275893 instance=ExtResource("3_cq4me")]
+
+[node name="Lamps" type="Node3D" parent="World/Bridge" unique_id=2111140323]
+
+[node name="Lamp1" parent="World/Bridge/Lamps" unique_id=799427924 instance=ExtResource("2_4kmhl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5756617, 0.1376878, 34.90726)
+lamp_id = 1
+
+[node name="LampCheckpoint1" parent="World/Bridge/Lamps" unique_id=475233180 instance=ExtResource("5_feaue")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.3942657, 0.39466405, 19.81903)
+lamp_id = 2
+
+[node name="Level" type="Node3D" parent="World/Bridge" unique_id=773777441]
+
+[node name="gate" parent="World/Bridge/Level" unique_id=1820116654 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.027605, 1.244012, 45.265568)
+
+[node name="gate2" parent="World/Bridge/Level" unique_id=474165654 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6027956, 1.244012, 45.265568)
+
+[node name="gate3" parent="World/Bridge/Level" unique_id=118452216 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1680667, 1.244012, 45.265568)
+
+[node name="gate4" parent="World/Bridge/Level" unique_id=1117212853 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25674272, 1.244012, 45.265568)
+
+[node name="gate5" parent="World/Bridge/Level" unique_id=1811835594 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7180543, 1.244012, 45.265568)
+
+[node name="gate6" parent="World/Bridge/Level" unique_id=98776786 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1428638, 1.244012, 45.265568)
+
+[node name="gate7" parent="World/Bridge/Level" unique_id=1064257646 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2164636, 1.244012, 45.265568)
+
+[node name="gate8" parent="World/Bridge/Level" unique_id=169658203 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.027605, 2.66464, 45.265568)
+
+[node name="gate9" parent="World/Bridge/Level" unique_id=1588899866 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6027956, 2.66464, 45.265568)
+
+[node name="gate10" parent="World/Bridge/Level" unique_id=717731339 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1680667, 2.66464, 45.265568)
+
+[node name="gate11" parent="World/Bridge/Level" unique_id=191335080 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25674272, 2.66464, 45.265568)
+
+[node name="gate12" parent="World/Bridge/Level" unique_id=1562474470 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7180543, 2.66464, 45.265568)
+
+[node name="gate13" parent="World/Bridge/Level" unique_id=1673086265 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1428638, 2.66464, 45.265568)
+
+[node name="gate14" parent="World/Bridge/Level" unique_id=1373210556 instance=ExtResource("6_210s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2164636, 2.66464, 45.265568)
+
+[node name="block" parent="World/Bridge/Level" unique_id=1542500026 instance=ExtResource("7_5qvs7")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -4.2643094, 1.7815228, 44.970158)
+
+[node name="block3" parent="World/Bridge/Level" unique_id=1912256695 instance=ExtResource("7_5qvs7")]
+transform = Transform3D(-4.371139e-08, -4.371139e-08, -1.3083208, 1, -8.742278e-08, -5.718851e-08, -8.742278e-08, -1, 5.7188522e-08, -2.1955721, 4.099655, 44.970158)
+
+[node name="block4" parent="World/Bridge/Level" unique_id=377519236 instance=ExtResource("7_5qvs7")]
+transform = Transform3D(-4.371139e-08, -4.371139e-08, -1.2489779, 1, -8.742278e-08, -5.4594555e-08, -8.742278e-08, -1, 5.459456e-08, 2.8037217, 4.099655, 44.970158)
+
+[node name="block2" parent="World/Bridge/Level" unique_id=861869353 instance=ExtResource("7_5qvs7")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 4.186555, 1.7815228, 44.970158)
+
+[node name="BridgeModel" type="CSGCombiner3D" parent="World/Bridge" unique_id=4290138]
+visible = false
+use_collision = true
+collision_mask = 521
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Bridge/BridgeModel" unique_id=1942851874]
+size = Vector3(10, 1, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Bridge/BridgeModel" unique_id=1385965103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 0)
+size = Vector3(1, 2, 100)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Bridge/BridgeModel" unique_id=506958832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, 0)
+size = Vector3(1, 2, 100)
+
+[node name="Env" type="Node3D" parent="World" unique_id=876416759]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World/Env" unique_id=271107855]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/Env" unique_id=1733552815]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Spawner" parent="World" unique_id=1985785800 instance=ExtResource("9_gxgfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50647, 1.0343511, 12.757125)
+enemy = ExtResource("10_sbw1o")
+spawn_interval = 999.0
+checkpoint = 2
+activate_tag = 1
+
+[node name="Spawner2" parent="World" unique_id=1987683339 instance=ExtResource("9_gxgfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6468172, 2.4302127, 15.939377)
+enemy = ExtResource("11_06rsu")
+spawn_interval = 999.0
+checkpoint = 2
+activate_tag = 1
+
+[node name="Water" type="MeshInstance3D" parent="World" unique_id=1422554642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.3975906, 0)
+mesh = SubResource("PlaneMesh_g4v7s")
+
+[node name="Moon" type="MeshInstance3D" parent="World" unique_id=1522560855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.119, 86.307755, -79.4249)
+mesh = SubResource("SphereMesh_g4v7s")
+
+[node name="Moon2" type="MeshInstance3D" parent="World" unique_id=2071092057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.372456, 85.48255, -76.89182)
+mesh = SubResource("SphereMesh_4c57u")
+
+[node name="Cloud" type="MeshInstance3D" parent="World" unique_id=1119159228]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 0, 0, 1, -29.59414, 0.41069221, 6.431384)
+mesh = SubResource("PlaneMesh_yf5fn")
+
+[node name="Cloud5" type="MeshInstance3D" parent="World" unique_id=335860529]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 0, 0, 1, -29.59414, 0.41069221, 6.431384)
+mesh = SubResource("PlaneMesh_yf5fn")
+
+[node name="Cloud3" type="MeshInstance3D" parent="World" unique_id=50863570]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 0, 0, 1, -37.891678, 0.41069221, 11.356784)
+mesh = SubResource("PlaneMesh_yf5fn")
+
+[node name="Cloud2" type="MeshInstance3D" parent="World" unique_id=1486564364]
+transform = Transform3D(4.3711395e-08, -1.0000001, -8.742278e-08, -1.0000001, -4.3711395e-08, 0, -3.8213718e-15, 8.7422784e-08, -1, 31.322031, 0.41069221, 6.431384)
+mesh = SubResource("PlaneMesh_yf5fn")
+
+[node name="Cloud4" type="MeshInstance3D" parent="World" unique_id=134549116]
+transform = Transform3D(4.3711395e-08, -1.0000001, -8.742278e-08, -1.0000001, -4.3711395e-08, 0, -3.8213718e-15, 8.7422784e-08, -1, 36.41459, 0.41069221, 10.622012)
+mesh = SubResource("PlaneMesh_yf5fn")
+
+[node name="Kerosene" type="Node3D" parent="World" unique_id=1955599020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.385)
+script = ExtResource("15_jne3d")
+
+[node name="barrel" parent="World/Kerosene" unique_id=2147203052 instance=ExtResource("16_nr1vm")]
+transform = Transform3D(-0.21473113, 0, 0.9766732, 0, 1, 0, -0.9766732, 0, -0.21473113, 3.7749586, 0.5, 42.28594)
+
+[node name="barrel3" parent="World/Kerosene" unique_id=998167378 instance=ExtResource("16_nr1vm")]
+transform = Transform3D(-0.8869784, 0, -0.46181113, 0, 1, 0, 0.46181113, 0, -0.8869784, 4.1345477, 0.5, 42.83598)
+
+[node name="barrel2" parent="World/Kerosene" unique_id=403452755 instance=ExtResource("16_nr1vm")]
+transform = Transform3D(0.21453765, 0.121362, -0.9691465, -0.9766057, 0.011759319, -0.21471627, -0.014661923, 0.99253875, 0.12104574, 4.2630954, 0.825878, 42.059086)
+
+[node name="Area3D" type="Area3D" parent="World/Kerosene" unique_id=169731270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9658513, 0.8117249, 42.164898)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Kerosene/Area3D" unique_id=1395427351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031902313, 0.16192627, 0.29884338)
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="UI" type="Control" parent="." unique_id=1300053703]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("17_feaue")
+script = ExtResource("18_i8gw2")
+
+[node name="Crosshair" type="TextureRect" parent="UI" unique_id=113545709]
+modulate = Color(0.4627451, 0.1764706, 0.11764706, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_4exn6")
+expand_mode = 1
+
+[node name="Kerosene" type="HBoxContainer" parent="UI" unique_id=1532930471]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 102.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="UI/Kerosene" unique_id=487476288]
+layout_mode = 2
+text = "Kerosene:"
+
+[node name="Charges" type="Label" parent="UI/Kerosene" unique_id=1241390789]
+layout_mode = 2
+
+[node name="StatusMessage" type="Label" parent="UI" unique_id=1421797719]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -455.0
+offset_top = -65.0
+offset_right = 455.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Test"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeroseneBar" type="TextureProgressBar" parent="UI" unique_id=577435662]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 306.0
+offset_top = -96.0
+offset_right = 406.0
+offset_bottom = 404.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+max_value = 5.0
+step = 0.1
+fill_mode = 3
+texture_under = ExtResource("20_6wmvi")
+texture_over = ExtResource("21_7muwt")
+texture_progress = ExtResource("22_liift")
+
+[node name="Label" type="Label" parent="UI/KeroseneBar" unique_id=654365106]
+layout_mode = 0
+offset_left = 83.000015
+offset_top = 377.0
+offset_right = 298.0
+offset_bottom = 473.0
+rotation = -1.5707964
+text = "Kerosene"
+horizontal_alignment = 1
+
+[node name="CourageBar" type="TextureProgressBar" parent="UI" unique_id=1911099215]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -61.0
+offset_top = -96.0
+offset_right = 39.0
+offset_bottom = 404.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+max_value = 20.0
+step = 0.1
+fill_mode = 3
+texture_under = ExtResource("20_6wmvi")
+texture_over = ExtResource("21_7muwt")
+texture_progress = ExtResource("23_2urjh")
+
+[node name="Label2" type="Label" parent="UI/CourageBar" unique_id=882074313]
+layout_mode = 0
+offset_left = 85.000015
+offset_top = 362.0
+offset_right = 300.0
+offset_bottom = 458.0
+rotation = -1.5707964
+text = "Courage"
+horizontal_alignment = 1
+
+[node name="Gun" type="HBoxContainer" parent="UI" unique_id=1747532361]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -90.0
+offset_bottom = 40.0
+grow_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-20, 10)
+alignment = 2
+
+[node name="Label" type="Label" parent="UI/Gun" unique_id=1700878136]
+layout_mode = 2
+text = "Barrel:"
+
+[node name="GunStatus" type="Label" parent="UI/Gun" unique_id=372587021]
+layout_mode = 2
+text = "TMP"
+
+[node name="TutorialSteps" type="Control" parent="." unique_id=695395410]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("17_feaue")
+
+[node name="Step1" type="VBoxContainer" parent="TutorialSteps" unique_id=188816432]
+visible = false
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 546.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step1" unique_id=281473416]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "It is too dangerous to stay in the dark like this...
+Time to start lighting up those lamps!
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step1" unique_id=1533776599]
+layout_mode = 2
+text = "First, switch (Right click) to your kerosene bottle."
+horizontal_alignment = 1
+
+[node name="Step2" type="VBoxContainer" parent="TutorialSteps" unique_id=193703065]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step2" unique_id=946781863]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "Great! Your bottle is empty, so let's fill it up.
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step2" unique_id=1702961912]
+layout_mode = 2
+text = "There should be some canisters nearby.
+Use (Left click) your bottle on them."
+horizontal_alignment = 1
+
+[node name="Step3" type="VBoxContainer" parent="TutorialSteps" unique_id=979615076]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step3" unique_id=1706809519]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "Well done. You will need it soon!
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step3" unique_id=66423508]
+layout_mode = 2
+text = "Let's find a nearest lamp and interact (E)
+with the maintenance hatch."
+horizontal_alignment = 1
+
+[node name="Step4" type="VBoxContainer" parent="TutorialSteps" unique_id=312834603]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step4" unique_id=2011625882]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "Remember the training?
+1) Fill the kerosene canister
+using your bottle
+
+2) Unlock the safety latch (top left)
+
+3) Use the valve (top right) to start the flow
+
+4) Wait..."
+horizontal_alignment = 1
+
+[node name="Step5" type="VBoxContainer" parent="TutorialSteps" unique_id=1882849755]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step5" unique_id=1911272272]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "Nicely done. But beware, there are
+monsters living in the shadows!
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step5" unique_id=1287618082]
+layout_mode = 2
+text = "Some are extremely vulnerable to light.
+Just being near one is all it takes!"
+horizontal_alignment = 1
+
+[node name="Step6" type="VBoxContainer" parent="TutorialSteps" unique_id=1722387147]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step6" unique_id=1179334466]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "Others are not so frail and will need a bullet or two!
+
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step6" unique_id=778860166]
+layout_mode = 2
+text = "Switch to your musket and enter reloading mode (R)."
+horizontal_alignment = 1
+
+[node name="Step7" type="VBoxContainer" parent="TutorialSteps" unique_id=1149817190]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step7" unique_id=1904427301]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "Now it's time to put your hands to it!
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step7" unique_id=372328756]
+layout_mode = 2
+text = "Grab one of the bullets and drop it into the barrel.
+Try it!"
+horizontal_alignment = 1
+
+[node name="Step8" type="VBoxContainer" parent="TutorialSteps" unique_id=785762792]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step8" unique_id=1828816623]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "Great! Now stuff it down with the gunpowder.
+
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step8" unique_id=1371600897]
+layout_mode = 2
+text = "Grab the ramrod and push it into the barrel.
+Give it a go a few times for good measure!"
+horizontal_alignment = 1
+
+[node name="Step9" type="VBoxContainer" parent="TutorialSteps" unique_id=1550019536]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step9" unique_id=1334151385]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "That's it. Now defend yourself!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step9" unique_id=41066947]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Step10" type="VBoxContainer" parent="TutorialSteps" unique_id=436127317]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -546.0
+offset_top = -250.0
+offset_right = 426.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step10" unique_id=705802587]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_6a2is")
+text = "You got the idea...
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialSteps/Step10" unique_id=1843836294]
+layout_mode = 2
+text = "Now it's time for you to do your job -
+Light up the whole bridge!"
+horizontal_alignment = 1
+
+[node name="Countdown" type="Label" parent="TutorialSteps/Step10" unique_id=2082427922]
+layout_mode = 2
+horizontal_alignment = 1

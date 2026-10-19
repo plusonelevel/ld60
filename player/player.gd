@@ -132,6 +132,7 @@ func _on_gun_state_changed(state: Enums.GunState):
 
 func toggle_kerosene():
 	kerosene_shown = not kerosene_shown
+	Signals.kerosene_toggled.emit(kerosene_shown)
 
 	var out_item: Node3D = gun if kerosene_shown else kerosene
 	var out_rest: Vector3 = gun_rest if kerosene_shown else kerosene_rest
