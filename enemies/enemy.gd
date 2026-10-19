@@ -6,6 +6,7 @@ var lamps_in_range: Array[Lamp] = []
 @onready var health_label = $DebugHP
 @onready var death_fx = $DeathFX
 @onready var hit_sfx = $Hit
+@onready var blood_fx = $Blood
 
 @export var health : float = 10.0
 @export var speed : float = 1.0
@@ -71,6 +72,9 @@ func hit_player():
 
 func take_dmg(dmg):
 	health -= dmg
+	if dmg > 0:
+		blood_fx.reparent(get_tree().current_scene)
+		blood_fx.emitting = true
 	if health <= 0:
 		die()
 

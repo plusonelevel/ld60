@@ -926,6 +926,50 @@ nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_lvnpg")
 nodes/TimeScale/position = Vector2(360, 100)
 node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
+[sub_resource type="Curve" id="Curve_kqsru"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ugqn"]
+curve = SubResource("Curve_kqsru")
+
+[sub_resource type="Curve" id="Curve_ee6jr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_be3tf"]
+curve = SubResource("Curve_ee6jr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qcjwy"]
+emission_shape_scale = Vector3(0.2, 0.2, 0.525)
+angle_min = 1.0728835e-05
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+scale_min = 0.099999994
+scale_max = 0.59999996
+scale_curve = SubResource("CurveTexture_be3tf")
+alpha_curve = SubResource("CurveTexture_0ugqn")
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2aem1"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.12941177, 0.14901961, 0.11764706, 1)
+emission_enabled = true
+emission = Color(0.25900558, 0.28953624, 0.23668337, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_le1bj"]
+material = SubResource("StandardMaterial3D_2aem1")
+radius = 0.1
+height = 0.2
+radial_segments = 4
+rings = 2
+
 [node name="Enemy" type="CharacterBody3D" unique_id=401762933]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 collision_layer = 256
@@ -1242,3 +1286,12 @@ parameters/looping = true
 [node name="Hit" type="AudioStreamPlayer3D" parent="." unique_id=487467970]
 stream = ExtResource("3_kqsru")
 max_distance = 30.0
+
+[node name="Blood" type="GPUParticles3D" parent="." unique_id=1847271253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123064995, -0.07315563, -0.4234324)
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_qcjwy")
+draw_pass_1 = SubResource("SphereMesh_le1bj")

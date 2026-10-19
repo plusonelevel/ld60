@@ -571,6 +571,7 @@ stream = ExtResource("3_wj2m8")
 
 [node name="Splash" type="AudioStreamPlayer3D" parent="." unique_id=219360471]
 stream = ExtResource("4_wj2m8")
+max_distance = 10.0
 
 [node name="DoorOpen" type="AudioStreamPlayer3D" parent="." unique_id=2130176792]
 stream = ExtResource("3_kh0r4")

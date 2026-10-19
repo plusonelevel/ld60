@@ -9,3 +9,5 @@ signal status_message(String)
 
 signal lamp_lit(int)
 signal activate_spawners(int)
+
+signal aim_prompt_changed(text: String)
