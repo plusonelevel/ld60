@@ -18,6 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://qtbaqhqvtqol" path="res://assets/block.blend" id="14_a8y0u"]
 [ext_resource type="Script" uid="uid://b64y6me24ghby" path="res://assets/kerosene_barrel.gd" id="15_muem4"]
 [ext_resource type="PackedScene" uid="uid://ckv0eto4h3my1" path="res://enemies/enemy3.tscn" id="18_dp3eg"]
+[ext_resource type="Texture2D" uid="uid://omnl601kh871" path="res://assets/bar_under.png" id="19_pm3ni"]
+[ext_resource type="Texture2D" uid="uid://v2v4xb4q6dtc" path="res://assets/kerosene.png" id="19_yc10j"]
+[ext_resource type="Texture2D" uid="uid://8kjkf5ho8xlj" path="res://assets/bar_over.png" id="20_jscy8"]
+[ext_resource type="Texture2D" uid="uid://tqs15sm1cn8" path="res://assets/courage.png" id="22_y6deb"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
 panorama = ExtResource("3_h2yge")
@@ -437,7 +441,11 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("13_jkv2x")
 
+[node name="Crosshair" type="TextureRect" parent="UI" unique_id=113545709]
+layout_mode = 0
+
 [node name="Kerosene" type="HBoxContainer" parent="UI" unique_id=1532930471]
+visible = false
 layout_mode = 0
 offset_left = 20.0
 offset_top = 10.0
@@ -450,24 +458,6 @@ text = "Kerosene:"
 
 [node name="Charges" type="Label" parent="UI/Kerosene" unique_id=1241390789]
 layout_mode = 2
-
-[node name="Crosshair" type="Label" parent="UI" unique_id=1953527581]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -12.0
-offset_right = 5.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="StatusMessage" type="Label" parent="UI" unique_id=1421797719]
 visible = false
@@ -487,6 +477,32 @@ theme_override_font_sizes/font_size = 50
 text = "Test"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="KeroseneBar" type="TextureProgressBar" parent="UI" unique_id=577435662]
+layout_mode = 1
+offset_left = 145.0
+offset_top = 43.0
+offset_right = 245.0
+offset_bottom = 543.0
+max_value = 5.0
+step = 0.1
+fill_mode = 3
+texture_under = ExtResource("19_pm3ni")
+texture_over = ExtResource("20_jscy8")
+texture_progress = ExtResource("19_yc10j")
+
+[node name="CourageBar" type="TextureProgressBar" parent="UI" unique_id=1911099215]
+layout_mode = 1
+offset_left = 39.0
+offset_top = 96.0
+offset_right = 139.0
+offset_bottom = 596.0
+max_value = 20.0
+step = 0.1
+fill_mode = 3
+texture_under = ExtResource("19_pm3ni")
+texture_over = ExtResource("20_jscy8")
+texture_progress = ExtResource("22_y6deb")
 
 [node name="Gun" type="HBoxContainer" parent="UI" unique_id=1747532361]
 custom_minimum_size = Vector2(200, 0)

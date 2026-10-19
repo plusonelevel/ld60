@@ -5,6 +5,7 @@ class_name Player extends CharacterBody3D
 @export var TILT_LOWER_LIMIT := deg_to_rad(-90.0)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
 @export var CAMERA : Camera3D
+@export var health : float = 20
 
 @onready var stuff: Node3D = $Stuff
 @onready var gun: Gun = $Gun
@@ -138,3 +139,11 @@ func fill_kerosene() -> void:
 	kerosene_amount = KEROSENE_CAPACITY
 	Signals.kerosene_amount_changed.emit(kerosene_amount)
 	Signals.status_message.emit("Bottle filled.")
+	
+func take_dmg(dmg):
+	health -= dmg
+	if health <= 0:
+		_die()
+
+func _die():
+	Signals.status_message.emit("Perished.")

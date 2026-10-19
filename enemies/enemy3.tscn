@@ -930,6 +930,7 @@ collision_layer = 256
 script = ExtResource("1_uqgo1")
 health = 20.0
 light_dps = 20.0
+attack_damage = 20.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1707719246]
 visible = false
