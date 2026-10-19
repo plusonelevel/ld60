@@ -40,7 +40,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.29999998
 scale_max = 0.79999995
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxgkd"]
 transparency = 1
 albedo_color = Color(0.7553766, 0.23276019, 9.62615e-08, 0.5882353)
 emission_enabled = true
@@ -48,7 +48,7 @@ emission = Color(0.52191913, 0.2021581, 4.813075e-08, 1)
 emission_energy_multiplier = 5.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
-material = SubResource("StandardMaterial3D_yf5fn")
+material = SubResource("StandardMaterial3D_mxgkd")
 radius = 0.05
 height = 0.1
 radial_segments = 4
@@ -70,7 +70,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.29999998
 scale_max = 0.79999995
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rsfmq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6gyw"]
 transparency = 1
 albedo_color = Color(0.7553766, 0.23276019, 9.62615e-08, 0.5882353)
 emission_enabled = true
@@ -78,7 +78,7 @@ emission = Color(0.52191913, 0.2021581, 4.813075e-08, 1)
 emission_energy_multiplier = 5.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_oi1it"]
-material = SubResource("StandardMaterial3D_rsfmq")
+material = SubResource("StandardMaterial3D_g6gyw")
 radius = 0.05
 height = 0.1
 radial_segments = 4
@@ -94,12 +94,12 @@ radius = 8.0
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_i42df"]
 panorama = ExtResource("4_70i5f")
 
-[sub_resource type="Sky" id="Sky_y6deb"]
+[sub_resource type="Sky" id="Sky_3dmrc"]
 sky_material = SubResource("PanoramaSkyMaterial_i42df")
 
 [sub_resource type="Environment" id="Environment_7jp70"]
 background_mode = 1
-sky = SubResource("Sky_y6deb")
+sky = SubResource("Sky_3dmrc")
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 0.5
@@ -110,12 +110,12 @@ fog_light_energy = 0.1
 fog_density = 0.1
 fog_sky_affect = 0.95
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_57qmd"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_81l6r"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mxgkd"]
-noise = SubResource("FastNoiseLite_57qmd")
+noise = SubResource("FastNoiseLite_81l6r")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rsfmq"]
 render_priority = 0
 shader = ExtResource("5_mj5lg")
 shader_parameter/water_color = Color(0.08334821, 0.14899787, 0.22050616, 1)
@@ -128,12 +128,12 @@ shader_parameter/specular = 0.0
 shader_parameter/metalic = 0.7670000364325
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g6gyw"]
-material = SubResource("ShaderMaterial_5vw27")
+material = SubResource("ShaderMaterial_rsfmq")
 size = Vector2(200, 200)
 subdivide_width = 500
 subdivide_depth = 500
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oi1it"]
 render_priority = 0
 shader = ExtResource("6_ufwb2")
 shader_parameter/cloud_tex = ExtResource("7_6cdou")
@@ -145,7 +145,7 @@ shader_parameter/tint = Color(1, 1, 1, 1)
 shader_parameter/opacity = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rsfmq"]
-material = SubResource("ShaderMaterial_4c57u")
+material = SubResource("ShaderMaterial_oi1it")
 size = Vector2(75, 150)
 
 [node name="Menu" type="Node" unique_id=1564836208]
@@ -219,7 +219,6 @@ draw_pass_1 = SubResource("SphereMesh_g4v7s")
 
 [node name="LampControls" parent="World/Bridge/Lamps/Lamp3" unique_id=2122993748 instance=ExtResource("5_ufwb2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24286175, 0)
-drain_time = 60.0
 
 [node name="LampSound" type="AudioStreamPlayer3D" parent="World/Bridge/Lamps/Lamp3" unique_id=1739158773]
 stream = ExtResource("6_6cdou")
@@ -251,6 +250,7 @@ spin_sides = 8
 
 [node name="Flame3" type="GPUParticles3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1176507907]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4162445, 0.014773488)
+visible = false
 cast_shadow = 0
 amount = 50
 randomness = 0.5
@@ -259,6 +259,7 @@ draw_pass_1 = SubResource("SphereMesh_oi1it")
 
 [node name="Light" type="OmniLight3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=93283193]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031212538, 4.6696486, 0.0031939745)
+visible = false
 layers = 2
 light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
 light_size = 1.0
@@ -268,6 +269,7 @@ script = ExtResource("5_6cdou")
 
 [node name="Flame" type="GPUParticles3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1435899329]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9452622, 0.96578944)
+visible = false
 cast_shadow = 0
 amount = 10
 lifetime = 0.5
@@ -277,6 +279,7 @@ draw_pass_1 = SubResource("SphereMesh_oi1it")
 
 [node name="Light2" type="OmniLight3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1815602674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03121233, 4.1427784, 1.0063831)
+visible = false
 layers = 2
 light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
 light_size = 1.0
@@ -286,6 +289,7 @@ script = ExtResource("5_6cdou")
 
 [node name="Light3" type="OmniLight3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1475605524]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.062404156, 4.2797394, -0.82168186)
+visible = false
 layers = 2
 light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
 light_size = 1.0
@@ -295,6 +299,7 @@ script = ExtResource("5_6cdou")
 
 [node name="Flame2" type="GPUParticles3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=530224629]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031191826, 4.026335, -0.81010234)
+visible = false
 cast_shadow = 0
 amount = 10
 lifetime = 0.5
@@ -319,8 +324,6 @@ shape = SubResource("SphereShape3D_6wigr")
 
 [node name="LampControls" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=150220317 instance=ExtResource("5_ufwb2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24286175, 0)
-fill_time = 10.0
-drain_time = 60000.0
 cone_presses_needed = 10
 cone_fill_time = 3.0
 

@@ -29,8 +29,8 @@ func _process(_delta: float) -> void:
 
 
 func light_up():
-	Signals.lamp_lit.emit(lamp_id)
 	lamp_sound.play()
+	Signals.lamp_lit.emit(lamp_id)
 	flame.emitting = true
 	flame.amount_ratio = 1.0
 	if tween:

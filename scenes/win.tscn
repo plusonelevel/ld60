@@ -1,3 +1,465 @@
 [gd_scene format=3 uid="uid://bqvrf8nlcf7y2"]
 
+[ext_resource type="PackedScene" uid="uid://clkjdylcngqe4" path="res://assets/bridge.blend" id="1_dprdm"]
+[ext_resource type="Script" uid="uid://doqt6ihhnad4k" path="res://lamp/lamp.gd" id="2_1sfkf"]
+[ext_resource type="PackedScene" uid="uid://fj4nupp38agc" path="res://assets/lamp.blend" id="3_cqlmx"]
+[ext_resource type="Script" uid="uid://rg5e5auuw6qp" path="res://lamp/light.gd" id="4_o0dbk"]
+[ext_resource type="PackedScene" uid="uid://b3tcgpjba40d2" path="res://lamp/lamp_controls.tscn" id="5_kocok"]
+[ext_resource type="AudioStream" uid="uid://pesq2xr88k4a" path="res://sound/lampsound.mp3" id="6_m8f7v"]
+[ext_resource type="PackedScene" uid="uid://btyhcpfakmmhv" path="res://assets/lamp_checkpoint.blend" id="7_pbhq3"]
+[ext_resource type="PackedScene" uid="uid://d2qg3mtw5dr3s" path="res://assets/crate.blend" id="8_lf1cl"]
+[ext_resource type="Texture2D" uid="uid://b8e6o88x8j8o4" path="res://bg_sky.png" id="9_x2brb"]
+[ext_resource type="Shader" uid="uid://8q6v2pnnp6pi" path="res://shaders/water.gdshader" id="10_grtag"]
+[ext_resource type="Shader" uid="uid://bpodw4v7ljp3j" path="res://shaders/cloud_drift.gdshader" id="11_4cboq"]
+[ext_resource type="Texture2D" uid="uid://cihj5u5pwjasm" path="res://cloud.png" id="12_cwh44"]
+[ext_resource type="Theme" uid="uid://bvesck7rk66lk" path="res://menu_theme.tres" id="13_5tb6j"]
+[ext_resource type="Script" uid="uid://c0388maiw7vit" path="res://scenes/menu.gd" id="14_yb6q2"]
+[ext_resource type="AudioStream" uid="uid://dke7eyd2lr0jf" path="res://sound/take_pellet.wav" id="15_yt86t"]
+[ext_resource type="AudioStream" uid="uid://bntaehw34d1p" path="res://sound/ambient.mp3" id="16_5yb1t"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_keyvu"]
+height = 3.0
+radius = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ihw3b"]
+height = 3.0
+radius = 1.7
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1x8xo"]
+radius = 8.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8dm3c"]
+emission_shape_scale = Vector3(0.1, 0.05, 0.1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 0.19999999
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.79999995
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+transparency = 1
+albedo_color = Color(0.7553766, 0.23276019, 9.62615e-08, 0.5882353)
+emission_enabled = true
+emission = Color(0.52191913, 0.2021581, 4.813075e-08, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_s8vj5"]
+material = SubResource("StandardMaterial3D_yf5fn")
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ldwhd"]
+height = 3.0
+radius = 0.3
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wk1dt"]
+emission_shape_scale = Vector3(0.1, 0.05, 0.1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 0.19999999
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.79999995
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rsfmq"]
+transparency = 1
+albedo_color = Color(0.7553766, 0.23276019, 9.62615e-08, 0.5882353)
+emission_enabled = true
+emission = Color(0.52191913, 0.2021581, 4.813075e-08, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_2hftx"]
+material = SubResource("StandardMaterial3D_rsfmq")
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mkega"]
+height = 3.0
+radius = 1.7
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3bvli"]
+radius = 8.0
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aadtp"]
+panorama = ExtResource("9_x2brb")
+
+[sub_resource type="Sky" id="Sky_y6deb"]
+sky_material = SubResource("PanoramaSkyMaterial_aadtp")
+
+[sub_resource type="Environment" id="Environment_5b2ks"]
+background_mode = 1
+sky = SubResource("Sky_y6deb")
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.5
+fog_enabled = true
+fog_light_color = Color(0.032437935, 0.15050533, 0.20623124, 1)
+fog_light_energy = 0.1
+fog_density = 0.1
+fog_sky_affect = 0.95
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_57qmd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dloc3"]
+noise = SubResource("FastNoiseLite_57qmd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+render_priority = 0
+shader = ExtResource("10_grtag")
+shader_parameter/water_color = Color(0.08334821, 0.14899787, 0.22050616, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_dloc3")
+shader_parameter/wave_speed = 0.20000000624012
+shader_parameter/wave_noise = 0.10000000312006
+shader_parameter/wave_strength = Vector3(0, 3, 0)
+shader_parameter/roughness = 0.378000017955
+shader_parameter/specular = 0.0
+shader_parameter/metalic = 0.7670000364325
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kafct"]
+material = SubResource("ShaderMaterial_5vw27")
+size = Vector2(200, 200)
+subdivide_width = 500
+subdivide_depth = 500
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
+render_priority = 0
+shader = ExtResource("11_4cboq")
+shader_parameter/cloud_tex = ExtResource("12_cwh44")
+shader_parameter/drift_dir = Vector2(1, 0.2)
+shader_parameter/drift_speed = 0.01
+shader_parameter/wobble_amount = 0.07
+shader_parameter/wobble_speed = 0.4
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/opacity = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6netg"]
+material = SubResource("ShaderMaterial_4c57u")
+size = Vector2(75, 150)
+
 [node name="Win" type="Node3D" unique_id=140629198]
+
+[node name="World" type="Node3D" parent="." unique_id=567413443]
+
+[node name="Bridge" type="Node3D" parent="World" unique_id=1398143597]
+
+[node name="bridge" parent="World/Bridge" unique_id=1645976202 instance=ExtResource("1_dprdm")]
+
+[node name="Lamps" type="Node3D" parent="World/Bridge" unique_id=772659817]
+
+[node name="Lamp3" type="StaticBody3D" parent="World/Bridge/Lamps" unique_id=208360321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9205456, -0.48207963, -14.984238)
+script = ExtResource("2_1sfkf")
+lamp_id = 3
+
+[node name="lamp" parent="World/Bridge/Lamps/Lamp3" unique_id=2044616971 instance=ExtResource("3_cqlmx")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Bridge/Lamps/Lamp3" unique_id=70024467]
+shape = SubResource("CylinderShape3D_keyvu")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="World/Bridge/Lamps/Lamp3" unique_id=1098471453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50456345, 0)
+visible = false
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/Bridge/Lamps/Lamp3/CSGCombiner3D" unique_id=1428364105]
+radius = 0.25
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="World/Bridge/Lamps/Lamp3/CSGCombiner3D" unique_id=380752586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99064064, 0)
+polygon = PackedVector2Array(0, 0, 0, 1, 0.75, 0.75, 0.25, 0, 0, 0, 0, 0)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+
+[node name="Light" type="OmniLight3D" parent="World/Bridge/Lamps/Lamp3" unique_id=344112468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03753212, 4.4389887, 0)
+visible = false
+layers = 2
+light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
+light_energy = 15.0
+light_size = 1.0
+shadow_enabled = true
+omni_range = 50.0
+script = ExtResource("4_o0dbk")
+
+[node name="InteractiveArea" type="Area3D" parent="World/Bridge/Lamps/Lamp3" unique_id=1766976479]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Bridge/Lamps/Lamp3/InteractiveArea" unique_id=1426260542]
+shape = SubResource("CylinderShape3D_ihw3b")
+debug_fill = false
+
+[node name="LightArea" type="Area3D" parent="World/Bridge/Lamps/Lamp3" unique_id=1042120101]
+collision_layer = 4
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Bridge/Lamps/Lamp3/LightArea" unique_id=1973021409]
+shape = SubResource("SphereShape3D_1x8xo")
+
+[node name="Flame" type="GPUParticles3D" parent="World/Bridge/Lamps/Lamp3" unique_id=1210272379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0760393, 0.014773488)
+cast_shadow = 0
+emitting = false
+amount = 50
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_8dm3c")
+draw_pass_1 = SubResource("SphereMesh_s8vj5")
+
+[node name="LampControls" parent="World/Bridge/Lamps/Lamp3" unique_id=2122993748 instance=ExtResource("5_kocok")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24286175, 0)
+
+[node name="LampSound" type="AudioStreamPlayer3D" parent="World/Bridge/Lamps/Lamp3" unique_id=528527318]
+stream = ExtResource("6_m8f7v")
+volume_db = 80.0
+max_distance = 30.0
+parameters/looping = true
+
+[node name="LampCheckpoint2" type="StaticBody3D" parent="World/Bridge/Lamps" unique_id=436844925]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.394266, 0.39466405, -0.35362625)
+
+[node name="lamp_checkpoint" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=302217909 instance=ExtResource("7_pbhq3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1295345259]
+shape = SubResource("CylinderShape3D_ldwhd")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=952097657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50456345, 0)
+visible = false
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/Bridge/Lamps/LampCheckpoint2/CSGCombiner3D" unique_id=505235644]
+radius = 0.25
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="World/Bridge/Lamps/LampCheckpoint2/CSGCombiner3D" unique_id=1651671660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99064064, 0)
+polygon = PackedVector2Array(0, 0, 0, 1, 0.75, 0.75, 0.25, 0, 0, 0, 0, 0)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+
+[node name="Flame3" type="GPUParticles3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=475370955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4162445, 0.014773488)
+cast_shadow = 0
+amount = 50
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_wk1dt")
+draw_pass_1 = SubResource("SphereMesh_2hftx")
+
+[node name="Light" type="OmniLight3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=240830472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031212538, 4.6696486, 0.0031939745)
+layers = 2
+light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
+light_size = 1.0
+shadow_enabled = true
+omni_range = 30.0
+script = ExtResource("4_o0dbk")
+
+[node name="Flame" type="GPUParticles3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=944684243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9452622, 0.96578944)
+cast_shadow = 0
+amount = 10
+lifetime = 0.5
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_wk1dt")
+draw_pass_1 = SubResource("SphereMesh_2hftx")
+
+[node name="Light2" type="OmniLight3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1069904403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03121233, 4.1427784, 1.0063831)
+layers = 2
+light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
+light_size = 1.0
+shadow_enabled = true
+omni_range = 30.0
+script = ExtResource("4_o0dbk")
+
+[node name="Light3" type="OmniLight3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=2126914114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.062404156, 4.2797394, -0.82168186)
+layers = 2
+light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
+light_size = 1.0
+shadow_enabled = true
+omni_range = 30.0
+script = ExtResource("4_o0dbk")
+
+[node name="Flame2" type="GPUParticles3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=493846164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031191826, 4.026335, -0.81010234)
+cast_shadow = 0
+amount = 10
+lifetime = 0.5
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_wk1dt")
+draw_pass_1 = SubResource("SphereMesh_2hftx")
+
+[node name="InteractiveArea" type="Area3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1882341813]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Bridge/Lamps/LampCheckpoint2/InteractiveArea" unique_id=173400731]
+shape = SubResource("CylinderShape3D_mkega")
+debug_fill = false
+
+[node name="LightArea" type="Area3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1991537597]
+collision_layer = 4
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Bridge/Lamps/LampCheckpoint2/LightArea" unique_id=972597536]
+shape = SubResource("SphereShape3D_3bvli")
+
+[node name="LampControls" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=743423839 instance=ExtResource("5_kocok")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24286175, 0)
+cone_presses_needed = 10
+cone_fill_time = 3.0
+
+[node name="LampSound" type="AudioStreamPlayer3D" parent="World/Bridge/Lamps/LampCheckpoint2" unique_id=1370069697]
+stream = ExtResource("6_m8f7v")
+volume_db = 16.0
+max_distance = 30.0
+parameters/looping = true
+
+[node name="Level" type="Node3D" parent="World/Bridge" unique_id=738091541]
+
+[node name="crate4" parent="World/Bridge/Level" unique_id=1631011088 instance=ExtResource("8_lf1cl")]
+transform = Transform3D(0.81714785, 0, 0.5764281, 0, 1, 0, -0.5764281, 0, 0.81714785, 2.0595708, 1.2652454, 4.2978373)
+
+[node name="crate7" parent="World/Bridge/Level" unique_id=144661433 instance=ExtResource("8_lf1cl")]
+transform = Transform3D(-0.0136116445, 0, 0.9999074, 0, 1, 0, -0.9999074, 0, -0.0136116445, -0.020728588, 1.2652454, 3.9645414)
+
+[node name="crate5" parent="World/Bridge/Level" unique_id=195412430 instance=ExtResource("8_lf1cl")]
+transform = Transform3D(-0.9958849, 0, -0.0906274, 0, 1, 0, 0.0906274, 0, -0.9958849, 3.8868227, 1.2667406, 3.8125124)
+
+[node name="crate6" parent="World/Bridge/Level" unique_id=929603415 instance=ExtResource("8_lf1cl")]
+transform = Transform3D(-0.48575646, 0, 0.9800679, 6.5081295e-08, -1, 5.5907183e-08, 0.7444434, 8.7422784e-08, 0.63950366, 3.1230984, 1.1835423, 5.55087)
+
+[node name="crate17" parent="World/Bridge/Level" unique_id=1432409298 instance=ExtResource("8_lf1cl")]
+transform = Transform3D(0.80586207, 7.274187e-08, 0.7677393, 1.7221902e-07, -0.99999994, -1.2345721e-07, 0.62607986, 1.814451e-07, -0.9881996, 1.7747884, 1.1835423, -12.409154)
+
+[node name="crate19" parent="World/Bridge/Level" unique_id=320126762 instance=ExtResource("8_lf1cl")]
+transform = Transform3D(0.026255285, -0.69150233, 0.023097783, -0.4075215, -0.045285616, -0.008564681, 0.008869752, -0.03374159, -0.46187305, 2.6309395, 0.8708236, -10.026823)
+
+[node name="crate18" parent="World/Bridge/Level" unique_id=536074261 instance=ExtResource("8_lf1cl")]
+transform = Transform3D(0.6958552, 4.130848e-08, 0.4763321, 1.4870967e-07, -0.56787753, -7.659713e-08, 0.54061466, 1.0303862e-07, -0.6131133, 3.5292292, 0.98094225, -13.305729)
+
+[node name="crate16" parent="World/Bridge/Level" unique_id=252832066 instance=ExtResource("8_lf1cl")]
+transform = Transform3D(-0.8536674, -1.7505371e-07, -0.38951796, 1.977655e-07, -1, 1.5851581e-08, -0.55412894, -8.721411e-08, 0.60007465, 1.2894309, 1.1835423, -10.618944)
+
+[node name="Env" type="Node3D" parent="World" unique_id=2012616451]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World/Env" unique_id=2089378359]
+environment = SubResource("Environment_5b2ks")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/Env" unique_id=1585755347]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Water" type="MeshInstance3D" parent="World" unique_id=489106420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.3975906, 0)
+mesh = SubResource("PlaneMesh_kafct")
+
+[node name="Cloud" type="MeshInstance3D" parent="World" unique_id=777717035]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 0, 0, 1, -29.59414, 0.41069221, 6.431384)
+mesh = SubResource("PlaneMesh_6netg")
+
+[node name="Cloud5" type="MeshInstance3D" parent="World" unique_id=1780130879]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 0, 0, 1, -29.59414, 0.41069221, 6.431384)
+mesh = SubResource("PlaneMesh_6netg")
+
+[node name="Cloud3" type="MeshInstance3D" parent="World" unique_id=767403791]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 0, 0, 1, -37.891678, 0.41069221, 11.356784)
+mesh = SubResource("PlaneMesh_6netg")
+
+[node name="Cloud2" type="MeshInstance3D" parent="World" unique_id=846085401]
+transform = Transform3D(4.3711395e-08, -1.0000001, -8.742278e-08, -1.0000001, -4.3711395e-08, 0, -3.8213718e-15, 8.7422784e-08, -1, 31.322031, 0.41069221, 6.431384)
+mesh = SubResource("PlaneMesh_6netg")
+
+[node name="Cloud4" type="MeshInstance3D" parent="World" unique_id=1708843368]
+transform = Transform3D(4.3711395e-08, -1.0000001, -8.742278e-08, -1.0000001, -4.3711395e-08, 0, -3.8213718e-15, 8.7422784e-08, -1, 36.41459, 0.41069221, 10.622012)
+mesh = SubResource("PlaneMesh_6netg")
+
+[node name="Camera3D" type="Camera3D" parent="World" unique_id=511071956]
+transform = Transform3D(1, 0, 0, 0, 0.93930274, 0.3430895, 0, -0.3430895, 0.93930274, 3.1290524, 5.23723, 1.5929282)
+
+[node name="Menu" type="Control" parent="." unique_id=1915621509]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_5tb6j")
+script = ExtResource("14_yb6q2")
+
+[node name="Title" type="Label" parent="Menu" unique_id=1618820491]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -861.0
+offset_top = -381.0
+offset_right = 155.0
+offset_bottom = -99.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "NIGHTGUARD"
+
+[node name="Play" type="Button" parent="Menu" unique_id=342339815]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -845.0
+offset_top = -2.0
+offset_right = -420.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="Tutorial" type="Button" parent="Menu" unique_id=651333517]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -845.0
+offset_top = 132.0
+offset_right = -420.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tutorial"
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=2109888489]
+stream = ExtResource("15_yt86t")
+volume_db = -8.0
+
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=1770062528]
+stream = ExtResource("16_5yb1t")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="body_entered" from="World/Bridge/Lamps/Lamp3/InteractiveArea" to="World/Bridge/Lamps/Lamp3" method="_on_interactive_area_body_entered"]
+[connection signal="body_exited" from="World/Bridge/Lamps/Lamp3/InteractiveArea" to="World/Bridge/Lamps/Lamp3" method="_on_interactive_area_body_exited"]
+[connection signal="body_entered" from="World/Bridge/Lamps/Lamp3/LightArea" to="World/Bridge/Lamps/Lamp3" method="_on_light_area_body_entered"]
+[connection signal="body_entered" from="World/Bridge/Lamps/LampCheckpoint2/InteractiveArea" to="World/Bridge/Lamps/LampCheckpoint2" method="_on_interactive_area_body_entered"]
+[connection signal="body_exited" from="World/Bridge/Lamps/LampCheckpoint2/InteractiveArea" to="World/Bridge/Lamps/LampCheckpoint2" method="_on_interactive_area_body_exited"]
+[connection signal="body_entered" from="World/Bridge/Lamps/LampCheckpoint2/LightArea" to="World/Bridge/Lamps/LampCheckpoint2" method="_on_light_area_body_entered"]
+[connection signal="pressed" from="Menu/Play" to="Menu" method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/Tutorial" to="Menu" method="_on_tutorial_pressed"]

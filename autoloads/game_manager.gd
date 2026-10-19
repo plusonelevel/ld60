@@ -11,6 +11,7 @@ func _ready() -> void:
 	Signals.gun_state_changed.connect(_on_gun_state_changed)
 
 	Signals.game_over.connect(_game_over)
+	Signals.win.connect(_game_won)
 	
 	await get_tree().process_frame
 	Signals.lamp_lit.emit(1)
@@ -32,4 +33,8 @@ func _game_over():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 	
 func _game_won():
-	get_tree().change_scene_to_file("res://scenes/win.tscn")
+	Signals.status_message.emit("You managed to light up the whole bridge.")
+	await get_tree().create_timer(3.0).timeout
+	Signals.status_message.emit("You are the true Nightguard.")
+	await get_tree().create_timer(3.0).timeout
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
