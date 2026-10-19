@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://djfd2owj6p3oc" path="res://sound/kerosene_bottle.wav" id="7_boad6"]
 [ext_resource type="AudioStream" uid="uid://dke7eyd2lr0jf" path="res://sound/take_pellet.wav" id="8_rgyib"]
 [ext_resource type="AudioStream" uid="uid://ckuhip8yl2bak" path="res://sound/umph.mp3" id="9_hg6s5"]
+[ext_resource type="AudioStream" uid="uid://bn53njtxj7qym" path="res://sound/pellets.wav" id="10_8t03j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttdjf"]
 
@@ -31,6 +32,7 @@ MOUSE_SENSITIVITY = 0.15
 
 [node name="Gun" parent="." unique_id=940231012 instance=ExtResource("2_rkbax")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.721)
+prime_target = 3
 prime_duration = 0.15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1073120225]
@@ -89,5 +91,8 @@ stream = ExtResource("8_rgyib")
 
 [node name="TakeHit" type="AudioStreamPlayer3D" parent="." unique_id=47941435]
 stream = ExtResource("9_hg6s5")
+
+[node name="Pouch" type="AudioStreamPlayer3D" parent="." unique_id=550978456]
+stream = ExtResource("10_8t03j")
 
 [connection signal="body_entered" from="Stuff/Barrel" to="Stuff" method="_on_barrel_body_entered"]

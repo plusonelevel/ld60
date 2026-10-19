@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://bafcey40ac1ec" path="res://assets/fire_01_a.png" id="3_pk7sy"]
 [ext_resource type="AudioStream" uid="uid://buhfdvl6h2yar" path="res://sound/musket_fire.wav" id="4_1006d"]
 [ext_resource type="PackedScene" uid="uid://ut11q1s3mefm" path="res://assets/tycinka.blend" id="4_wm1u5"]
-[ext_resource type="AudioStream" uid="uid://bn53njtxj7qym" path="res://sound/pellets.wav" id="5_67j6s"]
 [ext_resource type="AudioStream" uid="uid://bs7inx4ypgkc7" path="res://sound/tycinka.wav" id="7_jh2s2"]
 
 [sub_resource type="Curve" id="Curve_hsu73"]
@@ -119,9 +118,6 @@ transform = Transform3D(0.9945219, 0.005470589, 0.10438521, 0.0030919313, 0.9966
 
 [node name="MusketFire" type="AudioStreamPlayer3D" parent="." unique_id=1238261505]
 stream = ExtResource("4_1006d")
-
-[node name="Pouch" type="AudioStreamPlayer3D" parent="." unique_id=1074067603]
-stream = ExtResource("5_67j6s")
 
 [node name="Priming" type="AudioStreamPlayer3D" parent="." unique_id=416370623]
 stream = ExtResource("7_jh2s2")

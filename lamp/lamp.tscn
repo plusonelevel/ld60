@@ -15,7 +15,7 @@ height = 3.0
 radius = 1.7
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u5qm3"]
-radius = 8.0
+radius = 10.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_57qmd"]
 emission_shape_scale = Vector3(0.1, 0.05, 0.1)
@@ -101,7 +101,6 @@ draw_pass_1 = SubResource("SphereMesh_g4v7s")
 
 [node name="LampControls" parent="." unique_id=2122993748 instance=ExtResource("4_f1vyn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24286175, 0)
-drain_time = 60.0
 
 [node name="LampSound" type="AudioStreamPlayer3D" parent="." unique_id=1739158773]
 stream = ExtResource("5_oq4na")
