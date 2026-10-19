@@ -1,7 +1,7 @@
 extends Node
 
 @onready var tut_steps := $TutorialSteps
-var current_idx := 7
+var current_idx := 0
 var total_steps : int
 
 var countdown := 5.0
