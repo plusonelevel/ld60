@@ -11,6 +11,7 @@ func _ready() -> void:
 	Signals.gun_state_changed.connect(_on_gun_state_changed)
 	
 	await get_tree().process_frame
+	Signals.activate_spawners.emit(1)
 
 
 func _on_player_state_changed(new_state):

@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cn7qhslhkc8b4"]
+
+[ext_resource type="Texture2D" uid="uid://b8e6o88x8j8o4" path="res://bg_sky.png" id="1_4bx60"]
+[ext_resource type="Script" uid="uid://3iksktp8y5fb" path="res://scenes/intro.gd" id="1_i2l1n"]
+[ext_resource type="FontFile" uid="uid://btxgeb35qrgpl" path="res://assets/GrenzeGotisch-VariableFont_wght.ttf" id="3_wfs7u"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_es01l"]
+panorama = ExtResource("1_4bx60")
+
+[sub_resource type="Sky" id="Sky_vyj8c"]
+sky_material = SubResource("PanoramaSkyMaterial_es01l")
+
+[sub_resource type="Environment" id="Environment_0naf5"]
+background_mode = 1
+sky = SubResource("Sky_vyj8c")
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.5
+fog_enabled = true
+fog_light_color = Color(0.032437935, 0.15050533, 0.20623124, 1)
+fog_light_energy = 0.1
+fog_density = 0.1
+fog_sky_affect = 0.95
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4v7s"]
+albedo_color = Color(0.7435617, 0.69591767, 0.5318162, 1)
+
+[node name="Intro" type="Node3D" unique_id=1050258236]
+script = ExtResource("1_i2l1n")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1343991322]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Env" type="Node3D" parent="." unique_id=1950843432]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env" unique_id=735245358]
+environment = SubResource("Environment_0naf5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env" unique_id=1424811670]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=540157282]
+transform = Transform3D(0.9234688, -0.18842725, 0.33421627, 0.19992355, 0.97981155, -7.450581e-09, -0.32746893, 0.0668177, 0.9424964, -0.747, 0.042, -0.007)
+size = Vector3(0.13, 0.895, 0.777)
+material = SubResource("StandardMaterial3D_g4v7s")
+
+[node name="Light" type="OmniLight3D" parent="." unique_id=1877347755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.722, 2.341, 0)
+layers = 2
+light_color = Color(0.8948416, 0.51425225, 1.92523e-06, 1)
+light_size = 1.0
+
+[node name="Label3D" type="Label3D" parent="." unique_id=528083356]
+transform = Transform3D(-0.33421627, -0.18842721, 0.92346877, -2.2351742e-08, 0.9798115, 0.19992353, -0.94249636, 0.06681767, -0.327469, -0.5769242, 0.05974661, 0.27812743)
+pixel_size = 0.0005
+modulate = Color(0.4627451, 0.1764706, 0.11764706, 1)
+text = "Dear son,
+The day has come. After long thirteen years 
+you stand here a man,
+and it is time you took up my work.
+Take my trusty musket and my kerosene kettle,
+and walk the path of a true lamplighter.
+Face the fears and nightmares that crawl out of the dark,
+and give the world the light it so badly needs.
+Take shelter under the dim lights of the lamps on the left to light up the strong lamps on the right.
+BTW ghosts can dodge bullets and hit hard.
+Your Father
+Press E to begin"
+font = ExtResource("3_wfs7u")
+font_size = 64
+outline_size = 0
+horizontal_alignment = 0
+line_spacing = 20.0

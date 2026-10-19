@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 
 func light_up():
 	Signals.lamp_lit.emit(lamp_id)
+	Signals.activate_spawners.emit(lamp_id-3)
 	print(self)
 	var flame_fade = controls.drain_time
 	flame.emitting = true

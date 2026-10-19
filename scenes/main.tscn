@@ -17,8 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://emgixhy66ewn" path="res://assets/gate.blend" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://qtbaqhqvtqol" path="res://assets/block.blend" id="14_a8y0u"]
 [ext_resource type="Script" uid="uid://b64y6me24ghby" path="res://assets/kerosene_barrel.gd" id="15_muem4"]
+[ext_resource type="FontFile" uid="uid://btxgeb35qrgpl" path="res://assets/GrenzeGotisch-VariableFont_wght.ttf" id="17_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://ckv0eto4h3my1" path="res://enemies/enemy3.tscn" id="18_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://omnl601kh871" path="res://assets/bar_under.png" id="19_pm3ni"]
+[ext_resource type="Texture2D" uid="uid://bln7u4juondw8" path="res://assets/crosshair.png" id="19_y6deb"]
 [ext_resource type="Texture2D" uid="uid://v2v4xb4q6dtc" path="res://assets/kerosene.png" id="19_yc10j"]
 [ext_resource type="Texture2D" uid="uid://8kjkf5ho8xlj" path="res://assets/bar_over.png" id="20_jscy8"]
 [ext_resource type="Texture2D" uid="uid://tqs15sm1cn8" path="res://assets/courage.png" id="22_y6deb"]
@@ -102,8 +104,13 @@ material = SubResource("ShaderMaterial_4c57u")
 size = Vector2(75, 150)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
-radius = 0.33984375
-height = 1.2536621
+radius = 0.78759766
+height = 1.5751953
+
+[sub_resource type="Theme" id="Theme_r4f5i"]
+Label/colors/font_color = Color(0.4627451, 0.1764706, 0.11764706, 1)
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("17_pm3ni")
 
 [node name="Main" type="Node" unique_id=196047157]
 
@@ -327,64 +334,74 @@ light_energy = 0.5
 shadow_enabled = true
 
 [node name="Spawner" parent="World" unique_id=1985785800 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9087684, 1.0343516, 23.640331)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.397208, 1.0343516, 23.526587)
 enemy = ExtResource("5_lquwl")
-spawn_interval = 20.0
+spawn_interval = 15.0
 checkpoint = 4
-
-[node name="Spawner3" parent="World" unique_id=441289407 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62147164, 1.0343497, 4.7862434)
-enemy = ExtResource("5_lquwl")
-spawn_interval = 20.0
-checkpoint = 4
-
-[node name="Spawner5" parent="World" unique_id=1554228143 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3843396, 1.0343506, -16.456055)
-enemy = ExtResource("5_lquwl")
-spawn_interval = 20.0
-checkpoint = 5
-
-[node name="Spawner6" parent="World" unique_id=508238292 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7497871, 1.0343506, -16.69491)
-enemy = ExtResource("5_lquwl")
-spawn_interval = 20.0
-checkpoint = 5
+activate_tag = 1
 
 [node name="Spawner2" parent="World" unique_id=1987683339 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.275597, 3.62872, 9.385618)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.979106, 2.4302127, 12.166933)
 enemy = ExtResource("7_4c57u")
-spawn_interval = 30.0
-checkpoint = 6
+spawn_interval = 35.0
+checkpoint = 4
+activate_tag = 1
+
+[node name="Spawner3" parent="World" unique_id=441289407 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.873659, 1.0343497, -7.1614404)
+enemy = ExtResource("5_lquwl")
+spawn_interval = 20.0
+checkpoint = 4
+activate_tag = 1
+
+[node name="Spawner5" parent="World" unique_id=1554228143 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.84248, 1.1069138, -9.967165)
+enemy = ExtResource("7_4c57u")
+spawn_interval = 20.0
+checkpoint = 5
+activate_tag = 2
+
+[node name="Spawner6" parent="World" unique_id=508238292 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6205976, 1.0343506, -18.894007)
+enemy = ExtResource("5_lquwl")
+spawn_interval = 15.0
+checkpoint = 5
+activate_tag = 2
 
 [node name="Spawner4" parent="World" unique_id=961854830 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9344764, 3.628722, 2.718121)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.386814, 1.9019604, -13.992439)
 enemy = ExtResource("7_4c57u")
-spawn_interval = 30.0
-checkpoint = 6
+spawn_interval = 45.0
+checkpoint = 5
+activate_tag = 2
 
 [node name="Spawner9" parent="World" unique_id=272594549 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.126781, 3.628722, -21.476171)
-enemy = ExtResource("7_4c57u")
-spawn_interval = 30.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.382688, 2.4067328, -26.82709)
+enemy = ExtResource("5_lquwl")
+spawn_interval = 15.0
 checkpoint = 6
+activate_tag = 3
 
 [node name="Spawner10" parent="World" unique_id=1012853588 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0798535, 3.628722, -44.042786)
-enemy = ExtResource("7_4c57u")
-spawn_interval = 30.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.83104205, 1.6646087, -36.84733)
+enemy = ExtResource("5_lquwl")
+spawn_interval = 15.0
 checkpoint = 6
+activate_tag = 3
 
 [node name="Spawner7" parent="World" unique_id=282553401 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.359081, 3.628721, -18.700157)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.359081, 3.628721, -36.330547)
 enemy = ExtResource("7_4c57u")
 spawn_interval = 30.0
 checkpoint = 6
+activate_tag = 3
 
 [node name="Spawner8" parent="World" unique_id=481514433 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.995449, 3.628721, -34.9506)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.900388, 3.628721, -38.8777)
 enemy = ExtResource("7_4c57u")
 spawn_interval = 30.0
 checkpoint = 6
+activate_tag = 3
 
 [node name="Water" type="MeshInstance3D" parent="World" unique_id=1422554642]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.3975906, 0)
@@ -424,11 +441,17 @@ script = ExtResource("15_muem4")
 [node name="barrel" parent="World/Kerosene" unique_id=2147203052 instance=ExtResource("13_jbj1t")]
 transform = Transform3D(-0.21473113, 0, 0.9766732, 0, 1, 0, -0.9766732, 0, -0.21473113, 3.7749586, 0.5, 42.28594)
 
+[node name="barrel3" parent="World/Kerosene" unique_id=998167378 instance=ExtResource("13_jbj1t")]
+transform = Transform3D(-0.8869784, 0, -0.46181113, 0, 1, 0, 0.46181113, 0, -0.8869784, 4.1345477, 0.5, 42.83598)
+
+[node name="barrel2" parent="World/Kerosene" unique_id=403452755 instance=ExtResource("13_jbj1t")]
+transform = Transform3D(0.21453765, 0.121362, -0.9691465, -0.9766057, 0.011759319, -0.21471627, -0.014661923, 0.99253875, 0.12104574, 4.2630954, 0.825878, 42.059086)
+
 [node name="Area3D" type="Area3D" parent="World/Kerosene" unique_id=169731270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9658513, 0.8117249, 42.164898)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Kerosene/Area3D" unique_id=1395427351]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1879425, 0.13708496, 0.09626007)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031902313, 0.16192627, 0.29884338)
 shape = SubResource("CapsuleShape3D_g4v7s")
 
 [node name="UI" type="Control" parent="." unique_id=1300053703]
@@ -439,10 +462,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme = SubResource("Theme_r4f5i")
 script = ExtResource("13_jkv2x")
 
 [node name="Crosshair" type="TextureRect" parent="UI" unique_id=113545709]
-layout_mode = 0
+modulate = Color(0.4627451, 0.1764706, 0.11764706, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_y6deb")
+expand_mode = 1
 
 [node name="Kerosene" type="HBoxContainer" parent="UI" unique_id=1532930471]
 visible = false
@@ -480,10 +518,15 @@ vertical_alignment = 1
 
 [node name="KeroseneBar" type="TextureProgressBar" parent="UI" unique_id=577435662]
 layout_mode = 1
-offset_left = 145.0
-offset_top = 43.0
-offset_right = 245.0
-offset_bottom = 543.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 535.0
+offset_top = 91.0
+offset_right = 635.0
+offset_bottom = 591.0
+grow_horizontal = 2
+rotation = 1.5707964
 max_value = 5.0
 step = 0.1
 fill_mode = 3
@@ -491,18 +534,41 @@ texture_under = ExtResource("19_pm3ni")
 texture_over = ExtResource("20_jscy8")
 texture_progress = ExtResource("19_yc10j")
 
+[node name="Label" type="Label" parent="UI/KeroseneBar" unique_id=654365106]
+layout_mode = 0
+offset_left = -86.999985
+offset_top = 377.0
+offset_right = 128.00002
+offset_bottom = 473.0
+rotation = -1.5707964
+text = "Kerosene"
+
 [node name="CourageBar" type="TextureProgressBar" parent="UI" unique_id=1911099215]
 layout_mode = 1
-offset_left = 39.0
-offset_top = 96.0
-offset_right = 139.0
-offset_bottom = 596.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_top = 86.0
+offset_right = 69.0
+offset_bottom = 586.0
+grow_horizontal = 2
+rotation = 1.5707964
 max_value = 20.0
 step = 0.1
 fill_mode = 3
 texture_under = ExtResource("19_pm3ni")
 texture_over = ExtResource("20_jscy8")
 texture_progress = ExtResource("22_y6deb")
+
+[node name="Label2" type="Label" parent="UI/CourageBar" unique_id=882074313]
+layout_mode = 0
+offset_left = -89.999985
+offset_top = 362.0
+offset_right = 125.000015
+offset_bottom = 458.0
+rotation = -1.5707964
+text = "Courage"
 
 [node name="Gun" type="HBoxContainer" parent="UI" unique_id=1747532361]
 custom_minimum_size = Vector2(200, 0)

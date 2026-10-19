@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://ckv0eto4h3my1"]
 
 [ext_resource type="Script" uid="uid://vqf7q2x0ewo6" path="res://enemies/enemy.gd" id="1_uqgo1"]
+[ext_resource type="AudioStream" uid="uid://brwqg21g40dqn" path="res://sound/whisper.mp3" id="2_lvnpg"]
+[ext_resource type="AudioStream" uid="uid://c4yg7jymo2vsx" path="res://sound/chimes.mp3" id="3_kqsru"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
 
@@ -1230,3 +1232,13 @@ libraries/ = SubResource("AnimationLibrary_be1q1")
 tree_root = SubResource("AnimationNodeBlendTree_lvnpg")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 0.0
+
+[node name="Whisper" type="AudioStreamPlayer3D" parent="." unique_id=1250860326]
+stream = ExtResource("2_lvnpg")
+autoplay = true
+max_distance = 10.0
+parameters/looping = true
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="." unique_id=487467970]
+stream = ExtResource("3_kqsru")
+max_distance = 30.0

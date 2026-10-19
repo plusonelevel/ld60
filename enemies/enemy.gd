@@ -5,6 +5,7 @@ class_name Enemy
 var lamps_in_range: Array[Lamp] = []
 @onready var health_label = $DebugHP
 @onready var death_fx = $DeathFX
+@onready var hit_sfx = $Hit
 
 @export var health : float = 10.0
 @export var speed : float = 1.0
@@ -14,7 +15,6 @@ var lamps_in_range: Array[Lamp] = []
 @export var attack_damage : float = 10.0
 @export var attack_cooldown : float = 1.0
 @export var blend_speed : float = 6.0
-@export var detection_range : float = 20.0
 
 
 enum State { RUN, HIT, DIE}
@@ -33,7 +33,7 @@ func _physics_process(delta):
 	var dist := to_player.length()
 	
 	#CHASING PLAYER
-	if not chasing and dist <= detection_range:
+	if not chasing:
 		chasing = true
 
 	if not chasing:
@@ -74,11 +74,16 @@ func take_dmg(dmg):
 	if health <= 0:
 		die()
 
+func play_hit():
+	hit_sfx.play()
+
 func die():
 	death_fx.reparent(get_tree().current_scene)  
 	death_fx.emitting = true
 	#death_fx.finished.connect(death_fx.queue_free)
-
+	if hit_sfx.playing:
+		hit_sfx.reparent(get_tree().current_scene)
+		#hit_sfx.finished.connect(hit_sfx.queue_free)
 	queue_free()
 	
 	
