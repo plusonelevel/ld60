@@ -19,11 +19,11 @@
 [ext_resource type="FontFile" uid="uid://btxgeb35qrgpl" path="res://assets/GrenzeGotisch-VariableFont_wght.ttf" id="17_6a2is"]
 [ext_resource type="Theme" uid="uid://dccrdaomawscv" path="res://ui_theme.tres" id="17_feaue"]
 [ext_resource type="Script" uid="uid://cn323ipqiq128" path="res://scenes/ui.gd" id="18_i8gw2"]
-[ext_resource type="Texture2D" uid="uid://bln7u4juondw8" path="res://assets/crosshair.png" id="19_4exn6"]
 [ext_resource type="Texture2D" uid="uid://omnl601kh871" path="res://assets/bar_under.png" id="20_6wmvi"]
 [ext_resource type="Texture2D" uid="uid://8kjkf5ho8xlj" path="res://assets/bar_over.png" id="21_7muwt"]
 [ext_resource type="Texture2D" uid="uid://v2v4xb4q6dtc" path="res://assets/kerosene.png" id="22_liift"]
 [ext_resource type="Texture2D" uid="uid://tqs15sm1cn8" path="res://assets/courage.png" id="23_2urjh"]
+[ext_resource type="Script" uid="uid://dc7uvqcjt4orb" path="res://scenes/guide.gd" id="23_feaue"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
 panorama = ExtResource("8_qbchm")
@@ -290,23 +290,17 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("17_feaue")
 script = ExtResource("18_i8gw2")
+is_tutorial = true
 
-[node name="Crosshair" type="TextureRect" parent="UI" unique_id=113545709]
-modulate = Color(0.4627451, 0.1764706, 0.11764706, 1)
+[node name="PlayerDamage" type="ColorRect" parent="UI" unique_id=1702718420]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("19_4exn6")
-expand_mode = 1
+mouse_filter = 2
+color = Color(0.5137255, 0, 0.039215688, 1)
 
 [node name="Kerosene" type="HBoxContainer" parent="UI" unique_id=1532930471]
 visible = false
@@ -332,9 +326,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -455.0
-offset_top = -65.0
+offset_top = -109.0
 offset_right = 455.0
-offset_bottom = 65.0
+offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
@@ -427,6 +421,39 @@ text = "Barrel:"
 layout_mode = 2
 text = "TMP"
 
+[node name="Guide" type="Label" parent="UI" unique_id=1840995844]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 64.0
+offset_right = 148.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+script = ExtResource("23_feaue")
+
+[node name="Crosshair" type="Label" parent="UI" unique_id=550795554]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -48.0
+offset_right = 20.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TutorialSteps" type="Control" parent="." unique_id=695395410]
 layout_mode = 3
 anchors_preset = 15
@@ -446,9 +473,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
+offset_left = -552.5
 offset_top = -250.0
-offset_right = 546.0
+offset_right = 552.5
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -476,10 +503,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -486.0
+offset_top = -140.0
+offset_right = 486.0
+offset_bottom = 353.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -506,10 +533,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -486.0
+offset_top = -140.0
+offset_right = 486.0
+offset_bottom = 353.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -536,10 +563,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -505.5
+offset_top = -384.41498
+offset_right = 505.5
+offset_bottom = 503.58545
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -548,8 +575,7 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("17_6a2is")
 text = "Remember the training?
-1) Fill the kerosene canister
-using your bottle
+1) Fill the kerosene canister using your bottle
 
 2) Unlock the safety latch (top left)
 
@@ -566,10 +592,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -486.0
+offset_top = -214.35
+offset_right = 486.0
+offset_bottom = 278.65002
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -596,10 +622,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -595.0
+offset_top = -190.0
+offset_right = 595.0
+offset_bottom = 303.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -626,10 +652,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -552.0
+offset_top = -190.0
+offset_right = 552.0
+offset_bottom = 303.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -656,10 +682,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -513.0
+offset_top = -215.0
+offset_right = 513.0
+offset_bottom = 377.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -687,10 +713,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -486.0
+offset_top = -246.5
+offset_right = 486.0
+offset_bottom = 246.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -706,16 +732,17 @@ layout_mode = 2
 horizontal_alignment = 1
 
 [node name="Step10" type="VBoxContainer" parent="TutorialSteps" unique_id=436127317]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -546.0
-offset_top = -250.0
-offset_right = 426.0
-offset_bottom = 243.0
+offset_left = -486.0
+offset_top = -190.0
+offset_right = 486.0
+offset_bottom = 403.0
 grow_horizontal = 2
 grow_vertical = 2
 

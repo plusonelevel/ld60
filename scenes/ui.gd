@@ -8,6 +8,9 @@ extends Control
 @onready var crosshair = $Crosshair
 @onready var kerosene_charges = $Kerosene/Charges
 @onready var gun_status = $Gun/GunStatus
+@onready var player_damage_flash = $PlayerDamage
+
+@export var is_tutorial : bool
 
 
 var tween: Tween
@@ -17,12 +20,16 @@ var last_health
 var last_kerosene
 
 func _ready() -> void:
-	Signals.status_message.connect(_status_message_change)
 	Signals.player_state_changed.connect(_on_player_state_changed)
 	Signals.kerosene_amount_changed.connect(_on_kerosene_amount_changed)
 	Signals.gun_state_changed.connect(_on_gun_state_changed)
+	Signals.player_took_damage.connect(_on_player_damage)
+	if is_tutorial == false:
+		Signals.status_message.connect(_status_message_change)
 	
 	_on_gun_state_changed(Enums.GunState.DEFAULT)
+	
+	player_damage_flash.modulate.a = 0.0
 
 	
 func _process(delta: float) -> void:
@@ -65,3 +72,12 @@ func _on_gun_state_changed(state: Enums.GunState):
 		gun_status.text = "READY"
 	else:
 		gun_status.text = "Empty"
+		
+		
+func _on_player_damage():
+	var damage_tween : Tween
+	if damage_tween:
+		damage_tween.kill()
+	player_damage_flash.modulate.a = 0.6
+	damage_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	damage_tween.tween_property(player_damage_flash, ^"modulate:a", 0.0, 0.4)
