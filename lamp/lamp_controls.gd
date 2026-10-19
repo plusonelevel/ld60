@@ -3,8 +3,8 @@ extends Node3D
 signal pressure_full
 signal pressure_empty
 
-var fill_time := 3.0
-const drain_time := 1234.0
+const fill_time := 3.0
+const drain_time := 5555.0
 @export var cone_presses_needed := 3
 @export var cone_fill_time := 0.6
 
