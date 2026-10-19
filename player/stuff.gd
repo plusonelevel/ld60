@@ -56,7 +56,7 @@ func handle_release():
 	dragged = null
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and GameManager.player_state == Enums.PlayerState.RELOADING:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and GameManager.player_state == Enums.PlayerState.RELOADING and GameManager.gun_state != Enums.GunState.LOADED:
 		if event.pressed:
 			handle_click()
 		else:

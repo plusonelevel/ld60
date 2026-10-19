@@ -14,6 +14,8 @@ var projectile_scn = preload("res://player/gun/projectile.tscn")
 
 var priming_counter := 0
 var can_prime := true
+var prime_strength_needed := 500.0
+var prime_strength := 0.0
 var gun_position
 
 
@@ -43,10 +45,20 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"fire") and GameManager.player_state == Enums.PlayerState.DEFAULT and GameManager.gun_state == Enums.GunState.PRIMED:
-		fire()
-	elif event.is_action_pressed(&"prime_gun") and GameManager.player_state == Enums.PlayerState.RELOADING and GameManager.gun_state == Enums.GunState.LOADED:
-		prime()
+	if event.is_action_pressed(&"fire") \
+		and GameManager.player_state == Enums.PlayerState.DEFAULT \
+		and GameManager.gun_state == Enums.GunState.PRIMED:
+			fire()
+	elif event is InputEventMouseMotion \
+		and can_prime \
+		and GameManager.gun_state == Enums.GunState.LOADED \
+		and GameManager.player_state == Enums.PlayerState.RELOADING \
+		and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			if event.relative.x >= 10.0 and event.relative.y >= 10.0:
+				prime_strength = prime_strength + event.relative.x + event.relative.y
+				if prime_strength >= prime_strength_needed:
+					prime_strength = 0
+					prime()
 
 func fire() -> void:
 	if not visible:
