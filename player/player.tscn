@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://kdol44hddtl7" path="res://player/stuff.gd" id="3_yw30f"]
 [ext_resource type="PackedScene" uid="uid://c53qtfkkj8xsg" path="res://assets/pouch.blend" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://b0rwu76oxvwfv" path="res://assets/kerosene.blend" id="5_qjkh3"]
+[ext_resource type="AudioStream" uid="uid://knonabfn0eo1" path="res://sound/steps.wav" id="6_g6k8r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttdjf"]
 
@@ -72,5 +73,8 @@ shape = SubResource("CylinderShape3D_cjont")
 
 [node name="kerosene" parent="." unique_id=838895358 instance=ExtResource("5_qjkh3")]
 transform = Transform3D(0.8613412, 0.20737098, -0.46377647, 0, 0.91289747, 0.40818897, 0.5080269, -0.35158998, 0.7863162, -0.153, -0.37652647, -0.163)
+
+[node name="Steps" type="AudioStreamPlayer3D" parent="." unique_id=1661937373]
+stream = ExtResource("6_g6k8r")
 
 [connection signal="body_entered" from="Stuff/Barrel" to="Stuff" method="_on_barrel_body_entered"]

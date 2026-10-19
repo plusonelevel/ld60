@@ -4,6 +4,8 @@ class_name Gun extends Node3D
 
 @onready var smoke : GPUParticles3D = $Smoke
 @onready var tycinka : Node3D = $Tycinka
+@onready var musket_fire_sfx = $MusketFire
+@onready var pouch_sfx = $Pouch
 var tycinka_orig_pos: Vector3
 
 var is_empty := true
@@ -45,6 +47,7 @@ func fire() -> void:
 	if not visible:
 		return
 	is_empty = true
+	musket_fire_sfx.play()
 	Signals.gun_state_changed.emit(Enums.GunState.DEFAULT)
 	smoke.restart()
 	var projectile: Projectile = projectile_scn.instantiate()

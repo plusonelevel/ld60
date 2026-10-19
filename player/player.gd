@@ -10,6 +10,7 @@ class_name Player extends CharacterBody3D
 @onready var stuff: Node3D = $Stuff
 @onready var gun: Gun = $Gun
 @onready var kerosene = $kerosene
+@onready var steps_sfx = $Steps
 
 var _mouse_input : bool = false
 var _rotation_input : float
@@ -70,6 +71,7 @@ func _rotate(delta):
 
 func _physics_process(delta):
 	if not GameManager.player_state == Enums.PlayerState.DEFAULT:
+		steps_sfx.stop()
 		return
 
 	# Update camera movement based on mouse movement
@@ -92,7 +94,16 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	_update_steps()
 
+func _update_steps() -> void:
+	var horizontal_speed := Vector2(velocity.x, velocity.z).length()
+	var walking := is_on_floor() and horizontal_speed > 0.1
+
+	if walking and not steps_sfx.playing:
+		steps_sfx.play()
+	elif not walking and steps_sfx.playing:
+		steps_sfx.stop()
 
 func toggle_reloading():
 	var tween = create_tween().set_parallel()
@@ -104,6 +115,7 @@ func toggle_reloading():
 		tween.tween_property(self, ^"rotation:x", 0.0, GameManager.reload_transition_length)
 		tween.tween_property(CAMERA, ^"rotation:x", -PI/4, GameManager.reload_transition_length)
 		gun.start_reloading()
+		gun.pouch_sfx.play()
 	else:
 		Signals.player_state_changed.emit(Enums.PlayerState.DEFAULT)
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

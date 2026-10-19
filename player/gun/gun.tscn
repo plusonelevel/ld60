@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://c78r05v5bxr08" path="res://player/gun/gun.gd" id="1_f3u3k"]
 [ext_resource type="PackedScene" uid="uid://b1soccev4x17l" path="res://assets/musket.blend" id="2_sss0t"]
 [ext_resource type="Texture2D" uid="uid://bafcey40ac1ec" path="res://assets/fire_01_a.png" id="3_pk7sy"]
+[ext_resource type="AudioStream" uid="uid://buhfdvl6h2yar" path="res://sound/musket_fire.wav" id="4_1006d"]
+[ext_resource type="AudioStream" uid="uid://bn53njtxj7qym" path="res://sound/pellets.wav" id="5_67j6s"]
 
 [sub_resource type="Curve" id="Curve_hsu73"]
 _data = [Vector2(0, 0.37762243), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -65,3 +67,9 @@ visible = false
 transform = Transform3D(0.9945219, 0.104385205, -0.005470596, 0.0030919255, -0.08169045, -0.9966529, -0.10448272, 0.99117625, -0.08156567, 0.10683918, -0.04733903, -0.5283054)
 radius = 0.01
 height = 0.5
+
+[node name="MusketFire" type="AudioStreamPlayer3D" parent="." unique_id=1238261505]
+stream = ExtResource("4_1006d")
+
+[node name="Pouch" type="AudioStreamPlayer3D" parent="." unique_id=1074067603]
+stream = ExtResource("5_67j6s")
