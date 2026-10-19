@@ -6,7 +6,6 @@ class_name Gun extends Node3D
 @onready var sparks : GPUParticles3D = $Sparks
 @onready var tycinka : Node3D = $Tycinka
 @onready var musket_fire_sfx = $MusketFire
-@onready var pouch_sfx = $Pouch
 @onready var priming_sfx = $Priming
 
 var tycinka_orig_pos: Vector3

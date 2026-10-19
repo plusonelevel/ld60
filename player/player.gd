@@ -11,6 +11,7 @@ class_name Player extends CharacterBody3D
 @onready var gun: Gun = $Gun
 @onready var kerosene = $kerosene
 @onready var steps_sfx = $Steps
+@onready var pouch_sfx = $Pouch
 @onready var take_hit = $TakeHit
 @onready var bottle_fill = $BottleFill
 
@@ -119,14 +120,14 @@ func toggle_reloading():
 		tween.tween_property(self, ^"rotation:x", 0.0, GameManager.reload_transition_length)
 		tween.tween_property(CAMERA, ^"rotation:x", -PI/4, GameManager.reload_transition_length)
 		gun.start_reloading()
-		gun.pouch_sfx.play()
+		if gun.is_empty:
+			pouch_sfx.play()
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		tween.tween_property(CAMERA, ^"position", Vector3.ZERO, GameManager.reload_transition_length)
 		tween.tween_property(CAMERA, ^"rotation:x", 0, GameManager.reload_transition_length)
 		tween.tween_callback(gun.stop_reloading)
 		tween.chain().tween_callback(func(): Signals.player_state_changed.emit(Enums.PlayerState.DEFAULT))
-		gun.pouch_sfx.play()
 		
 func _on_gun_state_changed(state: Enums.GunState):
 	if state == Enums.GunState.PRIMED and GameManager.player_state == Enums.PlayerState.RELOADING:
