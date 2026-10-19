@@ -7,6 +7,8 @@ class_name Gun extends Node3D
 @onready var tycinka : Node3D = $Tycinka
 @onready var musket_fire_sfx = $MusketFire
 @onready var pouch_sfx = $Pouch
+@onready var priming_sfx = $Priming
+
 var tycinka_orig_pos: Vector3
 
 var is_empty := true
@@ -97,6 +99,8 @@ func prime():
 		return
 	
 	can_prime = false
+	priming_sfx.pitch_scale = randf_range(0.95, 1.05)
+	priming_sfx.play()
 	var tween = create_tween()
 	tween.tween_property(tycinka, ^"position", tycinka_orig_pos + Vector3(0.02, -0.015, 0.2), prime_duration)
 	tween.tween_property(tycinka, ^"position", tycinka_orig_pos, prime_duration)

@@ -48,6 +48,8 @@ var pressure := 0.0
 var draining := false
 var cone_presses := 0
 
+var current_prompt := ""
+
 var kerosene_level := 0.0:
 	set(value):
 		kerosene_level = value
@@ -61,6 +63,28 @@ func _ready() -> void:
 	_set_door(false, false)
 	_update_kerosene()
 
+func _physics_process(_delta: float) -> void:
+	var prompt := _prompt_for(_aim_target())
+	if prompt != current_prompt:
+		current_prompt = prompt
+		Signals.aim_prompt_changed.emit(prompt)
+
+func _prompt_for(hit: Node) -> String:
+	if hit == null:
+		return ""
+	if _is_part(door, hit):
+		return "[E] Open hatch"
+	if _is_part(door2, hit):
+		return "[E] Close hatch"
+	if draining:
+		return ""
+	if _is_part(splash, hit):
+		return "[E] Close splash guard" if splash_slid else "[E] Open splash guard"
+	if _is_part(valve, hit):
+		return "[E] Stop valve" if valve_spinning else "[E] Turn valve"
+	if _is_part(cone, hit) and cone_presses < cone_presses_needed:
+		return "[LMB] Pour kerosene (%d/%d)" % [cone_presses, cone_presses_needed]
+	return ""
 
 func _process(delta: float) -> void:
 	if draining:

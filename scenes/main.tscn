@@ -20,10 +20,10 @@
 [ext_resource type="FontFile" uid="uid://btxgeb35qrgpl" path="res://assets/GrenzeGotisch-VariableFont_wght.ttf" id="17_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://ckv0eto4h3my1" path="res://enemies/enemy3.tscn" id="18_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://omnl601kh871" path="res://assets/bar_under.png" id="19_pm3ni"]
-[ext_resource type="Texture2D" uid="uid://bln7u4juondw8" path="res://assets/crosshair.png" id="19_y6deb"]
 [ext_resource type="Texture2D" uid="uid://v2v4xb4q6dtc" path="res://assets/kerosene.png" id="19_yc10j"]
 [ext_resource type="Texture2D" uid="uid://8kjkf5ho8xlj" path="res://assets/bar_over.png" id="20_jscy8"]
 [ext_resource type="Texture2D" uid="uid://tqs15sm1cn8" path="res://assets/courage.png" id="22_y6deb"]
+[ext_resource type="Script" uid="uid://dc7uvqcjt4orb" path="res://scenes/guide.gd" id="24_og1vs"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fw1vm"]
 panorama = ExtResource("3_h2yge")
@@ -497,23 +497,6 @@ mouse_filter = 1
 theme = SubResource("Theme_r4f5i")
 script = ExtResource("13_jkv2x")
 
-[node name="Crosshair" type="TextureRect" parent="UI" unique_id=113545709]
-modulate = Color(0.4627451, 0.1764706, 0.11764706, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("19_y6deb")
-expand_mode = 1
-
 [node name="Kerosene" type="HBoxContainer" parent="UI" unique_id=1532930471]
 visible = false
 layout_mode = 0
@@ -538,9 +521,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -455.0
-offset_top = -65.0
+offset_top = -145.0
 offset_right = 455.0
-offset_bottom = 65.0
+offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
@@ -632,6 +615,39 @@ text = "Barrel:"
 [node name="GunStatus" type="Label" parent="UI/Gun" unique_id=372587021]
 layout_mode = 2
 text = "TMP"
+
+[node name="Guide" type="Label" parent="UI" unique_id=671670081]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 64.0
+offset_right = 148.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+script = ExtResource("24_og1vs")
+
+[node name="Crosshair" type="Label" parent="UI" unique_id=1169671751]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -48.0
+offset_right = 20.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "x"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Enemy" parent="." unique_id=401762933 instance=ExtResource("18_dp3eg")]
 transform = Transform3D(-0.741243, 0, 1.3040547, 0, 1.5, 0, -1.3040547, 0, -0.741243, 3.009426, 1.1593232, 20.100006)

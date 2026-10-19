@@ -11,6 +11,7 @@ class_name Player extends CharacterBody3D
 @onready var gun: Gun = $Gun
 @onready var kerosene = $kerosene
 @onready var steps_sfx = $Steps
+@onready var take_hit = $TakeHit
 @onready var bottle_fill = $BottleFill
 
 var _mouse_input : bool = false
@@ -24,6 +25,7 @@ var kerosene_rest:= Vector3(-0.153,-0.1,-0.163)
 var kerosene_tween: Tween
 var kerosene_amount = 0
 const KEROSENE_CAPACITY := 5
+
 
 var gun_rest: Vector3
 
@@ -124,6 +126,7 @@ func toggle_reloading():
 		tween.tween_property(CAMERA, ^"rotation:x", 0, GameManager.reload_transition_length)
 		tween.tween_callback(gun.stop_reloading)
 		tween.chain().tween_callback(func(): Signals.player_state_changed.emit(Enums.PlayerState.DEFAULT))
+		gun.pouch_sfx.play()
 		
 func _on_gun_state_changed(state: Enums.GunState):
 	if state == Enums.GunState.PRIMED and GameManager.player_state == Enums.PlayerState.RELOADING:
@@ -158,8 +161,9 @@ func fill_kerosene() -> void:
 	
 func take_dmg(dmg):
 	health -= dmg
+	take_hit.play()
 	if health <= 0:
 		_die()
 
 func _die():
-	Signals.status_message.emit("Perished.")
+	Signals.status_message.emit("You perished.")

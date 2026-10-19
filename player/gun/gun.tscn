@@ -4,7 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://b1soccev4x17l" path="res://assets/musket.blend" id="2_sss0t"]
 [ext_resource type="Texture2D" uid="uid://bafcey40ac1ec" path="res://assets/fire_01_a.png" id="3_pk7sy"]
 [ext_resource type="AudioStream" uid="uid://buhfdvl6h2yar" path="res://sound/musket_fire.wav" id="4_1006d"]
+[ext_resource type="PackedScene" uid="uid://ut11q1s3mefm" path="res://assets/tycinka.blend" id="4_wm1u5"]
 [ext_resource type="AudioStream" uid="uid://bn53njtxj7qym" path="res://sound/pellets.wav" id="5_67j6s"]
+[ext_resource type="AudioStream" uid="uid://bs7inx4ypgkc7" path="res://sound/tycinka.wav" id="7_jh2s2"]
 
 [sub_resource type="Curve" id="Curve_hsu73"]
 _data = [Vector2(0, 0.37762243), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -45,7 +47,7 @@ size = Vector2(2.5, 2.5)
 _data = [Vector2(0, 0.37762243), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_wm1u5"]
+[sub_resource type="CurveTexture" id="CurveTexture_jh2s2"]
 curve = SubResource("Curve_67j6s")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jh2s2"]
@@ -58,18 +60,18 @@ initial_velocity_min = 20.0
 initial_velocity_max = 25.0
 scale_min = 0.099999994
 scale_max = 0.19999999
-alpha_curve = SubResource("CurveTexture_wm1u5")
+alpha_curve = SubResource("CurveTexture_jh2s2")
 hue_variation_min = -2.2351742e-08
 hue_variation_max = 0.29999998
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgyib"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn78s"]
 albedo_color = Color(0.8111675, 0.57661575, 0.11009175, 1)
 emission_enabled = true
 emission = Color(0.7829661, 0.29716516, 8.663535e-07, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_boad6"]
-material = SubResource("StandardMaterial3D_rgyib")
+material = SubResource("StandardMaterial3D_pn78s")
 radius = 0.05
 height = 0.1
 radial_segments = 4
@@ -108,11 +110,18 @@ visible = false
 
 [node name="CSG" type="CSGCylinder3D" parent="Tycinka" unique_id=1630223014]
 transform = Transform3D(0.9945219, 0.104385205, -0.005470596, 0.0030919255, -0.08169045, -0.9966529, -0.10448272, 0.99117625, -0.08156567, 0.10683918, -0.04733903, -0.5283054)
+visible = false
 radius = 0.01
 height = 0.5
+
+[node name="tycinka" parent="Tycinka" unique_id=2006447203 instance=ExtResource("4_wm1u5")]
+transform = Transform3D(0.9945219, 0.005470589, 0.10438521, 0.0030919313, 0.996653, -0.08169037, -0.104482725, 0.08156561, 0.99117625, 0.42041975, -0.2927427, 2.4492586)
 
 [node name="MusketFire" type="AudioStreamPlayer3D" parent="." unique_id=1238261505]
 stream = ExtResource("4_1006d")
 
 [node name="Pouch" type="AudioStreamPlayer3D" parent="." unique_id=1074067603]
 stream = ExtResource("5_67j6s")
+
+[node name="Priming" type="AudioStreamPlayer3D" parent="." unique_id=416370623]
+stream = ExtResource("7_jh2s2")

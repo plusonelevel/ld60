@@ -13,3 +13,5 @@ signal lamp_lit(lamp_id: int)
 signal lamp_door_opened(is_open: bool)
 
 signal tutorial_advanced(idx: int)
+
+signal aim_prompt_changed(text: String)
