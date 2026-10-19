@@ -161,6 +161,7 @@ func fill_kerosene() -> void:
 	bottle_fill.play()
 	
 func take_dmg(dmg):
+	Signals.player_took_damage.emit()
 	health -= dmg
 	take_hit.play()
 	if health <= 0:

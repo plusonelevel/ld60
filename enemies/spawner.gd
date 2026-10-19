@@ -12,6 +12,7 @@ func _ready():
 	timer.timeout.connect(_on_spawn_timer_timeout)
 
 	Signals.lamp_lit.connect(_on_lamp_lit)
+	
 
 func _on_spawn_timer_timeout():
 	if enemy:

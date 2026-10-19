@@ -15,3 +15,5 @@ signal lamp_door_opened(is_open: bool)
 signal tutorial_advanced(idx: int)
 
 signal aim_prompt_changed(text: String)
+
+signal player_took_damage

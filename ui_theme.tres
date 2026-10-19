@@ -3,6 +3,6 @@
 [ext_resource type="FontFile" uid="uid://btxgeb35qrgpl" path="res://assets/GrenzeGotisch-VariableFont_wght.ttf" id="1_touxu"]
 
 [resource]
-Label/colors/font_color = Color(0.6318149, 0.37663376, 0.24875814, 1)
+Label/colors/font_color = Color(0.6313726, 0.3764706, 0.24705882, 1)
 Label/font_sizes/font_size = 64
 Label/fonts/font = ExtResource("1_touxu")

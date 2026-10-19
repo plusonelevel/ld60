@@ -391,7 +391,7 @@ activate_tag = 5
 [node name="Spawner7" parent="World" unique_id=282553401 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.359081, 3.628721, -36.330547)
 enemy = ExtResource("7_4c57u")
-spawn_interval = 30.0
+spawn_interval = 15.0
 checkpoint = 6
 activate_tag = 3
 
@@ -498,6 +498,16 @@ mouse_filter = 1
 theme = SubResource("Theme_r4f5i")
 script = ExtResource("13_jkv2x")
 
+[node name="PlayerDamage" type="ColorRect" parent="UI" unique_id=1435507005]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.5137255, 0, 0.039215688, 1)
+
 [node name="Kerosene" type="HBoxContainer" parent="UI" unique_id=1532930471]
 visible = false
 layout_mode = 0
@@ -539,10 +549,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 306.0
-offset_top = -96.0
-offset_right = 406.0
-offset_bottom = 404.0
+offset_left = 312.0
+offset_top = -114.0
+offset_right = 412.0
+offset_bottom = 386.0
 grow_horizontal = 2
 grow_vertical = 0
 rotation = 1.5707964
@@ -556,10 +566,10 @@ texture_progress = ExtResource("19_yc10j")
 
 [node name="Label" type="Label" parent="UI/KeroseneBar" unique_id=654365106]
 layout_mode = 0
-offset_left = 83.000015
-offset_top = 377.0
-offset_right = 298.0
-offset_bottom = 473.0
+offset_left = 85.000015
+offset_top = 362.0
+offset_right = 300.0
+offset_bottom = 458.0
 rotation = -1.5707964
 text = "Kerosene"
 horizontal_alignment = 1
@@ -571,10 +581,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -61.0
-offset_top = -96.0
-offset_right = 39.0
-offset_bottom = 404.0
+offset_left = -50.0
+offset_top = -114.0
+offset_right = 50.0
+offset_bottom = 386.0
 grow_horizontal = 2
 grow_vertical = 0
 rotation = 1.5707964
