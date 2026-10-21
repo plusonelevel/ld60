@@ -28,6 +28,8 @@ var chasing := false
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group(&"player")
+	if health_label:
+		health_label.hide()
 
 func _physics_process(delta):
 	var to_player := player.global_position - global_position

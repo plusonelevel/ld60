@@ -510,30 +510,26 @@ text = "Courage"
 horizontal_alignment = 1
 
 [node name="TutorialSteps" type="Control" parent="." unique_id=695395410]
+modulate = Color(1, 0.8862745, 0.28235295, 1)
+propagate_maximum_size = true
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 600.0
 grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("17_feaue")
 
 [node name="Step1" type="VBoxContainer" parent="TutorialSteps" unique_id=188816432]
-visible = false
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -552.5
-offset_top = -250.0
-offset_right = 552.5
-offset_bottom = 250.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 493.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="TutorialSteps/Step1" unique_id=281473416]
 custom_minimum_size = Vector2(0, 100)
@@ -551,19 +547,11 @@ text = "First, switch (Right click) to your kerosene bottle."
 horizontal_alignment = 1
 
 [node name="Step2" type="VBoxContainer" parent="TutorialSteps" unique_id=193703065]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -486.0
-offset_top = -140.0
-offset_right = 486.0
-offset_bottom = 353.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 493.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="TutorialSteps/Step2" unique_id=946781863]
 custom_minimum_size = Vector2(0, 100)
@@ -581,19 +569,11 @@ Use (Left click) your bottle on them."
 horizontal_alignment = 1
 
 [node name="Step3" type="VBoxContainer" parent="TutorialSteps" unique_id=979615076]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -486.0
-offset_top = -140.0
-offset_right = 486.0
-offset_bottom = 353.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 493.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="TutorialSteps/Step3" unique_id=1706809519]
 custom_minimum_size = Vector2(0, 100)
@@ -611,19 +591,11 @@ with the maintenance hatch."
 horizontal_alignment = 1
 
 [node name="Step4" type="VBoxContainer" parent="TutorialSteps" unique_id=312834603]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -505.5
-offset_top = -384.41498
-offset_right = 505.5
-offset_bottom = 503.58545
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 789.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="TutorialSteps/Step4" unique_id=2011625882]
 custom_minimum_size = Vector2(0, 100)
@@ -631,28 +603,17 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("17_6a2is")
 text = "Remember the training?
 1) Fill the kerosene canister using your bottle
-
 2) Unlock the safety latch (top left)
-
 3) Use the valve (top right) to start the flow
-
 4) Wait..."
 horizontal_alignment = 1
 
 [node name="Step5" type="VBoxContainer" parent="TutorialSteps" unique_id=1882849755]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -486.0
-offset_top = -214.35
-offset_right = 486.0
-offset_bottom = 278.65002
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 493.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="TutorialSteps/Step5" unique_id=1911272272]
 custom_minimum_size = Vector2(0, 100)
@@ -670,19 +631,11 @@ Just being near one is all it takes!"
 horizontal_alignment = 1
 
 [node name="Step6" type="VBoxContainer" parent="TutorialSteps" unique_id=1722387147]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -595.0
-offset_top = -190.0
-offset_right = 595.0
-offset_bottom = 303.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 493.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="TutorialSteps/Step6" unique_id=1179334466]
 custom_minimum_size = Vector2(0, 100)
@@ -699,22 +652,23 @@ layout_mode = 2
 text = "Switch to your musket and enter reloading mode (R)."
 horizontal_alignment = 1
 
-[node name="Step7" type="VBoxContainer" parent="TutorialSteps" unique_id=1149817190]
-visible = false
+[node name="Step7" type="Panel" parent="TutorialSteps" unique_id=776151226]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -552.0
-offset_top = -190.0
-offset_right = 552.0
-offset_bottom = 303.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
-[node name="Label" type="Label" parent="TutorialSteps/Step7" unique_id=1904427301]
+[node name="Box" type="VBoxContainer" parent="TutorialSteps/Step7" unique_id=1149817190]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 493.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step7/Box" unique_id=1904427301]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("17_6a2is")
@@ -723,57 +677,48 @@ text = "Now it's time to put your hands to it!
 "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="TutorialSteps/Step7" unique_id=372328756]
+[node name="Label2" type="Label" parent="TutorialSteps/Step7/Box" unique_id=372328756]
 layout_mode = 2
 text = "Grab one of the bullets and drop it into the barrel.
 Try it!"
 horizontal_alignment = 1
 
-[node name="Step8" type="VBoxContainer" parent="TutorialSteps" unique_id=785762792]
-visible = false
+[node name="Step8" type="Panel" parent="TutorialSteps" unique_id=1585149670]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -513.0
-offset_top = -215.0
-offset_right = 513.0
-offset_bottom = 377.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 592.0
 grow_horizontal = 2
-grow_vertical = 2
+mouse_filter = 1
 
-[node name="Label" type="Label" parent="TutorialSteps/Step8" unique_id=1828816623]
+[node name="Box" type="VBoxContainer" parent="TutorialSteps/Step8" unique_id=785762792]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 592.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TutorialSteps/Step8/Box" unique_id=1828816623]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("17_6a2is")
 text = "Great! Now stuff it down with the gunpowder.
 
-
 "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="TutorialSteps/Step8" unique_id=1371600897]
+[node name="Label2" type="Label" parent="TutorialSteps/Step8/Box" unique_id=1371600897]
 layout_mode = 2
 text = "Grab the ramrod and push it into the barrel.
 Give it a go a few times for good measure!"
 horizontal_alignment = 1
 
 [node name="Step9" type="VBoxContainer" parent="TutorialSteps" unique_id=1550019536]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -486.0
-offset_top = -246.5
-offset_right = 486.0
-offset_bottom = 246.5
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 200.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="TutorialSteps/Step9" unique_id=1334151385]
 custom_minimum_size = Vector2(0, 100)
@@ -782,31 +727,18 @@ theme_override_fonts/font = ExtResource("17_6a2is")
 text = "That's it. Now defend yourself!"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="TutorialSteps/Step9" unique_id=41066947]
-layout_mode = 2
-horizontal_alignment = 1
-
 [node name="Step10" type="VBoxContainer" parent="TutorialSteps" unique_id=436127317]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -486.0
-offset_top = -197.0
-offset_right = 486.0
-offset_bottom = 396.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 593.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="TutorialSteps/Step10" unique_id=705802587]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("17_6a2is")
 text = "You got the idea...
-
 "
 horizontal_alignment = 1
 
